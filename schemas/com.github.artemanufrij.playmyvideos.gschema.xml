@@ -1,0 +1,39 @@
+<schemalist>
+	<schema path="/com/github/artemanufrij/playmyvideos/" id="com.github.artemanufrij.playmyvideos" gettext-domain="com.github.artemanufrij.playmyvideos">
+		<key name="window-width" type="i">
+			<default>1024</default>
+			<summary>The saved width of the window.</summary>
+			<description>The saved width of the window.</description>
+		</key>
+		<key name="window-height" type="i">
+			<default>720</default>
+			<summary>The saved height of the window.</summary>
+			<description>The saved height of the window.</description>
+		</key>
+		<key name="window-maximized" type="b">
+			<default>false</default>
+			<summary>Maximized window.</summary>
+			<description>Maximized window.</description>
+		</key>
+		<key name="repeat-mode" type="b">
+			<default>false</default>
+			<summary>Repeat mode.</summary>
+			<description>Repeat mode.</description>
+		</key>
+		<key name="look-for-new-files" type="b">
+			<default>true</default>
+			<summary>Look for new video files on start up.</summary>
+			<description>Look for new video files on start up.</description>
+		</key>
+		<key name="covers" type="as">
+			<default>['cover.jpg','Cover.jpg','cover.png','Cover.png','poster.jpg','Poster.jpg','poster.png','Poster.png']</default>
+			<summary>Cover file names.</summary>
+			<description>Cover file names.</description>
+		</key>
+		<key name="library-location" type="s">
+			<default>""</default>
+			<summary>Default library location.</summary>
+			<description>Default library location.</description>
+		</key>
+	</schema>
+</schemalist>
