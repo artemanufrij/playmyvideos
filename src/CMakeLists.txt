@@ -2,6 +2,7 @@ set (CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/Config.vala)
 configure_file (${CMAKE_SOURCE_DIR}/Config.vala.cmake ${CONFIG_FILE})
 
 vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
+    Services/DataBaseManager.vala
     Services/LocalFilesManager.vala
     Services/LibraryManager.vala
     Settings.vala

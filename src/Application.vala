@@ -26,18 +26,18 @@
  */
 
 namespace PlayMyVideos {
-    public class PlayMyVideoApp : Gtk.Application {
+    public class PlayMyVideosApp : Gtk.Application {
         public string DB_PATH { get; private set; }
         public string COVER_FOLDER { get; private set; }
         public string CACHE_FOLDER { get; private set; }
 
         PlayMyVideos.Settings settings;
 
-        static PlayMyVideoApp _instance = null;
-        public static PlayMyVideoApp instance {
+        static PlayMyVideosApp _instance = null;
+        public static PlayMyVideosApp instance {
             get {
                 if (_instance == null) {
-                    _instance = new PlayMyVideoApp ();
+                    _instance = new PlayMyVideosApp ();
                 }
                 return _instance;
             }
@@ -78,7 +78,7 @@ namespace PlayMyVideos {
             }
         }
 
-        private PlayMyVideoApp () {}
+        private PlayMyVideosApp () {}
 
         public MainWindow mainwindow { get; private set; default = null; }
 
@@ -101,6 +101,6 @@ namespace PlayMyVideos {
 
 public static int main (string [] args) {
     Gst.init (ref args);
-    var app = PlayMyVideos.PlayMyVideoApp.instance;
+    var app = PlayMyVideos.PlayMyVideosApp.instance;
     return app.run (args);
 }
