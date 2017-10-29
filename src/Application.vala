@@ -48,6 +48,15 @@ namespace PlayMyVideos {
             this.application_id = "com.github.artemanufrij.playmyvideos";
             settings = PlayMyVideos.Settings.get_default ();
 
+            var add_into_clipboard = new SimpleAction ("back-action", null);
+            add_action (add_into_clipboard);
+            add_accelerator ("<Alt>Left", "app.back-action", null);
+            add_into_clipboard.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.show_boxes ();
+                }
+            });
+
             create_cache_folders ();
         }
 
