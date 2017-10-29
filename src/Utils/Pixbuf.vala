@@ -28,7 +28,6 @@
 namespace PlayMyVideos.Utils {
     public static Gdk.Pixbuf? align_pixbuf_for_thumbnail_normal (Gdk.Pixbuf p) {
         Gdk.Pixbuf? pixbuf = p;
-        stdout.printf ("%d\n", pixbuf.height);
         int dif = (pixbuf.height - 50) / 2;
         pixbuf = new Gdk.Pixbuf.subpixbuf (pixbuf, 8, dif, pixbuf.width - 16, 50);
         return pixbuf;

@@ -67,8 +67,7 @@ namespace PlayMyVideos.Services {
             q = """CREATE TABLE IF NOT EXISTS boxes (
                 ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
                 title       TEXT        NOT NULL,
-                year        INT         NULL,
-                CONSTRAINT unique_album UNIQUE (title, year)
+                CONSTRAINT unique_album UNIQUE (title)
                 );""";
 
             if (db.exec (q, null, out errormsg) != Sqlite.OK) {
@@ -81,6 +80,7 @@ namespace PlayMyVideos.Services {
                 path        TEXT        NOT NULL,
                 title       TEXT        NOT NULL,
                 mime_type   TEXT        NOT NULL,
+                year        INT         NOT NULL,
                 CONSTRAINT unique_track UNIQUE (path),
                 FOREIGN KEY (box_id) REFERENCES boxes (ID)
                     ON DELETE CASCADE
@@ -215,13 +215,14 @@ namespace PlayMyVideos.Services {
             Sqlite.Statement stmt;
 
             string sql = """
-                INSERT OR IGNORE INTO videos (box_id, title, path, mime_type) VALUES ($BOX_ID, $TITLE, $PATH, $MIME_TYPE);
+                INSERT OR IGNORE INTO videos (box_id, title, path, mime_type, year) VALUES ($BOX_ID, $TITLE, $PATH, $MIME_TYPE, $YEAR);
             """;
             db.prepare_v2 (sql, sql.length, out stmt);
             set_parameter_int (stmt, sql, "$BOX_ID", video.box.ID);
             set_parameter_str (stmt, sql, "$TITLE", video.title);
             set_parameter_str (stmt, sql, "$PATH", video.path);
             set_parameter_str (stmt, sql, "$MIME_TYPE", video.mime_type);
+            set_parameter_int (stmt, sql, "$YEAR", video.year);
 
             if (stmt.step () != Sqlite.DONE) {
                 warning ("Error: %d: %s", db.errcode (), db.errmsg ());
@@ -269,11 +270,6 @@ namespace PlayMyVideos.Services {
         private void set_parameter_int (Sqlite.Statement? stmt, string sql, string par, int val) {
             int par_position = stmt.bind_parameter_index (par);
             stmt.bind_int (par_position, val);
-        }
-
-        private void set_parameter_int64 (Sqlite.Statement? stmt, string sql, string par, int64 val) {
-            int par_position = stmt.bind_parameter_index (par);
-            stmt.bind_int64 (par_position, val);
         }
 
         private void set_parameter_str (Sqlite.Statement? stmt, string sql, string par, string val) {

@@ -31,6 +31,7 @@ namespace PlayMyVideos.Objects {
 
         public int ID { get; set; }
         public string title { get; set; }
+        public int year { get; set; default = 0; }
 
         public signal void thumbnail_normal_changed ();
 
