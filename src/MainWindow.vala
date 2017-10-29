@@ -30,6 +30,7 @@ namespace PlayMyVideos {
         PlayMyVideos.Services.LibraryManager library_manager;
         PlayMyVideos.Settings settings;
 
+        Gtk.HeaderBar headerbar;
         Widgets.Views.BoxesView boxes_view;
         Widgets.Views.PlayerView player_view;
 
@@ -60,15 +61,33 @@ namespace PlayMyVideos {
         }
 
         private void build_ui () {
-            this.title = "Video Player";
-
             var content = new Gtk.Stack ();
             content.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
+
+            headerbar = new Gtk.HeaderBar ();
+            headerbar.show_close_button = true;
+            headerbar.title = _("Play My Videos");
+
+            var navigation_button = new Gtk.Button ();
+            navigation_button.label = _("Back");
+            navigation_button.can_focus = false;
+            navigation_button.get_style_context ().add_class ("back-button");
+            navigation_button.clicked.connect (() => {
+                content.set_visible_child_name ("boxes");
+                player_view.pause ();
+                navigation_button.hide ();
+                headerbar.title = _("Play My Videos");
+            });
+
+            headerbar.pack_start (navigation_button);
+            this.set_titlebar (headerbar);
 
             boxes_view = new Widgets.Views.BoxesView ();
             boxes_view.video_selected.connect ((video) => {
                 content.set_visible_child_name ("player");
                 player_view.play (video);
+                navigation_button.show ();
+                headerbar.title = video.title;
             });
 
             player_view = new Widgets.Views.PlayerView ();
@@ -80,6 +99,8 @@ namespace PlayMyVideos {
             content.add_named (player_view, "player");
             this.add (content);
             this.show_all ();
+
+            navigation_button.hide ();
         }
 
         private void load_settings () {

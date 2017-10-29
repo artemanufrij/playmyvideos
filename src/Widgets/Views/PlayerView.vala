@@ -72,8 +72,14 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         public void play (Objects.Video video) {
-            playback.uri = video.uri;
+            if (playback.uri != video.uri) {
+                playback.uri = video.uri;
+            }
             playback.playing = true;
+        }
+
+        public void pause () {
+            playback.playing = false;
         }
     }
 }

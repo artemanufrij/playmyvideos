@@ -77,6 +77,7 @@ namespace PlayMyVideos.Widgets.Views {
             var selected_row = videos.get_selected_row ();
             if (selected_row != null) {
                 video_selected ((selected_row as Widgets.Video).video);
+                videos.unselect_all ();
             }
         }
 
