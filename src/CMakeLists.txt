@@ -12,6 +12,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Widgets/Video.vala
     Widgets/Views/BoxesView.vala
     Widgets/Views/BoxView.vala
+    Widgets/Views/PlayerView.vala
     Utils/Utils.vala
     Utils/Pixbuf.vala
     Settings.vala
@@ -21,8 +22,8 @@ PACKAGES
     granite
     gtk+-3.0
     sqlite3
-    gstreamer-pbutils-1.0
-    gstreamer-tag-1.0
+    clutter-gtk-1.0
+    clutter-gst-3.0
 OPTIONS
     --vapidir=${CMAKE_SOURCE_DIR}/vapi
     --target-glib=2.32

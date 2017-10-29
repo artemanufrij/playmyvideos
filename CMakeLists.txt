@@ -20,9 +20,8 @@ pkg_check_modules (DEPS REQUIRED
     gtk+-3.0>=3.11.6
     granite
     sqlite3
-    gstreamer-tag-1.0
-    gstreamer-pbutils-1.0
-    gstreamer-audio-1.0
+    clutter-gtk-1.0
+    clutter-gst-3.0
 )
 
 # Comment this out to enable C compiler warnings
@@ -42,3 +41,6 @@ add_subdirectory (src)
 #add_subdirectory (data)
 #add_subdirectory (po)
 add_subdirectory (schemas)
+
+#libclutter-gtk-1.0-dev
+#libclutter-gst-3.0-dev

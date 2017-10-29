@@ -46,10 +46,21 @@ namespace PlayMyVideos.Objects {
                 _path = value;
 
                 var file = File.new_for_path (_path);
+                _uri = file.get_uri ();
+
                 var hash_file_poster = GLib.Checksum.compute_for_string (ChecksumType.MD5, file.get_uri (), file.get_uri ().length);
 
                 thumbnail_large_path = Path.build_filename (GLib.Environment.get_user_cache_dir (),"thumbnails", "large", hash_file_poster + ".png");
                 thumbnail_normal_path = Path.build_filename (GLib.Environment.get_user_cache_dir (),"thumbnails", "normal", hash_file_poster + ".png");
+            }
+        }
+
+        string _uri = "";
+        public string uri {
+            get {
+                return _uri;
+            } set {
+                _uri = value;
             }
         }
 

@@ -28,6 +28,8 @@
 namespace PlayMyVideos.Widgets.Views {
     public class BoxesView : Gtk.Grid {
 
+        public signal void video_selected (Objects.Video video);
+
         Gtk.FlowBox boxes;
         Gtk.Revealer action_revealer;
 
@@ -51,6 +53,7 @@ namespace PlayMyVideos.Widgets.Views {
             boxes_scroll.add (boxes);
 
             box_view = new Widgets.Views.BoxView ();
+            box_view.video_selected.connect ((video) => { video_selected (video); });
 
             action_revealer = new Gtk.Revealer ();
             action_revealer.add (box_view);

@@ -101,6 +101,7 @@ namespace PlayMyVideos {
 }
 
 public static int main (string [] args) {
+    GtkClutter.init (ref args);
     Gst.init (ref args);
     var app = PlayMyVideos.PlayMyVideosApp.instance;
     return app.run (args);

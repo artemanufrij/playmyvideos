@@ -30,8 +30,8 @@ namespace PlayMyVideos {
         PlayMyVideos.Services.LibraryManager library_manager;
         PlayMyVideos.Settings settings;
 
-
         Widgets.Views.BoxesView boxes_view;
+        Widgets.Views.PlayerView player_view;
 
         construct {
             settings = PlayMyVideos.Settings.get_default ();
@@ -62,8 +62,23 @@ namespace PlayMyVideos {
         private void build_ui () {
             this.title = "Video Player";
 
+            var content = new Gtk.Stack ();
+            content.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
+
             boxes_view = new Widgets.Views.BoxesView ();
-            this.add (boxes_view);
+            boxes_view.video_selected.connect ((video) => {
+                content.set_visible_child_name ("player");
+                player_view.play (video);
+            });
+
+            player_view = new Widgets.Views.PlayerView ();
+            player_view.player_frame_resized.connect ((width, height) => {
+                stdout.printf ("%d, %d\n", width, height);
+            });
+
+            content.add_named (boxes_view, "boxes");
+            content.add_named (player_view, "player");
+            this.add (content);
             this.show_all ();
         }
 

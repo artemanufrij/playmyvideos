@@ -27,8 +27,9 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class BoxView : Gtk.Grid {
-
         public PlayMyVideos.Objects.Box current_box { get; private set; }
+
+        public signal void video_selected (Objects.Video video);
 
         Gtk.ListBox videos;
         Gtk.Image cover;
@@ -47,6 +48,7 @@ namespace PlayMyVideos.Widgets.Views {
             var videos_scroll = new Gtk.ScrolledWindow (null, null);
 
             videos = new Gtk.ListBox ();
+            videos.selected_rows_changed.connect (play_video);
             videos_scroll.add (videos);
 
             content.pack_start (cover, false, false, 0);
@@ -68,6 +70,13 @@ namespace PlayMyVideos.Widgets.Views {
 
             foreach (var video in current_box.videos) {
                 add_video (video);
+            }
+        }
+
+        private void play_video () {
+            var selected_row = videos.get_selected_row ();
+            if (selected_row != null) {
+                video_selected ((selected_row as Widgets.Video).video);
             }
         }
 
