@@ -2,9 +2,18 @@ set (CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/Config.vala)
 configure_file (${CMAKE_SOURCE_DIR}/Config.vala.cmake ${CONFIG_FILE})
 
 vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
+    Objects/Box.vala
+    Objects/Video.vala
     Services/DataBaseManager.vala
     Services/LocalFilesManager.vala
     Services/LibraryManager.vala
+    Interfaces/Thubnailer.vala
+    Widgets/Box.vala
+    Widgets/Video.vala
+    Widgets/Views/BoxesView.vala
+    Widgets/Views/BoxView.vala
+    Utils/Utils.vala
+    Utils/Pixbuf.vala
     Settings.vala
     MainWindow.vala
     Application.vala

@@ -38,7 +38,7 @@ namespace PlayMyVideos.Services {
         }
 
         public signal void scan_started ();
-        public signal void found_video_file (string path);
+        public signal void found_video_file (string path, string mime_type);
 
         private LocalFilesManager () { }
 
@@ -73,7 +73,7 @@ namespace PlayMyVideos.Services {
                             bool valid_file = !file_info.get_is_hidden () && mime_type.has_prefix ("video/");
                             if (valid_file) {
                                 string found_path = GLib.Path.build_filename (path, file_info.get_name ());
-                                found_video_file (found_path);
+                                found_video_file (found_path, mime_type);
                             }
                         }
                     }

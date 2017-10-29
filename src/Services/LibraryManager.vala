@@ -37,11 +37,20 @@ namespace PlayMyVideos.Services {
             }
         }
 
+        public PlayMyVideos.Services.DataBaseManager db_manager { get; construct set; }
         public PlayMyVideos.Services.LocalFilesManager lf_manager { get; construct set; }
+
+        public GLib.List<PlayMyVideos.Objects.Box> boxes {
+            get {
+                return db_manager.boxes;
+            }
+        }
 
         construct {
             lf_manager = PlayMyVideos.Services.LocalFilesManager.instance;
             lf_manager.found_video_file.connect (found_local_video_file);
+
+            db_manager = PlayMyVideos.Services.DataBaseManager.instance;
         }
 
         private LibraryManager () { }
@@ -51,15 +60,27 @@ namespace PlayMyVideos.Services {
             lf_manager.scan (path);
         }
 
-        private void found_local_video_file (string path) {
-            stdout.printf ("%s\n", path);
-           /* new Thread<void*> (null, () => {
-                if (!db_manager.music_file_exists (path)) {
-                    tg_manager.add_discover_path (path);
+        private void found_local_video_file (string path, string mime_type) {
+            new Thread<void*> (null, () => {
+                if (!db_manager.video_file_exists (path)) {
+                    insert_video_file (path, mime_type);
                 }
                 return null;
-            });*/
+            });
         }
 
+        private void insert_video_file (string path, string mime_type) {
+            File file = File.new_for_path (path);
+            var parent = file.get_parent ().get_basename ();
+            stdout.printf ("%s\n", parent);
+            var box = new Objects.Box (parent);
+            var db_box = db_manager.insert_box_if_not_exists (box);
+            var video = new Objects.Video ();
+            video.path = path;
+            video.mime_type = mime_type;
+            video.title = Utils.get_title_from_basename(file.get_basename ());
+
+            db_box.add_video_if_not_exists (video);
+        }
     }
 }

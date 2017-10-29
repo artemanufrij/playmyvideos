@@ -30,6 +30,9 @@ namespace PlayMyVideos {
         PlayMyVideos.Services.LibraryManager library_manager;
         PlayMyVideos.Settings settings;
 
+
+        Widgets.Views.BoxesView boxes_view;
+
         construct {
             settings = PlayMyVideos.Settings.get_default ();
 
@@ -39,10 +42,12 @@ namespace PlayMyVideos {
         public MainWindow () {
             load_settings ();
             this.window_position = Gtk.WindowPosition.CENTER;
+            Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
             build_ui ();
 
-            library_manager.scan_local_library (settings.library_location);
-
+            load_content_from_database.begin ((obj, res) => {
+                library_manager.scan_local_library (settings.library_location);
+            });
             this.configure_event.connect ((event) => {
                 settings.window_width = event.width;
                 settings.window_height = event.height;
@@ -55,6 +60,11 @@ namespace PlayMyVideos {
         }
 
         private void build_ui () {
+            this.title = "Video Player";
+
+            boxes_view = new Widgets.Views.BoxesView ();
+            this.add (boxes_view);
+            this.show_all ();
         }
 
         private void load_settings () {
@@ -68,6 +78,12 @@ namespace PlayMyVideos {
 
         private void save_settings () {
             settings.window_maximized = this.is_maximized;
+        }
+
+        private async void load_content_from_database () {
+            foreach (var box in library_manager.boxes) {
+                boxes_view.add_box (box);
+            }
         }
     }
 }

@@ -37,6 +37,18 @@ namespace PlayMyVideos.Services {
             }
         }
 
+        public signal void added_new_box (PlayMyVideos.Objects.Box box);
+
+        GLib.List<PlayMyVideos.Objects.Box> _boxes = null;
+        public GLib.List<PlayMyVideos.Objects.Box> boxes {
+            get {
+                if (_boxes == null) {
+                    _boxes = get_box_collection ();
+                }
+                return _boxes;
+            }
+        }
+
         Sqlite.Database db;
         string errormsg;
 
@@ -68,6 +80,7 @@ namespace PlayMyVideos.Services {
                 box_id      INT         NOT NULL,
                 path        TEXT        NOT NULL,
                 title       TEXT        NOT NULL,
+                mime_type   TEXT        NOT NULL,
                 CONSTRAINT unique_track UNIQUE (path),
                 FOREIGN KEY (box_id) REFERENCES boxes (ID)
                     ON DELETE CASCADE
@@ -91,6 +104,144 @@ namespace PlayMyVideos.Services {
                 warning (err.message);
             }
             open_database ();
+        }
+// BOX REGION
+        private GLib.List<PlayMyVideos.Objects.Box> get_box_collection () {
+            GLib.List<PlayMyVideos.Objects.Box> return_value = new GLib.List<PlayMyVideos.Objects.Box> ();
+
+            Sqlite.Statement stmt;
+            string sql = """
+                SELECT id, title FROM boxes ORDER BY title;
+            """;
+
+            db.prepare_v2 (sql, sql.length, out stmt);
+
+            while (stmt.step () == Sqlite.ROW) {
+                return_value.append (_fill_box (stmt));
+            }
+            stmt.reset ();
+
+            return return_value;
+        }
+
+        public PlayMyVideos.Objects.Box _fill_box (Sqlite.Statement stmt) {
+            PlayMyVideos.Objects.Box return_value = new PlayMyVideos.Objects.Box ();
+            return_value.ID = stmt.column_int (0);
+            return_value.title = stmt.column_text (1);
+            return return_value;
+        }
+
+        public void insert_box (PlayMyVideos.Objects.Box box) {
+            Sqlite.Statement stmt;
+            string sql = """
+                INSERT OR IGNORE INTO boxes (title) VALUES ($TITLE);
+            """;
+
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_str (stmt, sql, "$TITLE", box.title);
+
+            if (stmt.step () != Sqlite.DONE) {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
+            }
+            stmt.reset ();
+
+            sql = """
+                SELECT id FROM boxes WHERE title=$TITLE;
+            """;
+
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_str (stmt, sql, "$TITLE", box.title);
+
+            if (stmt.step () == Sqlite.ROW) {
+                box.ID = stmt.column_int (0);
+                stdout.printf ("Box ID: %d - %s\n", box.ID, box.title);
+                _boxes.append (box);
+                added_new_box (box);
+            } else {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
+            }
+            stmt.reset ();
+        }
+
+        public PlayMyVideos.Objects.Box insert_box_if_not_exists (PlayMyVideos.Objects.Box new_box) {
+            PlayMyVideos.Objects.Box? return_value = null;
+            lock (_boxes) {
+                foreach (var box in boxes) {
+                    if (box.title == new_box.title) {
+                        return_value = box;
+                        break;
+                    }
+                }
+                if (return_value == null) {
+                    insert_box (new_box);
+                    return_value = new_box;
+                }
+                return return_value;
+            }
+        }
+
+// VIDEO REGION
+        public GLib.List<PlayMyVideos.Objects.Video> get_video_collection (PlayMyVideos.Objects.Box box) {
+            GLib.List<PlayMyVideos.Objects.Video> return_value = new GLib.List<PlayMyVideos.Objects.Video> ();
+            Sqlite.Statement stmt;
+
+            string sql = """
+                SELECT id, title, path, mime_type
+                FROM videos
+                WHERE box_id=$BOX_ID
+                ORDER BY title;
+            """;
+
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_int (stmt, sql, "$BOX_ID", box.ID);
+
+            while (stmt.step () == Sqlite.ROW) {
+                return_value.append (_fill_video (stmt, box));
+            }
+            stmt.reset ();
+            return return_value;
+        }
+
+        private PlayMyVideos.Objects.Video _fill_video (Sqlite.Statement stmt, PlayMyVideos.Objects.Box box) {
+            PlayMyVideos.Objects.Video return_value = new PlayMyVideos.Objects.Video (box);
+            return_value.ID = stmt.column_int (0);
+            return_value.title = stmt.column_text (1);
+            return_value.path = stmt.column_text (2);
+            return_value.mime_type = stmt.column_text (3);
+            return return_value;
+        }
+
+        public void insert_video (PlayMyVideos.Objects.Video video) {
+            Sqlite.Statement stmt;
+
+            string sql = """
+                INSERT OR IGNORE INTO videos (box_id, title, path, mime_type) VALUES ($BOX_ID, $TITLE, $PATH, $MIME_TYPE);
+            """;
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_int (stmt, sql, "$BOX_ID", video.box.ID);
+            set_parameter_str (stmt, sql, "$TITLE", video.title);
+            set_parameter_str (stmt, sql, "$PATH", video.path);
+            set_parameter_str (stmt, sql, "$MIME_TYPE", video.mime_type);
+
+            if (stmt.step () != Sqlite.DONE) {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
+            }
+            stmt.reset ();
+
+            sql = """
+                SELECT id FROM videos WHERE path=$PATH;
+            """;
+
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_str (stmt, sql, "$PATH", video.path);
+
+            if (stmt.step () == Sqlite.ROW) {
+                video.ID = stmt.column_int (0);
+                stdout.printf ("Video ID: %d - %s\n", video.ID, video.title);
+            } else {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
+            }
+            stmt.reset ();
         }
 
 
