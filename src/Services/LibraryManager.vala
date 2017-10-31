@@ -37,6 +37,8 @@ namespace PlayMyVideos.Services {
             }
         }
 
+        public signal void added_new_box (PlayMyVideos.Objects.Box box);
+
         public PlayMyVideos.Services.DataBaseManager db_manager { get; construct set; }
         public PlayMyVideos.Services.LocalFilesManager lf_manager { get; construct set; }
 
@@ -51,6 +53,7 @@ namespace PlayMyVideos.Services {
             lf_manager.found_video_file.connect (found_local_video_file);
 
             db_manager = PlayMyVideos.Services.DataBaseManager.instance;
+            db_manager.added_new_box.connect ((box) => { added_new_box (box); });
         }
 
         private LibraryManager () { }

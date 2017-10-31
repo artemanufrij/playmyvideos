@@ -115,6 +115,7 @@ namespace PlayMyVideos {
             content.set_visible_child_name ("player");
             navigation_button.show ();
             player_view.play (video);
+            search_entry.hide ();
         }
 
         public void show_boxes () {
@@ -122,6 +123,7 @@ namespace PlayMyVideos {
             player_view.pause ();
             navigation_button.hide ();
             headerbar.title = _("Play My Videos");
+            search_entry.show ();
             this.get_window ().resize (settings.window_width, settings.window_height);
         }
 

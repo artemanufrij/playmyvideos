@@ -90,6 +90,7 @@ namespace PlayMyVideos.Widgets.Views {
             }
 
             if (current_box != null) {
+                current_box.video_added.disconnect (add_video);
                 current_box.cover_changed.disconnect (change_cover);
             }
 
@@ -102,6 +103,7 @@ namespace PlayMyVideos.Widgets.Views {
                 add_video (video);
             }
             current_box.cover_changed.connect (change_cover);
+            current_box.video_added.connect (add_video);
         }
 
         private void change_cover () {

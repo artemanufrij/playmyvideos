@@ -29,15 +29,40 @@ namespace PlayMyVideos.Widgets {
     public class VideoTimeLine : Gtk.Grid {
         Views.PlayerView player_view;
         Granite.SeekBar timeline;
+        Gtk.Popover audio_stream_popover;
+        Gtk.ListBox audio_streams;
+
+        Gtk.Button play_button;
+        Gtk.Image icon_play;
+        Gtk.Image icon_pause;
 
         public VideoTimeLine (Views.PlayerView player_view) {
             this.player_view = player_view;
             build_ui ();
             this.player_view.duration_changed.connect ((duration) => {
                 timeline.playback_duration = duration;
+
+                foreach (var row in audio_streams.get_children ()) {
+                    row.destroy ();
+                }
+                foreach (var stream in player_view.playback.audio_streams) {
+                    var lab = new Gtk.Label (stream);
+                    lab.margin = 4;
+                    var row = new Gtk.ListBoxRow ();
+                    row.add (lab);
+                    audio_streams.add (row);
+                    row.show_all ();
+                }
             });
             this.player_view.progress_changed.connect ((progress) => {
                 timeline.playback_progress = progress;
+            });
+            this.player_view.toggled.connect ((playing) => {
+                if (playing) {
+                    play_button.image = icon_pause;
+                } else {
+                    play_button.image = icon_play;
+                }
             });
         }
 
@@ -52,11 +77,36 @@ namespace PlayMyVideos.Widgets {
                 return false;
             });
 
-            var lang_button = new Gtk.Button.from_icon_name ("config-language-symbolic", Gtk.IconSize.MENU);
+            icon_play = new Gtk.Image.from_icon_name ("media-playback-start-symbolic", Gtk.IconSize.MENU);
+            icon_pause = new Gtk.Image.from_icon_name ("media-playback-pause-symbolic", Gtk.IconSize.MENU);
+
+            play_button = new Gtk.Button ();
+            play_button.image = icon_play;
+            play_button.can_focus = false;
+            play_button.clicked.connect (() => { player_view.toogle_playing (); });
+
+            var audio_stream = new Gtk.Button.from_icon_name ("config-language-symbolic", Gtk.IconSize.MENU);
+            audio_stream.clicked.connect (() => {
+                audio_stream_popover.show_all ();
+            });
+            audio_stream_popover =  new Gtk.Popover(audio_stream);
+            audio_streams = new Gtk.ListBox ();
+            audio_streams.row_activated.connect ((row) => {
+                int i = 0;
+                foreach (var child in audio_streams.get_children ()) {
+                    if (child == row) {
+                        player_view.playback.audio_stream = i;
+                        return;
+                    }
+                    i++;
+                }
+            });
+            audio_stream_popover.add (audio_streams);
 
             var content = new Gtk.ActionBar ();
+            content.pack_start (play_button);
             content.pack_start (timeline);
-            content.pack_end (lang_button);
+            content.pack_end (audio_stream);
             this.add (content);
             show_all ();
         }

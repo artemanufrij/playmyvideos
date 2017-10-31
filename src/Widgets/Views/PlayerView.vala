@@ -33,6 +33,7 @@ namespace PlayMyVideos.Widgets.Views {
         public signal void player_frame_resized (int width, int height);
         public signal void duration_changed (double duration);
         public signal void progress_changed (double progress);
+        public signal void toggled (bool playing);
 
         public Objects.Video current_video { get; private set; }
 
@@ -88,6 +89,7 @@ namespace PlayMyVideos.Widgets.Views {
                         progress_timer = 0;
                     }
                 }
+                toggled (playback.playing);
             });
 
             video_actor = new Clutter.Actor ();
@@ -133,6 +135,10 @@ namespace PlayMyVideos.Widgets.Views {
 
         public void pause () {
             playback.playing = false;
+        }
+
+        public void toogle_playing () {
+            playback.playing = !playback.playing;
         }
     }
 }
