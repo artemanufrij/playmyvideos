@@ -29,13 +29,16 @@ namespace PlayMyVideos.Widgets.Views {
     public class PlayerView : Gtk.Grid {
 
         public signal void player_frame_resized (int width, int height);
+        public signal void duration_changed (double duration);
 
         int last_width = 0;
         int last_height = 0;
+        double last_dur = 0;
 
         ClutterGst.Playback playback;
         Clutter.Actor video_actor;
         GtkClutter.Embed clutter;
+        VideoTimeLine timeline;
 
         construct {
             clutter = new GtkClutter.Embed ();
@@ -43,24 +46,39 @@ namespace PlayMyVideos.Widgets.Views {
             playback.new_frame.connect ((frame) => {
                 var current_width = frame.resolution.width;
                 var current_height = frame.resolution.height;
-
+                var current_dur = playback.duration;
                 if (last_width != current_width || last_height != current_height) {
                     last_width = current_width;
                     last_height = current_height;
                     player_frame_resized (last_width, last_height);
                 }
+                if (last_dur != current_dur) {
+                    last_dur = current_dur;
+                    duration_changed (current_dur);
+                }
             });
+
             video_actor = new Clutter.Actor ();
 
             var stage = (Clutter.Stage)clutter.get_stage ();
+            stage.background_color = {0, 0, 0, 0};
 
             var aspect_ratio = new ClutterGst.Aspectratio ();
+            aspect_ratio.paint_borders = false;
             aspect_ratio.player = playback;
 
             video_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
             video_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
             video_actor.content = aspect_ratio;
             stage.add_child (video_actor);
+
+            timeline = new VideoTimeLine (this);
+            var bottom_actor = new GtkClutter.Actor.with_contents (timeline);
+            bottom_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+            bottom_actor.add_constraint (new Clutter.AlignConstraint (stage, Clutter.AlignAxis.Y_AXIS, 1));
+            stage.add_child (bottom_actor);
+
+            timeline.show_all ();
         }
 
         public PlayerView () {
