@@ -50,6 +50,7 @@ namespace PlayMyVideos.Widgets.Views {
 
         construct {
             clutter = new GtkClutter.Embed ();
+
             playback = new ClutterGst.Playback ();
             playback.new_frame.connect ((frame) => {
                 var current_width = frame.resolution.width;
@@ -68,12 +69,7 @@ namespace PlayMyVideos.Widgets.Views {
             });
 
             playback.eos.connect (() => {
-                var next = current_video.box.get_next_video (current_video);
-                if (next != null) {
-                    play (next);
-                } else {
-                    ended ();
-                }
+                next ();
             });
 
             playback.notify["playing"].connect (() => {
@@ -118,7 +114,29 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         private void build_ui () {
-            this.add (clutter);
+            var event_box = new Gtk.EventBox ();
+            event_box.events |= Gdk.EventMask.POINTER_MOTION_MASK;
+            event_box.events |= Gdk.EventMask.KEY_PRESS_MASK;
+            event_box.events |= Gdk.EventMask.KEY_RELEASE_MASK;
+            event_box.add (clutter);
+
+      /*      event_box.key_press_event.connect ((key) => {
+                return true;
+            });
+
+            event_box.key_release_event.connect ((key) => {
+                return true;
+            });
+
+            event_box.button_press_event.connect ((event) => {
+                return true;
+            });
+
+            event_box.button_release_event.connect ((event) => {
+                return true;
+            });*/
+
+            this.add (event_box);
         }
 
         public void play (Objects.Video video) {
@@ -135,6 +153,15 @@ namespace PlayMyVideos.Widgets.Views {
 
         public void pause () {
             playback.playing = false;
+        }
+
+        public void next () {
+            var next = current_video.box.get_next_video (current_video);
+            if (next != null) {
+                play (next);
+            } else {
+                ended ();
+            }
         }
 
         public void toogle_playing () {

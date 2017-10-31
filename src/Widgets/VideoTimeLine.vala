@@ -76,6 +76,7 @@ namespace PlayMyVideos.Widgets {
             play_button.clicked.connect (() => { player_view.toogle_playing (); });
 
             audio_stream = new Gtk.Button.from_icon_name ("config-language-symbolic", Gtk.IconSize.MENU);
+            audio_stream.can_focus = false;
             audio_stream.clicked.connect (() => {
                 audio_stream_popover.show_all ();
             });
@@ -108,23 +109,20 @@ namespace PlayMyVideos.Widgets {
 
             if (player_view.playback.audio_streams.length () > 1) {
                 int i = 0;
-                foreach (var stream in player_view.playback.audio_streams) {
+                foreach (string stream in player_view.playback.audio_streams) {
                     var lab = new Gtk.Label ("");
+                    lab.label = _("Track %d (%s)").printf (++i, stream.to_ascii ());
                     lab.margin = 4;
                     var row = new Gtk.ListBoxRow ();
                     row.add (lab);
                     audio_streams.add (row);
-                    if (player_view.playback.audio_stream == i) {
-                        row.activate ();
-                    }
-                    i++;
-                    lab.label = _("Track %d (%s)").printf (i, stream.to_ascii ());
                     row.show_all ();
                 }
                 audio_stream.show ();
             } else {
                 audio_stream.hide ();
             }
+
         }
     }
 }
