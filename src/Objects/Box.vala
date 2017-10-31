@@ -197,6 +197,10 @@ namespace PlayMyVideos.Objects {
             return return_value;
         }
 
+        public void set_new_cover (Gdk.Pixbuf cover) {
+            this.cover = save_cover (cover);
+        }
+
         protected Gdk.Pixbuf? save_cover (Gdk.Pixbuf p) {
             Gdk.Pixbuf? pixbuf = PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (p);
             try {

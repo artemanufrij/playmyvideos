@@ -84,7 +84,10 @@ namespace PlayMyVideos {
 
             player_view = new Widgets.Views.PlayerView ();
             player_view.player_frame_resized.connect ((width, height) => {
-                stdout.printf ("%d, %d\n", width, height);
+                var current_width = get_allocated_width ();
+                double w_r = (double)(current_width - 156) / width;
+                int new_height = (int)(height * w_r) + 198;
+                this.get_window ().resize (current_width, new_height);
             });
 
             content.add_named (boxes_view, "boxes");

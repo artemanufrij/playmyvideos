@@ -82,5 +82,28 @@ namespace PlayMyVideos.Services {
 
             db_box.add_video_if_not_exists (video);
         }
+
+        //PIXBUF
+        public string? choose_new_cover () {
+            string? return_value = null;
+            var cover = new Gtk.FileChooserDialog (
+                _("Choose an image…"), PlayMyVideosApp.instance.mainwindow,
+                Gtk.FileChooserAction.OPEN,
+                _("_Cancel"), Gtk.ResponseType.CANCEL,
+                _("_Open"), Gtk.ResponseType.ACCEPT);
+
+            var filter = new Gtk.FileFilter ();
+            filter.set_filter_name (_("Images"));
+            filter.add_mime_type ("image/*");
+
+            cover.add_filter (filter);
+
+            if (cover.run () == Gtk.ResponseType.ACCEPT) {
+                return_value = cover.get_filename ();
+            }
+
+            cover.destroy();
+            return return_value;
+        }
     }
 }

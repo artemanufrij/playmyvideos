@@ -77,9 +77,12 @@ namespace PlayMyVideos.Services {
                             }
                         }
                     }
+                    children.close ();
+                    children.dispose ();
                 } catch (Error err) {
                     warning (err.message);
                 }
+                directory.dispose ();
                 return null;
             });
         }

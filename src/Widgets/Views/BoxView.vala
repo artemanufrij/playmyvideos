@@ -27,12 +27,18 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class BoxView : Gtk.Grid {
+        PlayMyVideos.Services.LibraryManager library_manager;
         public PlayMyVideos.Objects.Box current_box { get; private set; }
 
         public signal void video_selected (Objects.Video video);
 
         Gtk.ListBox videos;
         Gtk.Image cover;
+        Gtk.Menu menu;
+
+        construct {
+            library_manager = PlayMyVideos.Services.LibraryManager.instance;
+        }
 
         public BoxView () {
             build_ui ();
@@ -43,7 +49,27 @@ namespace PlayMyVideos.Widgets.Views {
             content.width_request = 256;
             content.vexpand = true;
 
+            var event_box = new Gtk.EventBox ();
+            event_box.button_press_event.connect (show_context_menu);
+
             cover = new Gtk.Image ();
+            event_box.add (cover);
+
+            menu = new Gtk.Menu ();
+            var menu_new_cover = new Gtk.MenuItem.with_label (_("Set new Cover…"));
+            menu_new_cover.activate.connect (() => {
+                var new_cover = library_manager.choose_new_cover ();
+                if (new_cover != null) {
+                    try {
+                        var pixbuf = new Gdk.Pixbuf.from_file (new_cover);
+                        current_box.set_new_cover (pixbuf);
+                    } catch (Error err) {
+                        warning (err.message);
+                    }
+                }
+            });
+            menu.append (menu_new_cover);
+            menu.show_all ();
 
             var videos_scroll = new Gtk.ScrolledWindow (null, null);
 
@@ -51,7 +77,7 @@ namespace PlayMyVideos.Widgets.Views {
             videos.selected_rows_changed.connect (play_video);
             videos_scroll.add (videos);
 
-            content.pack_start (cover, false, false, 0);
+            content.pack_start (event_box, false, false, 0);
             content.pack_start (videos_scroll, true, true, 0);
             var separator = new Gtk.Separator (Gtk.Orientation.VERTICAL);
             this.attach (separator, 0, 0);
@@ -63,6 +89,10 @@ namespace PlayMyVideos.Widgets.Views {
                 return;
             }
 
+            if (current_box != null) {
+                current_box.cover_changed.disconnect (change_cover);
+            }
+
             current_box = box;
             reset ();
 
@@ -71,6 +101,11 @@ namespace PlayMyVideos.Widgets.Views {
             foreach (var video in current_box.videos) {
                 add_video (video);
             }
+            current_box.cover_changed.connect (change_cover);
+        }
+
+        private void change_cover () {
+            cover.pixbuf = current_box.cover;
         }
 
         private void play_video () {
@@ -94,6 +129,14 @@ namespace PlayMyVideos.Widgets.Views {
             foreach (var child in videos.get_children ()) {
                 child.destroy ();
             }
+        }
+
+        private bool show_context_menu (Gtk.Widget sender, Gdk.EventButton evt) {
+            if (evt.type == Gdk.EventType.BUTTON_PRESS && evt.button == 3) {
+                menu.popup (null, null, null, evt.button, evt.time);
+                return true;
+            }
+            return false;
         }
     }
 }

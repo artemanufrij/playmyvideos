@@ -87,8 +87,7 @@ namespace PlayMyVideos {
             }
         }
 
-        private PlayMyVideosApp () {
-        }
+        private PlayMyVideosApp () { }
 
         public MainWindow mainwindow { get; private set; default = null; }
 
