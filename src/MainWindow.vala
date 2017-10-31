@@ -31,6 +31,7 @@ namespace PlayMyVideos {
         PlayMyVideos.Settings settings;
 
         Gtk.HeaderBar headerbar;
+        Gtk.SearchEntry search_entry;
         Gtk.Stack content;
         Gtk.Button navigation_button;
         Widgets.Views.BoxesView boxes_view;
@@ -38,7 +39,6 @@ namespace PlayMyVideos {
 
         construct {
             settings = PlayMyVideos.Settings.get_default ();
-
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
         }
 
@@ -52,8 +52,10 @@ namespace PlayMyVideos {
                 library_manager.scan_local_library (settings.library_location);
             });
             this.configure_event.connect ((event) => {
-                settings.window_width = event.width;
-                settings.window_height = event.height;
+                if (!player_view.playback.playing) {
+                    settings.window_width = event.width;
+                    settings.window_height = event.height;
+                }
                 return false;
             });
 
@@ -70,6 +72,12 @@ namespace PlayMyVideos {
             headerbar.show_close_button = true;
             headerbar.title = _("Play My Videos");
 
+            search_entry = new Gtk.SearchEntry ();
+            search_entry.placeholder_text = _("Search Videos");
+            search_entry.search_changed.connect (() => {
+                boxes_view.filter = search_entry.text;
+            });
+
             navigation_button = new Gtk.Button ();
             navigation_button.label = _("Back");
             navigation_button.can_focus = false;
@@ -77,12 +85,17 @@ namespace PlayMyVideos {
             navigation_button.clicked.connect (show_boxes);
 
             headerbar.pack_start (navigation_button);
+            headerbar.pack_end (search_entry);
             this.set_titlebar (headerbar);
 
             boxes_view = new Widgets.Views.BoxesView ();
             boxes_view.video_selected.connect (show_player);
 
             player_view = new Widgets.Views.PlayerView ();
+            player_view.ended.connect (show_boxes);
+            player_view.started.connect ((video) => {
+                headerbar.title = video.title;
+            });
             player_view.player_frame_resized.connect ((width, height) => {
                 var current_width = get_allocated_width ();
                 double w_r = (double)(current_width - 156) / width;
@@ -101,7 +114,6 @@ namespace PlayMyVideos {
         private void show_player (Objects.Video video) {
             content.set_visible_child_name ("player");
             navigation_button.show ();
-            headerbar.title = video.title;
             player_view.play (video);
         }
 
@@ -110,6 +122,7 @@ namespace PlayMyVideos {
             player_view.pause ();
             navigation_button.hide ();
             headerbar.title = _("Play My Videos");
+            this.get_window ().resize (settings.window_width, settings.window_height);
         }
 
         private void load_settings () {
@@ -123,6 +136,18 @@ namespace PlayMyVideos {
 
         private void save_settings () {
             settings.window_maximized = this.is_maximized;
+        }
+
+        public void search () {
+            this.search_entry.grab_focus ();
+        }
+
+        public void search_reset () {
+            if (this.search_entry.text != "") {
+                this.search_entry.text = "";
+            } else {
+                boxes_view.unselect_all ();
+            }
         }
 
         private async void load_content_from_database () {

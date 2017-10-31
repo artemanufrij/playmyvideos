@@ -36,17 +36,29 @@ namespace PlayMyVideos.Widgets {
             this.player_view.duration_changed.connect ((duration) => {
                 timeline.playback_duration = duration;
             });
-            //this.player_view.
+            this.player_view.progress_changed.connect ((progress) => {
+                timeline.playback_progress = progress;
+            });
         }
 
         private void build_ui () {
             timeline = new Granite.SeekBar (0);
-            var content = new Gtk.Grid ();
+            timeline.hexpand = true;
+            timeline.valign = Gtk.Align.CENTER;
+            timeline.scale.change_value.connect ((scroll, new_value) => {
+                if (scroll == Gtk.ScrollType.JUMP) {
+                    player_view.playback.progress = new_value;
+                }
+                return false;
+            });
 
-            content.attach (timeline, 1, 0);
+            var lang_button = new Gtk.Button.from_icon_name ("config-language-symbolic", Gtk.IconSize.MENU);
+
+            var content = new Gtk.ActionBar ();
+            content.pack_start (timeline);
+            content.pack_end (lang_button);
             this.add (content);
             show_all ();
         }
-
     }
 }

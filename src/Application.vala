@@ -48,12 +48,30 @@ namespace PlayMyVideos {
             this.application_id = "com.github.artemanufrij.playmyvideos";
             settings = PlayMyVideos.Settings.get_default ();
 
-            var add_into_clipboard = new SimpleAction ("back-action", null);
-            add_action (add_into_clipboard);
+            var action_back = new SimpleAction ("back-action", null);
+            add_action (action_back);
             add_accelerator ("<Alt>Left", "app.back-action", null);
-            add_into_clipboard.activate.connect (() => {
+            action_back.activate.connect (() => {
                 if (mainwindow != null) {
                     mainwindow.show_boxes ();
+                }
+            });
+
+            var action_search = new SimpleAction ("search", null);
+            add_action (action_search);
+            add_accelerator ("<Control>f", "app.search", null);
+            action_search.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.search ();
+                }
+            });
+
+            var action_search_reset = new SimpleAction ("search-reset", null);
+            add_action (action_search_reset);
+            add_accelerator ("Escape", "app.search-reset", null);
+            action_search_reset.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.search_reset ();
                 }
             });
 

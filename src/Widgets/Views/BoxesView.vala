@@ -35,6 +35,18 @@ namespace PlayMyVideos.Widgets.Views {
 
         Widgets.Views.BoxView box_view;
 
+        private string _filter = "";
+        public string filter {
+            get {
+                return _filter;
+            } set {
+                if (_filter != value) {
+                    _filter = value;
+                    boxes.invalidate_filter ();
+                }
+            }
+        }
+
         public BoxesView () {
             build_ui ();
         }
@@ -47,6 +59,7 @@ namespace PlayMyVideos.Widgets.Views {
             boxes.column_spacing = 24;
             boxes.max_children_per_line = 24;
             boxes.valign = Gtk.Align.START;
+            boxes.set_filter_func (boxes_filter_func);
             boxes.child_activated.connect (show_box_viewer);
 
             var boxes_scroll = new Gtk.ScrolledWindow (null, null);
@@ -79,6 +92,36 @@ namespace PlayMyVideos.Widgets.Views {
             action_revealer.set_reveal_child (true);
             var box = (item as PlayMyVideos.Widgets.Box).box;
             box_view.show_box (box);
+        }
+
+        public void unselect_all () {
+            boxes.unselect_all ();
+            action_revealer.set_reveal_child (false);
+        }
+
+        private bool boxes_filter_func (Gtk.FlowBoxChild child) {
+            if (filter.strip ().length == 0) {
+                return true;
+            }
+
+            string[] filter_elements = filter.strip ().down ().split (" ");
+            var box = (child as Widgets.Box).box;
+
+            foreach (string filter_element in filter_elements) {
+                if (!box.title.down ().contains (filter_element)) {
+                    bool video_title = false;
+                    foreach (var video in box.videos) {
+                        if (video.title.down ().contains (filter_element)) {
+                            video_title = true;
+                        }
+                    }
+                    if (video_title) {
+                        continue;
+                    }
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

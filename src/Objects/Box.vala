@@ -105,6 +105,14 @@ namespace PlayMyVideos.Objects {
             }
         }
 
+        public Video? get_next_video (Video current) {
+            int i = _videos.index (current) + 1;
+            if (i < _videos.length ()) {
+                return _videos.nth_data (i);
+            }
+            return null;
+        }
+
 // COVER REGION
         private async void load_cover_async () {
             if (is_cover_loading || cover != null || this.ID == 0 || this.videos.length () == 0) {

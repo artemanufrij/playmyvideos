@@ -28,14 +28,21 @@
 namespace PlayMyVideos.Widgets.Views {
     public class PlayerView : Gtk.Grid {
 
+        public signal void ended ();
+        public signal void started (Objects.Video video);
         public signal void player_frame_resized (int width, int height);
         public signal void duration_changed (double duration);
+        public signal void progress_changed (double progress);
+
+        public Objects.Video current_video { get; private set; }
 
         int last_width = 0;
         int last_height = 0;
         double last_dur = 0;
 
-        ClutterGst.Playback playback;
+        uint progress_timer = 0;
+
+        public ClutterGst.Playback playback { get; private set; }
         Clutter.Actor video_actor;
         GtkClutter.Embed clutter;
         VideoTimeLine timeline;
@@ -55,6 +62,31 @@ namespace PlayMyVideos.Widgets.Views {
                 if (last_dur != current_dur) {
                     last_dur = current_dur;
                     duration_changed (current_dur);
+                    progress_changed (0);
+                }
+            });
+
+            playback.eos.connect (() => {
+                var next = current_video.box.get_next_video (current_video);
+                if (next != null) {
+                    play (next);
+                } else {
+                    ended ();
+                }
+            });
+
+            playback.notify["playing"].connect (() => {
+                if (playback.playing) {
+                    started (current_video);
+                    progress_timer = GLib.Timeout.add (250, () => {
+                        progress_changed (playback.progress);
+                        return true;
+                    });
+                } else {
+                    if (progress_timer != 0) {
+                        Source.remove (progress_timer);
+                        progress_timer = 0;
+                    }
                 }
             });
 
@@ -77,8 +109,6 @@ namespace PlayMyVideos.Widgets.Views {
             bottom_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
             bottom_actor.add_constraint (new Clutter.AlignConstraint (stage, Clutter.AlignAxis.Y_AXIS, 1));
             stage.add_child (bottom_actor);
-
-            timeline.show_all ();
         }
 
         public PlayerView () {
@@ -90,9 +120,14 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         public void play (Objects.Video video) {
-            if (playback.uri != video.uri) {
-                playback.uri = video.uri;
+            if (current_video == video) {
+                if (!playback.playing) {
+                    playback.playing = true;
+                }
+                return;
             }
+            current_video = video;
+            playback.uri = video.uri;
             playback.playing = true;
         }
 
