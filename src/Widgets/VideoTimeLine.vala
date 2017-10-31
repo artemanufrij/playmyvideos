@@ -29,6 +29,7 @@ namespace PlayMyVideos.Widgets {
     public class VideoTimeLine : Gtk.Grid {
         Views.PlayerView player_view;
         Granite.SeekBar timeline;
+        Gtk.Button audio_stream;
         Gtk.Popover audio_stream_popover;
         Gtk.ListBox audio_streams;
 
@@ -41,18 +42,7 @@ namespace PlayMyVideos.Widgets {
             build_ui ();
             this.player_view.duration_changed.connect ((duration) => {
                 timeline.playback_duration = duration;
-
-                foreach (var row in audio_streams.get_children ()) {
-                    row.destroy ();
-                }
-                foreach (var stream in player_view.playback.audio_streams) {
-                    var lab = new Gtk.Label (stream);
-                    lab.margin = 4;
-                    var row = new Gtk.ListBoxRow ();
-                    row.add (lab);
-                    audio_streams.add (row);
-                    row.show_all ();
-                }
+                load_audio_streams ();
             });
             this.player_view.progress_changed.connect ((progress) => {
                 timeline.playback_progress = progress;
@@ -85,7 +75,7 @@ namespace PlayMyVideos.Widgets {
             play_button.can_focus = false;
             play_button.clicked.connect (() => { player_view.toogle_playing (); });
 
-            var audio_stream = new Gtk.Button.from_icon_name ("config-language-symbolic", Gtk.IconSize.MENU);
+            audio_stream = new Gtk.Button.from_icon_name ("config-language-symbolic", Gtk.IconSize.MENU);
             audio_stream.clicked.connect (() => {
                 audio_stream_popover.show_all ();
             });
@@ -109,6 +99,32 @@ namespace PlayMyVideos.Widgets {
             content.pack_end (audio_stream);
             this.add (content);
             show_all ();
+        }
+
+        private void load_audio_streams () {
+            foreach (var row in audio_streams.get_children ()) {
+                row.destroy ();
+            }
+
+            if (player_view.playback.audio_streams.length () > 1) {
+                int i = 0;
+                foreach (var stream in player_view.playback.audio_streams) {
+                    var lab = new Gtk.Label ("");
+                    lab.margin = 4;
+                    var row = new Gtk.ListBoxRow ();
+                    row.add (lab);
+                    audio_streams.add (row);
+                    if (player_view.playback.audio_stream == i) {
+                        row.activate ();
+                    }
+                    i++;
+                    lab.label = _("Track %d (%s)").printf (i, stream.to_ascii ());
+                    row.show_all ();
+                }
+                audio_stream.show ();
+            } else {
+                audio_stream.hide ();
+            }
         }
     }
 }
