@@ -39,15 +39,10 @@ namespace PlayMyVideos.Widgets {
             this.add (lab);
         }
 
-        public string? get_uri () {
-            string? return_value = null;
-            var directory = File.new_for_path (video.path).get_parent ();
-            if (directory != null) {
-                var path = GLib.Path.build_filename (directory.get_path (), subtitle);
-                return_value = File.new_for_path (path).get_uri ();
-            }
-
-            return return_value;
+        public string get_uri () {
+            var directory = GLib.Path.get_dirname (video.path);
+            var path = GLib.Path.build_filename (directory, subtitle);
+            return File.new_for_path (path).get_uri ();
         }
     }
 }
