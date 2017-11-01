@@ -45,6 +45,7 @@ namespace PlayMyVideos.Widgets {
             build_ui ();
             this.player_view.duration_changed.connect ((duration) => {
                 timeline.playback_duration = duration;
+                player_view.playback.subtitle_track = -1;
                 load_audio_streams ();
                 load_subtitle_tracks ();
             });
@@ -109,11 +110,17 @@ namespace PlayMyVideos.Widgets {
                 int i = -1;
                 foreach (var child in subtitle_tracks.get_children ()) {
                     if (child == row) {
-                        player_view.playback.subtitle_track = i;
+                        if (child is SubTitleRow) {
+                            var uri = (child as SubTitleRow).get_uri ();
+                            player_view.playback.subtitle_uri = uri;
+                        } else {
+                            player_view.playback.subtitle_track = i;
+                        }
                         return;
                     }
                     i++;
                 }
+                subtitle_track_popover.hide ();
             });
             subtitle_track_popover.add (subtitle_tracks);
 
@@ -153,7 +160,8 @@ namespace PlayMyVideos.Widgets {
                 row.destroy ();
             }
 
-            if (player_view.playback.subtitle_tracks.length () > 1) {
+            if (player_view.playback.subtitle_tracks.length () > 1 || player_view.current_video.local_subtitles.length () > 1) {
+
                 int i = 0;
                 var lab = new Gtk.Label (_("disable"));
                 lab.margin = 4;
@@ -162,15 +170,26 @@ namespace PlayMyVideos.Widgets {
                 row.add (lab);
                 subtitle_tracks.add (row);
                 row.show_all ();
-                foreach (string subtitle in player_view.playback.subtitle_tracks) {
+
+                foreach (string? subtitle in player_view.playback.subtitle_tracks) {
+                    if (subtitle == null) {
+                        continue;
+                    }
                     lab = new Gtk.Label ("");
                     lab.label = _("Subtitle %d (%s)").printf (++i, subtitle.to_ascii ());
                     lab.margin = 4;
+                    lab.halign = Gtk.Align.START;
                     row = new Gtk.ListBoxRow ();
                     row.add (lab);
                     subtitle_tracks.add (row);
                     row.show_all ();
                 }
+
+                foreach (string subtitle in player_view.current_video.local_subtitles) {
+                    subtitle_tracks.add (new SubTitleRow (player_view.current_video, subtitle));
+                    row.show_all ();
+                }
+
                 subtitle_track.show ();
             } else {
                 subtitle_track.hide ();

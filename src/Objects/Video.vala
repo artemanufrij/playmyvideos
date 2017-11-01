@@ -73,6 +73,30 @@ namespace PlayMyVideos.Objects {
             }
         }
 
+        GLib.List<string> _local_subtitles = null;
+        public GLib.List<string> local_subtitles {
+            get {
+                if (_local_subtitles == null) {
+                    _local_subtitles = new GLib.List<string> ();
+                    var directory = File.new_for_path (this.path).get_parent ();
+                    if (directory != null) {
+                        var children = directory.enumerate_children (FileAttribute.STANDARD_CONTENT_TYPE , GLib.FileQueryInfoFlags.NONE);
+                        FileInfo file_info;
+
+                        while ((file_info = children.next_file ()) != null) {
+                            foreach (var ext in Utils.subtitle_extentions ()) {
+                                if (file_info.get_name ().has_suffix (ext)) {
+                                    _local_subtitles.append (file_info.get_name ());
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                return _local_subtitles;
+            }
+        }
+
         Gdk.Pixbuf? _thumbnail_normal = null;
         public Gdk.Pixbuf? thumbnail_normal {
             get {

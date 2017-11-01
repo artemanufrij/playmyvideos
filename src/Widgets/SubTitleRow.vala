@@ -25,16 +25,29 @@
  * Authored by: Artem Anufrij <artem.anufrij@live.de>
  */
 
-namespace PlayMyVideos.Utils {
-    public static string get_title_from_basename (string basename) {
-        int index = basename.last_index_of_char ('.');
-        if (index > -1) {
-            return basename.substring (0, index);
-        }
-        return basename;
-    }
+namespace PlayMyVideos.Widgets {
+    public class SubTitleRow : Gtk.ListBoxRow {
+        public Objects.Video video { get; private set; }
+        public string subtitle { get; private set; }
 
-    public static string[] subtitle_extentions () {
-        return {"sub", "srt", "smi", "ssa", "ass", "asc"};
+        public SubTitleRow (Objects.Video video, string subtitle) {
+            this.video = video;
+            this.subtitle = subtitle;
+            var lab = new Gtk.Label (subtitle);
+            lab.margin = 4;
+            lab.halign = Gtk.Align.START;
+            this.add (lab);
+        }
+
+        public string? get_uri () {
+            string? return_value = null;
+            var directory = File.new_for_path (video.path).get_parent ();
+            if (directory != null) {
+                var path = GLib.Path.build_filename (directory.get_path (), subtitle);
+                return_value = File.new_for_path (path).get_uri ();
+            }
+
+            return return_value;
+        }
     }
 }

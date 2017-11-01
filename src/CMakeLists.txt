@@ -9,6 +9,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Services/LibraryManager.vala
     Interfaces/Thubnailer.vala
     Widgets/Box.vala
+    Widgets/SubTitleRow.vala
     Widgets/Video.vala
     Widgets/VideoTimeLine.vala
     Widgets/Views/BoxesView.vala
