@@ -32,6 +32,9 @@ namespace PlayMyVideos.Widgets {
         Gtk.Button audio_stream;
         Gtk.Popover audio_stream_popover;
         Gtk.ListBox audio_streams;
+        Gtk.Button subtitle_track;
+        Gtk.Popover subtitle_track_popover;
+        Gtk.ListBox subtitle_tracks;
 
         Gtk.Button play_button;
         Gtk.Image icon_play;
@@ -43,6 +46,7 @@ namespace PlayMyVideos.Widgets {
             this.player_view.duration_changed.connect ((duration) => {
                 timeline.playback_duration = duration;
                 load_audio_streams ();
+                load_subtitle_tracks ();
             });
             this.player_view.progress_changed.connect ((progress) => {
                 timeline.playback_progress = progress;
@@ -94,10 +98,30 @@ namespace PlayMyVideos.Widgets {
             });
             audio_stream_popover.add (audio_streams);
 
+            subtitle_track = new Gtk.Button.from_icon_name ("media-view-subtitles-symbolic", Gtk.IconSize.MENU);
+            subtitle_track.can_focus = false;
+            subtitle_track.clicked.connect (() => {
+                subtitle_track_popover.show_all ();
+            });
+            subtitle_track_popover = new Gtk.Popover(subtitle_track);
+            subtitle_tracks = new Gtk.ListBox ();
+            subtitle_tracks.row_activated.connect ((row) => {
+                int i = -1;
+                foreach (var child in subtitle_tracks.get_children ()) {
+                    if (child == row) {
+                        player_view.playback.subtitle_track = i;
+                        return;
+                    }
+                    i++;
+                }
+            });
+            subtitle_track_popover.add (subtitle_tracks);
+
             var content = new Gtk.ActionBar ();
             content.pack_start (play_button);
             content.pack_start (timeline);
             content.pack_end (audio_stream);
+            content.pack_end (subtitle_track);
             this.add (content);
             show_all ();
         }
@@ -122,7 +146,35 @@ namespace PlayMyVideos.Widgets {
             } else {
                 audio_stream.hide ();
             }
+        }
 
+        private void load_subtitle_tracks () {
+            foreach (var row in subtitle_tracks.get_children ()) {
+                row.destroy ();
+            }
+
+            if (player_view.playback.subtitle_tracks.length () > 1) {
+                int i = 0;
+                var lab = new Gtk.Label (_("disable"));
+                lab.margin = 4;
+                lab.halign = Gtk.Align.START;
+                var row = new Gtk.ListBoxRow ();
+                row.add (lab);
+                subtitle_tracks.add (row);
+                row.show_all ();
+                foreach (string subtitle in player_view.playback.subtitle_tracks) {
+                    lab = new Gtk.Label ("");
+                    lab.label = _("Subtitle %d (%s)").printf (++i, subtitle.to_ascii ());
+                    lab.margin = 4;
+                    row = new Gtk.ListBoxRow ();
+                    row.add (lab);
+                    subtitle_tracks.add (row);
+                    row.show_all ();
+                }
+                subtitle_track.show ();
+            } else {
+                subtitle_track.hide ();
+            }
         }
     }
 }
