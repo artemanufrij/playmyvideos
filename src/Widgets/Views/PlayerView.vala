@@ -192,10 +192,7 @@ namespace PlayMyVideos.Widgets.Views {
                 mouse_move_timer = GLib.Timeout.add (2000, () => {
                     timeline.set_reveal_child (false);
                     playlist.set_reveal_child (false);
-                    var window = PlayMyVideosApp.instance.mainwindow.get_window ();
-                    var display = window.get_display ();
-                    var cursor = new Gdk.Cursor.for_display (display, Gdk.CursorType.BLANK_CURSOR);
-                    window.set_cursor (cursor);
+                    PlayMyVideosApp.instance.mainwindow.hide_mouse_cursor ();
                     mouse_move_timer = 0;
                     return false;
                 });
@@ -207,5 +204,7 @@ namespace PlayMyVideos.Widgets.Views {
             }
             return false;
         }
+
+
     }
 }

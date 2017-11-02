@@ -61,7 +61,7 @@ namespace PlayMyVideos {
             });
 
             this.motion_notify_event.connect ((event) => {
-                this.get_window ().set_cursor (null);
+                show_mouse_cursor ();
                 return false;
             });
 
@@ -122,6 +122,7 @@ namespace PlayMyVideos {
             navigation_button.show ();
             player_view.play (video);
             search_entry.hide ();
+            hide_mouse_cursor ();
         }
 
         public void show_boxes () {
@@ -162,6 +163,16 @@ namespace PlayMyVideos {
             foreach (var box in library_manager.boxes) {
                 boxes_view.add_box (box);
             }
+        }
+
+        public void hide_mouse_cursor () {
+            var display = this.get_window ().get_display ();
+            var cursor = new Gdk.Cursor.for_display (display, Gdk.CursorType.BLANK_CURSOR);
+            this.get_window ().set_cursor (cursor);
+        }
+
+        public void show_mouse_cursor () {
+            this.get_window ().set_cursor (null);
         }
     }
 }
