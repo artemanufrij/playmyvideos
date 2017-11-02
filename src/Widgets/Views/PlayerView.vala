@@ -42,11 +42,13 @@ namespace PlayMyVideos.Widgets.Views {
         double last_dur = 0;
 
         uint progress_timer = 0;
+        uint mouse_move_timer = 0;
 
         public ClutterGst.Playback playback { get; private set; }
         Clutter.Actor video_actor;
         GtkClutter.Embed clutter;
         VideoTimeLine timeline;
+        Playlist playlist;
 
         construct {
             clutter = new GtkClutter.Embed ();
@@ -102,6 +104,13 @@ namespace PlayMyVideos.Widgets.Views {
             video_actor.content = aspect_ratio;
             stage.add_child (video_actor);
 
+            playlist = new Playlist (this);
+            var right_actor = new GtkClutter.Actor.with_contents (playlist);
+            right_actor.add_constraint (new Clutter.AlignConstraint (stage, Clutter.AlignAxis.X_AXIS, 1));
+            right_actor.add_constraint (new Clutter.AlignConstraint (stage, Clutter.AlignAxis.Y_AXIS, 0));
+            right_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
+            stage.add_child (right_actor);
+
             timeline = new VideoTimeLine (this);
             var bottom_actor = new GtkClutter.Actor.with_contents (timeline);
             bottom_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
@@ -120,7 +129,15 @@ namespace PlayMyVideos.Widgets.Views {
             event_box.events |= Gdk.EventMask.KEY_RELEASE_MASK;
             event_box.add (clutter);
 
-      /*      event_box.key_press_event.connect ((key) => {
+            event_box.motion_notify_event.connect ((event) => {
+                return mouse_over ();
+            });
+
+/*          event_box.button_release_event.connect ((event) => {
+                return true;
+            });
+
+            event_box.key_press_event.connect ((key) => {
                 return true;
             });
 
@@ -129,10 +146,6 @@ namespace PlayMyVideos.Widgets.Views {
             });
 
             event_box.button_press_event.connect ((event) => {
-                return true;
-            });
-
-            event_box.button_release_event.connect ((event) => {
                 return true;
             });*/
 
@@ -147,6 +160,7 @@ namespace PlayMyVideos.Widgets.Views {
                 return;
             }
             current_video = video;
+            playlist.show_box (current_video.box);
             playback.uri = video.uri;
             playback.playing = true;
         }
@@ -166,6 +180,32 @@ namespace PlayMyVideos.Widgets.Views {
 
         public void toogle_playing () {
             playback.playing = !playback.playing;
+        }
+
+        private bool mouse_over () {
+            if (mouse_move_timer != 0) {
+                Source.remove (mouse_move_timer);
+                mouse_move_timer = 0;
+            }
+
+            if (playback.playing) {
+                mouse_move_timer = GLib.Timeout.add (2000, () => {
+                    timeline.set_reveal_child (false);
+                    playlist.set_reveal_child (false);
+                    var window = PlayMyVideosApp.instance.mainwindow.get_window ();
+                    var display = window.get_display ();
+                    var cursor = new Gdk.Cursor.for_display (display, Gdk.CursorType.BLANK_CURSOR);
+                    window.set_cursor (cursor);
+                    mouse_move_timer = 0;
+                    return false;
+                });
+            }
+
+            timeline.set_reveal_child (true);
+            if (playlist.has_episodes) {
+                playlist.set_reveal_child (true);
+            }
+            return false;
         }
     }
 }

@@ -26,7 +26,7 @@
  */
 
 namespace PlayMyVideos.Widgets {
-    public class VideoTimeLine : Gtk.Grid {
+    public class VideoTimeLine : Gtk.Revealer {
         Views.PlayerView player_view;
         Granite.SeekBar timeline;
         Gtk.Button audio_stream;
@@ -62,6 +62,7 @@ namespace PlayMyVideos.Widgets {
         }
 
         private void build_ui () {
+            this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
             timeline = new Granite.SeekBar (0);
             timeline.hexpand = true;
             timeline.valign = Gtk.Align.CENTER;
@@ -129,8 +130,9 @@ namespace PlayMyVideos.Widgets {
             content.pack_start (timeline);
             content.pack_end (audio_stream);
             content.pack_end (subtitle_track);
+
             this.add (content);
-            show_all ();
+            this.show_all ();
         }
 
         private void load_audio_streams () {

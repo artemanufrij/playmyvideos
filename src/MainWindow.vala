@@ -43,6 +43,7 @@ namespace PlayMyVideos {
         }
 
         public MainWindow () {
+            events |= Gdk.EventMask.POINTER_MOTION_MASK;
             load_settings ();
             this.window_position = Gtk.WindowPosition.CENTER;
             Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
@@ -56,6 +57,11 @@ namespace PlayMyVideos {
                     settings.window_width = event.width;
                     settings.window_height = event.height;
                 }
+                return false;
+            });
+
+            this.motion_notify_event.connect ((event) => {
+                this.get_window ().set_cursor (null);
                 return false;
             });
 

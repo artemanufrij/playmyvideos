@@ -80,17 +80,21 @@ namespace PlayMyVideos.Objects {
                     _local_subtitles = new GLib.List<string> ();
                     var directory = File.new_for_path (this.path).get_parent ();
                     if (directory != null) {
-                        var children = directory.enumerate_children (FileAttribute.STANDARD_CONTENT_TYPE , GLib.FileQueryInfoFlags.NONE);
-                        FileInfo file_info;
-
-                        while ((file_info = children.next_file ()) != null) {
-                            foreach (var ext in Utils.subtitle_extentions ()) {
-                                if (file_info.get_name ().has_suffix (ext)) {
-                                    _local_subtitles.append (file_info.get_name ());
-                                    break;
+                        try {
+                            var children = directory.enumerate_children (FileAttribute.STANDARD_CONTENT_TYPE , GLib.FileQueryInfoFlags.NONE);
+                            FileInfo file_info;
+                            while ((file_info = children.next_file ()) != null) {
+                                foreach (var ext in Utils.subtitle_extentions ()) {
+                                    if (file_info.get_name ().has_suffix (ext)) {
+                                        _local_subtitles.append (file_info.get_name ());
+                                        break;
+                                    }
                                 }
                             }
+                        } catch (Error err) {
+                            warning (err.message);
                         }
+                        directory.dispose ();
                     }
                 }
                 return _local_subtitles;
