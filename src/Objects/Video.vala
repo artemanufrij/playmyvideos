@@ -75,9 +75,6 @@ namespace PlayMyVideos.Objects {
             }
         }
 
-        bool large_creating = false;
-        bool normal_creating = false;
-
         GLib.List<string> _local_subtitles = null;
         public GLib.List<string> local_subtitles {
             get {
@@ -122,7 +119,7 @@ namespace PlayMyVideos.Objects {
                          _thumbnail_normal = PlayMyVideos.Utils.align_pixbuf_for_thumbnail_normal (pixbuf);
                         }
                     } else {
-                        create_thumbnail ("normal");
+                        create_thumbnail.begin ("normal");
                     }
                     file.dispose ();
                 }
@@ -142,7 +139,7 @@ namespace PlayMyVideos.Objects {
                             warning (err.message);
                         }
                     } else {
-                        create_thumbnail ("large");
+                        create_thumbnail.begin ("large");
                     }
                     file.dispose ();
                 }
@@ -179,55 +176,54 @@ namespace PlayMyVideos.Objects {
             return return_value;
         }
 
-        public void create_thumbnail (string size) {
-            if (size == "normal" && (normal_creating || mime_type == "" || _thumbnail_normal != null)) {
+        private async void create_thumbnail (string size) {
+            if (size == "normal" && (mime_type == "" || _thumbnail_normal != null)) {
                 return;
-            } else if (size == "large" && (large_creating || mime_type == "" || _thumbnail_large != null)) {
+            } else if (size == "large" && (mime_type == "" || _thumbnail_large != null)) {
                 return;
             }
-            new Thread<void*> (null, () => {
-                File? file = null;
+
+            File? file = null;
+            if (size == "normal") {
+                file = File.new_for_path (thumbnail_normal_path);
+            } else if (size == "large") {
+                file = File.new_for_path (thumbnail_large_path);
+            }
+            if (file != null && !file.query_exists ()) {
                 if (size == "normal") {
-                    normal_creating = true;
-                    file = File.new_for_path (thumbnail_normal_path);
+                    Interfaces.DbusThumbnailer.instance.finished.connect (thumbnail_finished_normal);
                 } else if (size == "large") {
-                    large_creating = true;
-                    file = File.new_for_path (thumbnail_large_path);
+                    Interfaces.DbusThumbnailer.instance.finished.connect (thumbnail_finished_large);
                 }
-                if (file != null && !file.query_exists ()) {
-                    Interfaces.DbusThumbnailer.instance.finished.connect (thumbnail_finished);
-                    Gee.ArrayList<string> uris = new Gee.ArrayList<string> ();
-                    Gee.ArrayList<string> mimes = new Gee.ArrayList<string> ();
+                Gee.ArrayList<string> uris = new Gee.ArrayList<string> ();
+                Gee.ArrayList<string> mimes = new Gee.ArrayList<string> ();
 
-                    file = File.new_for_path (path);
-                    uris.add (file.get_uri ());
-                    mimes.add (mime_type);
+                file = File.new_for_path (path);
+                uris.add (file.get_uri ());
+                mimes.add (mime_type);
 
-                    Interfaces.DbusThumbnailer.instance.create_thumbnails (uris, mimes, size);
-                }
-                return null;
-            });
+                file.dispose ();
+
+                Interfaces.DbusThumbnailer.instance.create_thumbnails (uris, mimes, size);
+            }
         }
 
-        private void thumbnail_finished () {
-            var file_normal = File.new_for_path (thumbnail_normal_path);
-            var file_large = File.new_for_path (thumbnail_large_path);
-
-            if (file_normal.query_exists () && file_large.query_exists ()) {
-                Interfaces.DbusThumbnailer.instance.finished.disconnect (thumbnail_finished);
-            }
-
-            if (file_normal.query_exists ()) {
-                thumbnail_normal_changed ();
-                normal_creating = false;
-            }
-            if (file_large.query_exists ()) {
+        private void thumbnail_finished_large () {
+            var file = File.new_for_path (thumbnail_large_path);
+            if (file.query_exists ()) {
+                Interfaces.DbusThumbnailer.instance.finished.disconnect (thumbnail_finished_large);
                 thumbnail_large_changed ();
-                large_creating = false;
             }
+            file.dispose ();
+        }
 
-            file_normal.dispose ();
-            file_large.dispose ();
+        private void thumbnail_finished_normal () {
+            var file = File.new_for_path (thumbnail_normal_path);
+            if (file.query_exists ()) {
+                Interfaces.DbusThumbnailer.instance.finished.disconnect (thumbnail_finished_normal);
+                thumbnail_normal_changed ();
+            }
+            file.dispose ();
         }
     }
 }
