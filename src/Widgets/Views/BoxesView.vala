@@ -27,6 +27,7 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class BoxesView : Gtk.Grid {
+        PlayMyVideos.Services.LibraryManager library_manager;
 
         public signal void video_selected (Objects.Video video);
 
@@ -47,6 +48,15 @@ namespace PlayMyVideos.Widgets.Views {
             }
         }
 
+        construct {
+            library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            library_manager.added_new_box.connect ((box) => {
+                Idle.add (() => {
+                    add_box (box);
+                });
+            });
+        }
+
         public BoxesView () {
             build_ui ();
         }
@@ -59,6 +69,7 @@ namespace PlayMyVideos.Widgets.Views {
             boxes.column_spacing = 24;
             boxes.max_children_per_line = 24;
             boxes.valign = Gtk.Align.START;
+            boxes.set_sort_func (boxes_sort_func);
             boxes.set_filter_func (boxes_filter_func);
             boxes.child_activated.connect (show_box_viewer);
 
@@ -99,6 +110,15 @@ namespace PlayMyVideos.Widgets.Views {
             action_revealer.set_reveal_child (false);
         }
 
+        private int boxes_sort_func (Gtk.FlowBoxChild child1, Gtk.FlowBoxChild child2) {
+            var item1 = (PlayMyVideos.Widgets.Box)child1;
+            var item2 = (PlayMyVideos.Widgets.Box)child2;
+            if (item1 != null && item2 != null) {
+                return item1.title.collate (item2.title);
+            }
+            return 0;
+        }
+
         private bool boxes_filter_func (Gtk.FlowBoxChild child) {
             if (filter.strip ().length == 0) {
                 return true;
@@ -122,6 +142,14 @@ namespace PlayMyVideos.Widgets.Views {
                 }
             }
             return true;
+        }
+
+        public void reset () {
+            action_revealer.set_reveal_child (false);
+            box_view.reset ();
+            foreach (var child in boxes.get_children ()) {
+                child.destroy ();
+            }
         }
     }
 }

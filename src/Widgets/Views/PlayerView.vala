@@ -205,6 +205,11 @@ namespace PlayMyVideos.Widgets.Views {
             return false;
         }
 
-
+        public void reset () {
+            if (playback.playing) {
+                playback.playing = false;
+            }
+            playback.uri = null;
+        }
     }
 }

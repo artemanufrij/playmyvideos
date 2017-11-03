@@ -63,20 +63,7 @@ namespace PlayMyVideos.Objects {
 
         Gdk.Pixbuf? _cover = null;
         public Gdk.Pixbuf? cover {
-            owned get {
-                if (_cover == null && videos.length () > 0) {
-                    var first = videos.first ().data;
-                    var thumbnail = first.thumbnail_large;
-                    if (thumbnail != null) {
-                        return PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (thumbnail);
-                    } else {
-                        first.thumbnail_large_changed.connect (() => {
-                            if (_cover == null) {
-                                cover_changed ();
-                            }
-                        });
-                    }
-                }
+            get {
                 return _cover;
             } set {
                 _cover = value;
@@ -97,7 +84,14 @@ namespace PlayMyVideos.Objects {
 
         private void add_video (Video video) {
             video.set_box (this);
-            video_added (video);
+            lock (_videos) {
+                if (_videos == null) {
+                    _videos = new GLib.List<Video> ();
+                }
+                this._videos.append (video);
+                video_added (video);
+            }
+            load_cover_async.begin ();
         }
 
         public Video add_video_if_not_exists (Video new_video) {

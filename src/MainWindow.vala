@@ -78,6 +78,53 @@ namespace PlayMyVideos {
             headerbar.show_close_button = true;
             headerbar.title = _("Play My Videos");
 
+            //SETTINGS MENU
+            var app_menu = new Gtk.MenuButton ();
+            app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
+
+            var settings_menu = new Gtk.Menu ();
+
+            var menu_item_library = new Gtk.MenuItem.with_label(_("Change Video Folder…"));
+            menu_item_library.activate.connect (() => {
+                var folder = library_manager.choose_folder ();
+                if(folder != null) {
+                    settings.library_location = folder;
+                    library_manager.scan_local_library (folder);
+                }
+            });
+
+            var menu_item_import = new Gtk.MenuItem.with_label (_("Import Videos…"));
+            menu_item_import.activate.connect (() => {
+                var folder = library_manager.choose_folder ();
+                if(folder != null) {
+                    library_manager.scan_local_library (folder);
+                }
+            });
+
+            var menu_item_resync = new Gtk.MenuItem.with_label (_("Resync Library"));
+            menu_item_resync.activate.connect (() => {
+                reset_all_views ();
+                library_manager.rescan_library ();
+                //library_manager.scan_local_library (settings.library_location);
+            });
+
+            var menu_item_preferences = new Gtk.MenuItem.with_label (_("Preferences"));
+            menu_item_preferences.activate.connect (() => {
+                //var preferences = new Dialogs.Preferences (this);
+                //preferences.run ();
+            });
+
+            settings_menu.append (menu_item_library);
+            settings_menu.append (menu_item_import);
+            settings_menu.append (new Gtk.SeparatorMenuItem ());
+            settings_menu.append (menu_item_resync);
+            settings_menu.append (new Gtk.SeparatorMenuItem ());
+            settings_menu.append (menu_item_preferences);
+            settings_menu.show_all ();
+
+            app_menu.popup = settings_menu;
+            headerbar.pack_end (app_menu);
+
             search_entry = new Gtk.SearchEntry ();
             search_entry.placeholder_text = _("Search Videos");
             search_entry.search_changed.connect (() => {
@@ -157,6 +204,11 @@ namespace PlayMyVideos {
             } else {
                 boxes_view.unselect_all ();
             }
+        }
+
+        private void reset_all_views () {
+            player_view.reset ();
+            boxes_view.reset ();
         }
 
         private async void load_content_from_database () {

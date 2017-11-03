@@ -29,6 +29,7 @@ namespace PlayMyVideos.Widgets {
     public class Box : Gtk.FlowBoxChild {
         PlayMyVideos.Services.LibraryManager library_manager;
         public Objects.Box box { get; private set; }
+        public string title { get { return box.title; } }
 
         Gtk.Image cover;
         Gtk.Menu menu;
@@ -40,10 +41,6 @@ namespace PlayMyVideos.Widgets {
         public Box (Objects.Box box) {
             this.box = box;
             build_ui ();
-
-            this.box.cover_changed.connect (() => {
-                cover.pixbuf = this.box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
-            });
         }
 
         private void build_ui () {
@@ -74,12 +71,25 @@ namespace PlayMyVideos.Widgets {
             menu.show_all ();
 
             cover = new Gtk.Image ();
+            this.box.cover_changed.connect (() => {
+                Idle.add (() => {
+                    cover.pixbuf = this.box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
+                    return false;
+                });
+            });
             cover.get_style_context ().add_class ("card");
             cover.halign = Gtk.Align.CENTER;
             if (box.cover == null) {
                 cover.set_from_icon_name ("video-x-generic-symbolic", Gtk.IconSize.DIALOG);
                 cover.height_request = 181;
                 cover.width_request = 128;
+
+                if (box.videos.length () > 0) {
+                    load_cover_from_video (box.videos.first ().data);
+                } else {
+                    box.video_added.connect (load_cover_from_video);
+                }
+
             } else {
                 cover.pixbuf = box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
             }
@@ -106,6 +116,20 @@ namespace PlayMyVideos.Widgets {
                 return true;
             }
             return false;
+        }
+
+        private void load_cover_from_video (Objects.Video video) {
+            box.video_added.disconnect (load_cover_from_video);
+
+            video.thumbnail_large_changed.connect (() => {
+                stdout.printf ("LARGE\n");
+                if (cover.icon_name == "video-x-generic-symbolic") {
+                    cover.pixbuf = PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (video.thumbnail_large).scale_simple (128, 181, Gdk.InterpType.BILINEAR);
+                }
+            });
+            if (video.thumbnail_large != null && cover.icon_name == "video-x-generic-symbolic") {
+                cover.pixbuf = PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (video.thumbnail_large).scale_simple (128, 181, Gdk.InterpType.BILINEAR);
+            }
         }
     }
 }

@@ -75,6 +75,9 @@ namespace PlayMyVideos.Objects {
             }
         }
 
+        bool large_creating = false;
+        bool normal_creating = false;
+
         GLib.List<string> _local_subtitles = null;
         public GLib.List<string> local_subtitles {
             get {
@@ -176,17 +179,19 @@ namespace PlayMyVideos.Objects {
             return return_value;
         }
 
-        private void create_thumbnail (string size) {
-            if (size == "normal" && (mime_type == "" || _thumbnail_normal != null)) {
+        public void create_thumbnail (string size) {
+            if (size == "normal" && (normal_creating || mime_type == "" || _thumbnail_normal != null)) {
                 return;
-            } else if (size == "large" && (mime_type == "" || _thumbnail_large != null)) {
+            } else if (size == "large" && (large_creating || mime_type == "" || _thumbnail_large != null)) {
                 return;
             }
             new Thread<void*> (null, () => {
                 File? file = null;
                 if (size == "normal") {
+                    normal_creating = true;
                     file = File.new_for_path (thumbnail_normal_path);
                 } else if (size == "large") {
+                    large_creating = true;
                     file = File.new_for_path (thumbnail_large_path);
                 }
                 if (file != null && !file.query_exists ()) {
@@ -204,21 +209,21 @@ namespace PlayMyVideos.Objects {
             });
         }
 
-
         private void thumbnail_finished () {
             var file_normal = File.new_for_path (thumbnail_normal_path);
-            if (file_normal.query_exists ()) {
-                thumbnail_normal_changed ();
-            }
-
             var file_large = File.new_for_path (thumbnail_large_path);
-            if (file_large.query_exists ()) {
-                stdout.printf ("large\n");
-                thumbnail_large_changed ();
-            }
 
             if (file_normal.query_exists () && file_large.query_exists ()) {
                 Interfaces.DbusThumbnailer.instance.finished.disconnect (thumbnail_finished);
+            }
+
+            if (file_normal.query_exists ()) {
+                thumbnail_normal_changed ();
+                normal_creating = false;
+            }
+            if (file_large.query_exists ()) {
+                thumbnail_large_changed ();
+                large_creating = false;
             }
 
             file_normal.dispose ();

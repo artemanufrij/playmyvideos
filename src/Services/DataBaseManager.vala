@@ -69,7 +69,6 @@ namespace PlayMyVideos.Services {
                 title       TEXT        NOT NULL,
                 CONSTRAINT unique_album UNIQUE (title)
                 );""";
-
             if (db.exec (q, null, out errormsg) != Sqlite.OK) {
                 warning (errormsg);
             }
@@ -85,7 +84,6 @@ namespace PlayMyVideos.Services {
                 FOREIGN KEY (box_id) REFERENCES boxes (ID)
                     ON DELETE CASCADE
                 );""";
-
             if (db.exec (q, null, out errormsg) != Sqlite.OK) {
                 warning (errormsg);
             }
@@ -103,6 +101,7 @@ namespace PlayMyVideos.Services {
             } catch (Error err) {
                 warning (err.message);
             }
+            _boxes = new GLib.List<PlayMyVideos.Objects.Box> ();
             open_database ();
         }
 // BOX REGION
@@ -117,7 +116,12 @@ namespace PlayMyVideos.Services {
             db.prepare_v2 (sql, sql.length, out stmt);
 
             while (stmt.step () == Sqlite.ROW) {
-                return_value.append (_fill_box (stmt));
+                var box = _fill_box (stmt);
+                if (box.videos.length () > 0) {
+                    return_value.append (box);
+                } else {
+                    remove_box (box);
+                }
             }
             stmt.reset ();
 
@@ -129,6 +133,21 @@ namespace PlayMyVideos.Services {
             return_value.ID = stmt.column_int (0);
             return_value.title = stmt.column_text (1);
             return return_value;
+        }
+
+        private void remove_box (PlayMyVideos.Objects.Box box) {
+            Sqlite.Statement stmt;
+
+            string sql = """
+                DELETE FROM boxes WHERE id=$ID;
+            """;
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_int (stmt, sql, "$ID", box.ID);
+
+            if (stmt.step () != Sqlite.DONE) {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
+            }
+            stmt.reset ();
         }
 
         public void insert_box (PlayMyVideos.Objects.Box box) {

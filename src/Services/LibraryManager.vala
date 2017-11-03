@@ -27,6 +27,8 @@
 
 namespace PlayMyVideos.Services {
     public class LibraryManager : GLib.Object {
+        PlayMyVideos.Settings settings;
+
         static LibraryManager _instance = null;
         public static LibraryManager instance {
             get {
@@ -49,6 +51,8 @@ namespace PlayMyVideos.Services {
         }
 
         construct {
+            settings = PlayMyVideos.Settings.get_default ();
+
             lf_manager = PlayMyVideos.Services.LocalFilesManager.instance;
             lf_manager.found_video_file.connect (found_local_video_file);
 
@@ -57,6 +61,30 @@ namespace PlayMyVideos.Services {
         }
 
         private LibraryManager () { }
+
+        public void reset_library () {
+            db_manager.reset_database ();
+            File directory = File.new_for_path (PlayMyVideos.PlayMyVideosApp.instance.COVER_FOLDER);
+            try {
+                var children = directory.enumerate_children ("", 0);
+                FileInfo file_info;
+                while ((file_info = children.next_file ()) != null) {
+                     var file = File.new_for_path (GLib.Path.build_filename (PlayMyVideos.PlayMyVideosApp.instance.COVER_FOLDER, file_info.get_name ()));
+                     file.delete ();
+                     file.dispose ();
+                }
+                children.close ();
+                children.dispose ();
+            } catch (Error err) {
+                warning (err.message);
+            }
+            directory.dispose ();
+        }
+
+        public void rescan_library () {
+            reset_library ();
+            scan_local_library (settings.library_location);
+        }
 
         // LOCAL FILES REGION
         public void scan_local_library (string path) {
@@ -75,7 +103,7 @@ namespace PlayMyVideos.Services {
         private void insert_video_file (string path, string mime_type) {
             File file = File.new_for_path (path);
             var parent = file.get_parent ().get_basename ();
-            stdout.printf ("%s\n", parent);
+
             var box = new Objects.Box (parent);
             var db_box = db_manager.insert_box_if_not_exists (box);
             var video = new Objects.Video ();
@@ -106,6 +134,27 @@ namespace PlayMyVideos.Services {
             }
 
             cover.destroy();
+            return return_value;
+        }
+
+        public string? choose_folder () {
+            string? return_value = null;
+            Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+                _("Select a folder."), PlayMyVideosApp.instance.mainwindow, Gtk.FileChooserAction.SELECT_FOLDER,
+                _("_Cancel"), Gtk.ResponseType.CANCEL,
+                _("_Open"), Gtk.ResponseType.ACCEPT);
+
+            var filter = new Gtk.FileFilter ();
+            filter.set_filter_name (_("Folder"));
+            filter.add_mime_type ("inode/directory");
+
+            chooser.add_filter (filter);
+
+            if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+                return_value = chooser.get_file ().get_path ();
+            }
+
+            chooser.destroy ();
             return return_value;
         }
     }

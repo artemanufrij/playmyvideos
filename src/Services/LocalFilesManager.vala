@@ -58,7 +58,6 @@ namespace PlayMyVideos.Services {
                         if (file_info.get_is_hidden ()) {
                             continue;
                         }
-
                         if (file_info.get_is_symlink ()) {
                             string target = file_info.get_symlink_target ();
                             var symlink = File.new_for_path (target);

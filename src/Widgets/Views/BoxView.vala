@@ -74,6 +74,7 @@ namespace PlayMyVideos.Widgets.Views {
             var videos_scroll = new Gtk.ScrolledWindow (null, null);
 
             videos = new Gtk.ListBox ();
+            videos.set_sort_func (videos_sort_func);
             videos.selected_rows_changed.connect (play_video);
             videos_scroll.add (videos);
 
@@ -127,7 +128,8 @@ namespace PlayMyVideos.Widgets.Views {
             });
         }
 
-        private void reset () {
+        public void reset () {
+            this.cover.clear ();
             foreach (var child in videos.get_children ()) {
                 child.destroy ();
             }
@@ -139,6 +141,15 @@ namespace PlayMyVideos.Widgets.Views {
                 return true;
             }
             return false;
+        }
+
+        private int videos_sort_func (Gtk.ListBoxRow child1, Gtk.ListBoxRow child2) {
+            var item1 = (PlayMyVideos.Widgets.Video)child1;
+            var item2 = (PlayMyVideos.Widgets.Video)child2;
+            if (item1 != null && item2 != null) {
+                return item1.title.collate (item2.title);
+            }
+            return 0;
         }
     }
 }
