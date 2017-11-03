@@ -101,25 +101,16 @@ namespace PlayMyVideos {
                 }
             });
 
-            var menu_item_resync = new Gtk.MenuItem.with_label (_("Resync Library"));
-            menu_item_resync.activate.connect (() => {
+            var menu_item_rescan = new Gtk.MenuItem.with_label (_("Rescan Library"));
+            menu_item_rescan.activate.connect (() => {
                 reset_all_views ();
                 library_manager.rescan_library ();
-                //library_manager.scan_local_library (settings.library_location);
-            });
-
-            var menu_item_preferences = new Gtk.MenuItem.with_label (_("Preferences"));
-            menu_item_preferences.activate.connect (() => {
-                //var preferences = new Dialogs.Preferences (this);
-                //preferences.run ();
             });
 
             settings_menu.append (menu_item_library);
             settings_menu.append (menu_item_import);
             settings_menu.append (new Gtk.SeparatorMenuItem ());
-            settings_menu.append (menu_item_resync);
-            settings_menu.append (new Gtk.SeparatorMenuItem ());
-            settings_menu.append (menu_item_preferences);
+            settings_menu.append (menu_item_rescan);
             settings_menu.show_all ();
 
             app_menu.popup = settings_menu;
@@ -151,6 +142,9 @@ namespace PlayMyVideos {
                 headerbar.title = video.title;
             });
             player_view.player_frame_resized.connect ((width, height) => {
+                if (width == 0 || height == 0) {
+                    return;
+                }
                 var current_width = get_allocated_width ();
                 double w_r = (double)(current_width - 156) / width;
                 int new_height = (int)(height * w_r) + 206;
