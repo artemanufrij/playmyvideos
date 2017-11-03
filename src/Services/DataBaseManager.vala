@@ -186,17 +186,19 @@ namespace PlayMyVideos.Services {
             Sqlite.Statement stmt;
 
             string sql = """
-                SELECT id, title, path, mime_type
-                FROM videos
-                WHERE box_id=$BOX_ID
-                ORDER BY title;
+                SELECT id, title, path, mime_type FROM videos WHERE box_id=$BOX_ID ORDER BY title;
             """;
 
             db.prepare_v2 (sql, sql.length, out stmt);
             set_parameter_int (stmt, sql, "$BOX_ID", box.ID);
 
             while (stmt.step () == Sqlite.ROW) {
-                return_value.append (_fill_video (stmt, box));
+                var video = _fill_video (stmt, box);
+                if (video.file_exists ()) {
+                    return_value.append (video);
+                } else {
+                    remove_video (video);
+                }
             }
             stmt.reset ();
             return return_value;
@@ -209,6 +211,21 @@ namespace PlayMyVideos.Services {
             return_value.path = stmt.column_text (2);
             return_value.mime_type = stmt.column_text (3);
             return return_value;
+        }
+
+        private void remove_video (PlayMyVideos.Objects.Video video) {
+            Sqlite.Statement stmt;
+
+            string sql = """
+                DELETE FROM videos WHERE id=$ID;
+            """;
+            db.prepare_v2 (sql, sql.length, out stmt);
+            set_parameter_int (stmt, sql, "$ID", video.ID);
+
+            if (stmt.step () != Sqlite.DONE) {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
+            }
+            stmt.reset ();
         }
 
         public void insert_video (PlayMyVideos.Objects.Video video) {

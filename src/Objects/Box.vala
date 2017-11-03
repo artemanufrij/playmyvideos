@@ -61,9 +61,22 @@ namespace PlayMyVideos.Objects {
             }
         }
 
-        Gdk.Pixbuf? _cover;
+        Gdk.Pixbuf? _cover = null;
         public Gdk.Pixbuf? cover {
-            get {
+            owned get {
+                if (_cover == null && videos.length () > 0) {
+                    var first = videos.first ().data;
+                    var thumbnail = first.thumbnail_large;
+                    if (thumbnail != null) {
+                        return PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (thumbnail);
+                    } else {
+                        first.thumbnail_large_changed.connect (() => {
+                            if (_cover == null) {
+                                cover_changed ();
+                            }
+                        });
+                    }
+                }
                 return _cover;
             } set {
                 _cover = value;
@@ -115,7 +128,7 @@ namespace PlayMyVideos.Objects {
 
 // COVER REGION
         private async void load_cover_async () {
-            if (is_cover_loading || cover != null || this.ID == 0 || this.videos.length () == 0) {
+            if (is_cover_loading || _cover != null || this.ID == 0 || this.videos.length () == 0) {
                 return;
             }
             is_cover_loading = true;

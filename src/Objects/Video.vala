@@ -34,6 +34,7 @@ namespace PlayMyVideos.Objects {
         public int year { get; set; default = 0; }
 
         public signal void thumbnail_normal_changed ();
+        public signal void thumbnail_large_changed ();
 
         string thumbnail_large_path;
         string thumbnail_normal_path;
@@ -47,6 +48,7 @@ namespace PlayMyVideos.Objects {
 
                 var file = File.new_for_path (_path);
                 _uri = file.get_uri ();
+                file.dispose ();
 
                 var hash_file_poster = GLib.Checksum.compute_for_string (ChecksumType.MD5, file.get_uri (), file.get_uri ().length);
 
@@ -117,10 +119,31 @@ namespace PlayMyVideos.Objects {
                          _thumbnail_normal = PlayMyVideos.Utils.align_pixbuf_for_thumbnail_normal (pixbuf);
                         }
                     } else {
-                        create_thumbnail_normal ();
+                        create_thumbnail ("normal");
                     }
+                    file.dispose ();
                 }
                 return _thumbnail_normal;
+            }
+        }
+
+        Gdk.Pixbuf? _thumbnail_large = null;
+        public Gdk.Pixbuf? thumbnail_large {
+            get {
+                if (_thumbnail_large == null) {
+                    var file = File.new_for_path (thumbnail_large_path);
+                    if (file.query_exists ()) {
+                        try {
+                            _thumbnail_large = new Gdk.Pixbuf.from_file (thumbnail_large_path);
+                        } catch (Error err) {
+                            warning (err.message);
+                        }
+                    } else {
+                        create_thumbnail ("large");
+                    }
+                    file.dispose ();
+                }
+                return _thumbnail_large;
             }
         }
 
@@ -143,13 +166,30 @@ namespace PlayMyVideos.Objects {
             this._box = box;
         }
 
-        private void create_thumbnail_normal () {
-            if (mime_type == "" || _thumbnail_normal != null) {
+        public bool file_exists () {
+            bool return_value = true;
+            var file = File.new_for_uri (this.uri);
+            if (!file.query_exists ()) {
+                return_value = false;
+            }
+            file.dispose ();
+            return return_value;
+        }
+
+        private void create_thumbnail (string size) {
+            if (size == "normal" && (mime_type == "" || _thumbnail_normal != null)) {
+                return;
+            } else if (size == "large" && (mime_type == "" || _thumbnail_large != null)) {
                 return;
             }
             new Thread<void*> (null, () => {
-                var file = File.new_for_path (thumbnail_normal_path);
-                if (!file.query_exists ()) {
+                File? file = null;
+                if (size == "normal") {
+                    file = File.new_for_path (thumbnail_normal_path);
+                } else if (size == "large") {
+                    file = File.new_for_path (thumbnail_large_path);
+                }
+                if (file != null && !file.query_exists ()) {
                     Interfaces.DbusThumbnailer.instance.finished.connect (thumbnail_finished);
                     Gee.ArrayList<string> uris = new Gee.ArrayList<string> ();
                     Gee.ArrayList<string> mimes = new Gee.ArrayList<string> ();
@@ -158,7 +198,7 @@ namespace PlayMyVideos.Objects {
                     uris.add (file.get_uri ());
                     mimes.add (mime_type);
 
-                    Interfaces.DbusThumbnailer.instance.create_thumbnails (uris, mimes, "normal");
+                    Interfaces.DbusThumbnailer.instance.create_thumbnails (uris, mimes, size);
                 }
                 return null;
             });
@@ -166,11 +206,23 @@ namespace PlayMyVideos.Objects {
 
 
         private void thumbnail_finished () {
-            var file = File.new_for_path (thumbnail_normal_path);
-            if (file.query_exists ()) {
-                Interfaces.DbusThumbnailer.instance.finished.disconnect (thumbnail_finished);
+            var file_normal = File.new_for_path (thumbnail_normal_path);
+            if (file_normal.query_exists ()) {
                 thumbnail_normal_changed ();
             }
+
+            var file_large = File.new_for_path (thumbnail_large_path);
+            if (file_large.query_exists ()) {
+                stdout.printf ("large\n");
+                thumbnail_large_changed ();
+            }
+
+            if (file_normal.query_exists () && file_large.query_exists ()) {
+                Interfaces.DbusThumbnailer.instance.finished.disconnect (thumbnail_finished);
+            }
+
+            file_normal.dispose ();
+            file_large.dispose ();
         }
     }
 }

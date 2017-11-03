@@ -27,9 +27,15 @@
 
 namespace PlayMyVideos.Widgets {
     public class Box : Gtk.FlowBoxChild {
+        PlayMyVideos.Services.LibraryManager library_manager;
         public Objects.Box box { get; private set; }
 
         Gtk.Image cover;
+        Gtk.Menu menu;
+
+        construct {
+            library_manager = PlayMyVideos.Services.LibraryManager.instance;
+        }
 
         public Box (Objects.Box box) {
             this.box = box;
@@ -47,6 +53,25 @@ namespace PlayMyVideos.Widgets {
             content.margin = 12;
             content.halign = Gtk.Align.CENTER;
             content.row_spacing = 6;
+
+            var event_box = new Gtk.EventBox ();
+            event_box.button_press_event.connect (show_context_menu);
+
+            menu = new Gtk.Menu ();
+            var menu_new_cover = new Gtk.MenuItem.with_label (_("Set new Cover…"));
+            menu_new_cover.activate.connect (() => {
+                var new_cover = library_manager.choose_new_cover ();
+                if (new_cover != null) {
+                    try {
+                        var pixbuf = new Gdk.Pixbuf.from_file (new_cover);
+                        box.set_new_cover (pixbuf);
+                    } catch (Error err) {
+                        warning (err.message);
+                    }
+                }
+            });
+            menu.append (menu_new_cover);
+            menu.show_all ();
 
             cover = new Gtk.Image ();
             cover.get_style_context ().add_class ("card");
@@ -67,10 +92,20 @@ namespace PlayMyVideos.Widgets {
             content.attach (cover, 0, 0);
             content.attach (title, 0, 1);
 
-            this.add (content);
+            event_box.add (content);
+
+            this.add (event_box);
             this.valign = Gtk.Align.START;
 
             this.show_all ();
+        }
+
+        private bool show_context_menu (Gtk.Widget sender, Gdk.EventButton evt) {
+            if (evt.type == Gdk.EventType.BUTTON_PRESS && evt.button == 3) {
+                menu.popup (null, null, null, evt.button, evt.time);
+                return true;
+            }
+            return false;
         }
     }
 }
