@@ -133,6 +133,7 @@ namespace PlayMyVideos {
 
             navigation_button = new Gtk.Button ();
             navigation_button.label = _("Back");
+            navigation_button.valign = Gtk.Align.CENTER;
             navigation_button.can_focus = false;
             navigation_button.get_style_context ().add_class ("back-button");
             navigation_button.clicked.connect (show_boxes);
@@ -152,7 +153,7 @@ namespace PlayMyVideos {
             player_view.player_frame_resized.connect ((width, height) => {
                 var current_width = get_allocated_width ();
                 double w_r = (double)(current_width - 156) / width;
-                int new_height = (int)(height * w_r) + 198;
+                int new_height = (int)(height * w_r) + 206;
                 this.get_window ().resize (current_width, new_height);
             });
 
