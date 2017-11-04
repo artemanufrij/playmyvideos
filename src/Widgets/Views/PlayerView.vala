@@ -124,29 +124,10 @@ namespace PlayMyVideos.Widgets.Views {
 
         private void build_ui () {
             this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
-            this.events |= Gdk.EventMask.KEY_PRESS_MASK;
-            this.events |= Gdk.EventMask.KEY_RELEASE_MASK;
 
             this.motion_notify_event.connect ((event) => {
                 return mouse_over ();
             });
-
-/*          event_box.button_release_event.connect ((event) => {
-                return true;
-            });
-
-            event_box.key_press_event.connect ((key) => {
-                return true;
-            });
-
-            event_box.key_release_event.connect ((key) => {
-                return true;
-            });
-
-            event_box.button_press_event.connect ((event) => {
-                return true;
-            });*/
-
             this.add (clutter);
         }
 

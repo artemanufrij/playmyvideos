@@ -170,7 +170,7 @@ namespace PlayMyVideos {
         }
 
         private void show_player (Objects.Video video) {
-            content.set_visible_child_name ("player");
+            content.visible_child_name = "player";
             navigation_button.show ();
             player_view.play (video);
             search_entry.hide ();
@@ -178,7 +178,7 @@ namespace PlayMyVideos {
         }
 
         public void show_boxes () {
-            content.set_visible_child_name ("boxes");
+            content.visible_child_name = "boxes";
             player_view.pause ();
             navigation_button.hide ();
             headerbar.title = _("Play My Videos");
@@ -208,6 +208,12 @@ namespace PlayMyVideos {
                 this.search_entry.text = "";
             } else {
                 boxes_view.unselect_all ();
+            }
+        }
+
+        public void toggle_playing () {
+            if (content.visible_child_name == "player") {
+                player_view.toogle_playing ();
             }
         }
 

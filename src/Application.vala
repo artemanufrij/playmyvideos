@@ -75,6 +75,15 @@ namespace PlayMyVideos {
                 }
             });
 
+            var action_toggle = new SimpleAction ("toggle-playing", null);
+            add_action (action_toggle);
+            add_accelerator ("space", "app.toggle-playing", null);
+            action_toggle.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.toggle_playing ();
+                }
+            });
+
             create_cache_folders ();
         }
 
