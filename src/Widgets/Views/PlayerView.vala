@@ -123,13 +123,11 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         private void build_ui () {
-            var event_box = new Gtk.EventBox ();
-            event_box.events |= Gdk.EventMask.POINTER_MOTION_MASK;
-            event_box.events |= Gdk.EventMask.KEY_PRESS_MASK;
-            event_box.events |= Gdk.EventMask.KEY_RELEASE_MASK;
-            event_box.add (clutter);
+            this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
+            this.events |= Gdk.EventMask.KEY_PRESS_MASK;
+            this.events |= Gdk.EventMask.KEY_RELEASE_MASK;
 
-            event_box.motion_notify_event.connect ((event) => {
+            this.motion_notify_event.connect ((event) => {
                 return mouse_over ();
             });
 
@@ -149,7 +147,7 @@ namespace PlayMyVideos.Widgets.Views {
                 return true;
             });*/
 
-            this.add (event_box);
+            this.add (clutter);
         }
 
         public void play (Objects.Video video) {
