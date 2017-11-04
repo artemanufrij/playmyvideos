@@ -30,8 +30,8 @@ namespace PlayMyVideos.Objects {
         PlayMyVideos.Services.LibraryManager library_manager;
 
         public int ID { get; set; }
-        public string title { get; set; }
-        public int year { get; set; default = 0; }
+        public string title { get; private set; }
+        public int year { get; private set; default = 0; }
 
         public signal void thumbnail_normal_changed ();
         public signal void thumbnail_large_changed ();
@@ -39,7 +39,7 @@ namespace PlayMyVideos.Objects {
         string thumbnail_large_path;
         string thumbnail_normal_path;
 
-        string _path;
+        string _path = "";
         public string path {
             get {
                 return _path;
@@ -48,6 +48,8 @@ namespace PlayMyVideos.Objects {
 
                 var file = File.new_for_path (_path);
                 _uri = file.get_uri ();
+                title = Utils.get_title_from_basename (file.get_basename ());
+                year = Utils.get_year_from_basename (file.get_basename ());
                 file.dispose ();
 
                 var hash_file_poster = GLib.Checksum.compute_for_string (ChecksumType.MD5, file.get_uri (), file.get_uri ().length);
@@ -147,31 +149,20 @@ namespace PlayMyVideos.Objects {
             }
         }
 
-        Box? _box = null;
-        public Box box {
-            get {
-                return _box;
-            }
-        }
+
+        public Box? box { get; set; default = null; }
 
         construct {
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
         }
 
         public Video (Box? box = null) {
-            this._box = box;
-        }
-
-        public void set_box (Box box) {
-            this._box = box;
+            this.box = box;
         }
 
         public bool file_exists () {
-            bool return_value = true;
             var file = File.new_for_uri (this.uri);
-            if (!file.query_exists ()) {
-                return_value = false;
-            }
+            bool return_value = file.query_exists ();
             file.dispose ();
             return return_value;
         }

@@ -147,6 +147,9 @@ namespace PlayMyVideos.Widgets.Views {
             var item1 = (PlayMyVideos.Widgets.Video)child1;
             var item2 = (PlayMyVideos.Widgets.Video)child2;
             if (item1 != null && item2 != null) {
+                if (item1.year != item2.year) {
+                    return item1.year - item2.year;
+                }
                 return item1.title.collate (item2.title);
             }
             return 0;

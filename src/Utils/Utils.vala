@@ -34,6 +34,22 @@ namespace PlayMyVideos.Utils {
         return basename;
     }
 
+    public static int get_year_from_basename (string basename) {
+        int return_value = 0;
+
+        try {
+            var regex = new GLib.Regex ("(?<=\\()[12]\\d\\d\\d(?=\\)\\.)");
+            MatchInfo match_info;
+            if (regex.match (basename, 0, out match_info)) {
+                return_value = int.parse (match_info.fetch (0));
+            }
+        } catch (Error err) {
+            warning (err.message);
+        }
+
+        return return_value;
+    }
+
     public static string[] subtitle_extentions () {
         return {"sub", "srt", "smi", "ssa", "ass", "asc"};
     }

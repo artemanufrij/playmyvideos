@@ -160,7 +160,9 @@ namespace PlayMyVideos.Widgets.Views {
                 return;
             }
             current_video = video;
-            playlist.show_box (current_video.box);
+            if (current_video.box != null) {
+                playlist.show_box (current_video.box);
+            }
             playback.uri = video.uri;
             playback.playing = true;
         }

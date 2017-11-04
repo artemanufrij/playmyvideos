@@ -43,11 +43,13 @@ namespace PlayMyVideos.Objects {
                 _ID = value;
                 if (value > 0) {
                     this.cover_path = GLib.Path.build_filename (PlayMyVideos.PlayMyVideosApp.instance.COVER_FOLDER, ("box_%d.jpg").printf (this.ID));
-                    load_cover_async.begin ();
+                    if (title == "") {
+                       load_cover_async.begin ();
+                   }
                 }
             }
         }
-        public string title { get; set; }
+        public string title { get; set; default = "";}
 
         bool is_cover_loading = false;
 
@@ -76,40 +78,32 @@ namespace PlayMyVideos.Objects {
             db_manager = library_manager.db_manager;
         }
 
-        public Box (string? title = null) {
-            if (title != null) {
-                this.title = title;
-            }
+        public Box (string title = "") {
+            this.title = title;
         }
 
         private void add_video (Video video) {
-            video.set_box (this);
-            lock (_videos) {
-                if (_videos == null) {
-                    _videos = new GLib.List<Video> ();
-                }
-                this._videos.append (video);
-                video_added (video);
+        lock (_videos) {
+            video.box = this;
+            if (_videos == null) {
+                _videos = new GLib.List<Video> ();
             }
-            load_cover_async.begin ();
+            this._videos.append (video);
+            video_added (video);
+        }
         }
 
-        public Video add_video_if_not_exists (Video new_video) {
-            Video? return_value = null;
+        public void add_video_if_not_exists (Video new_video) {
             lock (_videos) {
                 foreach (var video in videos) {
                     if (video.path == new_video.path) {
-                        return_value = video;
-                        break;
+                       return;
                     }
                 }
-                if (return_value == null) {
-                    add_video (new_video);
-                    db_manager.insert_video (new_video);
-                    return_value = new_video;
-                }
-                return return_value;
+                add_video (new_video);
+                db_manager.insert_video (new_video);
             }
+            load_cover_async.begin ();
         }
 
         public Video? get_next_video (Video current) {
@@ -162,6 +156,7 @@ namespace PlayMyVideos.Objects {
                             try {
                                 return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                                 Idle.add ((owned) callback);
+                                cover_full_path.dispose ();
                                 return null;
                             } catch (Error err) {
                                 warning (err.message);
@@ -175,6 +170,7 @@ namespace PlayMyVideos.Objects {
                         try {
                             return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                             Idle.add ((owned) callback);
+                            cover_full_path.dispose ();
                             return null;
                         } catch (Error err) {
                             warning (err.message);
@@ -187,6 +183,7 @@ namespace PlayMyVideos.Objects {
                         try {
                             return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                             Idle.add ((owned) callback);
+                            cover_full_path.dispose ();
                             return null;
                         } catch (Error err) {
                             warning (err.message);
@@ -198,6 +195,7 @@ namespace PlayMyVideos.Objects {
                         try {
                             return_value = save_cover (new Gdk.Pixbuf.from_file (cover_full_path.get_path ()));
                             Idle.add ((owned) callback);
+                            cover_full_path.dispose ();
                             return null;
                         } catch (Error err) {
                             warning (err.message);
@@ -206,6 +204,7 @@ namespace PlayMyVideos.Objects {
                 }
 
                 Idle.add ((owned) callback);
+                cover_full_path.dispose ();
                 return null;
             });
             yield;

@@ -43,6 +43,12 @@ namespace PlayMyVideos.Widgets {
         public Box (Objects.Box box) {
             this.box = box;
             build_ui ();
+            this.box.cover_changed.connect (() => {
+                Idle.add (() => {
+                    cover.pixbuf = this.box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
+                    return false;
+                });
+            });
         }
 
         private void build_ui () {
@@ -73,15 +79,8 @@ namespace PlayMyVideos.Widgets {
             menu.show_all ();
 
             cover = new Gtk.Image ();
-            this.box.cover_changed.connect (() => {
-                Idle.add (() => {
-                    cover.pixbuf = this.box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
-                    return false;
-                });
-            });
             cover.get_style_context ().add_class ("card");
             cover.halign = Gtk.Align.CENTER;
-
 
             var title = new Gtk.Label (box.title);
             title.max_width_chars = 0;

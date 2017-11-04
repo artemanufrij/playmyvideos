@@ -123,7 +123,7 @@ namespace PlayMyVideos {
             });
 
             navigation_button = new Gtk.Button ();
-            navigation_button.label = _("Back");
+            navigation_button.label = _("Library");
             navigation_button.valign = Gtk.Align.CENTER;
             navigation_button.can_focus = false;
             navigation_button.get_style_context ().add_class ("back-button");
@@ -142,12 +142,15 @@ namespace PlayMyVideos {
                 headerbar.title = video.title;
             });
             player_view.player_frame_resized.connect ((width, height) => {
-                if (width == 0 || height == 0) {
-                    return;
-                }
-                var current_width = get_allocated_width ();
+
+                var current_width = this.get_allocated_width ();
                 double w_r = (double)(current_width - 156) / width;
                 int new_height = (int)(height * w_r) + 206;
+
+                if (current_width <= 0 || new_height <=0) {
+                    return;
+                }
+
                 this.get_window ().resize (current_width, new_height);
             });
 
@@ -220,6 +223,14 @@ namespace PlayMyVideos {
 
         public void show_mouse_cursor () {
             this.get_window ().set_cursor (null);
+        }
+
+        public void open_file (File file) {
+            if (!boxes_view.open_file (file)) {
+                var ext_video = new Objects.Video ();
+                ext_video.path = file.get_path ();
+                show_player (ext_video);
+            }
         }
     }
 }

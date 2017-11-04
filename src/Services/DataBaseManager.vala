@@ -67,7 +67,7 @@ namespace PlayMyVideos.Services {
             q = """CREATE TABLE IF NOT EXISTS boxes (
                 ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
                 title       TEXT        NOT NULL,
-                CONSTRAINT unique_album UNIQUE (title)
+                CONSTRAINT unique_box UNIQUE (title)
                 );""";
             if (db.exec (q, null, out errormsg) != Sqlite.OK) {
                 warning (errormsg);
@@ -77,10 +77,8 @@ namespace PlayMyVideos.Services {
                 ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
                 box_id      INT         NOT NULL,
                 path        TEXT        NOT NULL,
-                title       TEXT        NOT NULL,
                 mime_type   TEXT        NOT NULL,
-                year        INT         NOT NULL,
-                CONSTRAINT unique_track UNIQUE (path),
+                CONSTRAINT unique_video UNIQUE (path),
                 FOREIGN KEY (box_id) REFERENCES boxes (ID)
                     ON DELETE CASCADE
                 );""";
@@ -88,7 +86,7 @@ namespace PlayMyVideos.Services {
                 warning (errormsg);
             }
 
-            q = """PRAGMA foreign_keys = ON;""";
+            q = """PRAGMA foreign_keys=ON;""";
             if (db.exec (q, null, out errormsg) != Sqlite.OK) {
                 warning (errormsg);
             }
@@ -205,7 +203,7 @@ namespace PlayMyVideos.Services {
             Sqlite.Statement stmt;
 
             string sql = """
-                SELECT id, title, path, mime_type FROM videos WHERE box_id=$BOX_ID ORDER BY title;
+                SELECT id, path, mime_type FROM videos WHERE box_id=$BOX_ID ORDER BY path;
             """;
 
             db.prepare_v2 (sql, sql.length, out stmt);
@@ -226,9 +224,8 @@ namespace PlayMyVideos.Services {
         private PlayMyVideos.Objects.Video _fill_video (Sqlite.Statement stmt, PlayMyVideos.Objects.Box box) {
             PlayMyVideos.Objects.Video return_value = new PlayMyVideos.Objects.Video (box);
             return_value.ID = stmt.column_int (0);
-            return_value.title = stmt.column_text (1);
-            return_value.path = stmt.column_text (2);
-            return_value.mime_type = stmt.column_text (3);
+            return_value.path = stmt.column_text (1);
+            return_value.mime_type = stmt.column_text (2);
             return return_value;
         }
 
@@ -251,14 +248,12 @@ namespace PlayMyVideos.Services {
             Sqlite.Statement stmt;
 
             string sql = """
-                INSERT OR IGNORE INTO videos (box_id, title, path, mime_type, year) VALUES ($BOX_ID, $TITLE, $PATH, $MIME_TYPE, $YEAR);
+                INSERT OR IGNORE INTO videos (box_id, path, mime_type) VALUES ($BOX_ID, $PATH, $MIME_TYPE);
             """;
             db.prepare_v2 (sql, sql.length, out stmt);
             set_parameter_int (stmt, sql, "$BOX_ID", video.box.ID);
-            set_parameter_str (stmt, sql, "$TITLE", video.title);
             set_parameter_str (stmt, sql, "$PATH", video.path);
             set_parameter_str (stmt, sql, "$MIME_TYPE", video.mime_type);
-            set_parameter_int (stmt, sql, "$YEAR", video.year);
 
             if (stmt.step () != Sqlite.DONE) {
                 warning ("Error: %d: %s", db.errcode (), db.errmsg ());
@@ -296,8 +291,11 @@ namespace PlayMyVideos.Services {
 
             if (stmt.step () == Sqlite.ROW) {
                 file_exists = stmt.column_int (0) > 0;
+            } else {
+                warning ("Error: %d: %s", db.errcode (), db.errmsg ());
             }
             stmt.reset ();
+
             return file_exists;
         }
 

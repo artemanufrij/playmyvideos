@@ -151,5 +151,19 @@ namespace PlayMyVideos.Widgets.Views {
                 child.destroy ();
             }
         }
+
+        public bool open_file (File file) {
+            foreach (var child in boxes.get_children ()) {
+                var box = (child as Widgets.Box);
+                foreach (var video in box.box.videos) {
+                    if (video.path == file.get_path ()) {
+                        box.activate ();
+                        video_selected (video);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
