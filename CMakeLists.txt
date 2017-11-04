@@ -41,6 +41,3 @@ add_subdirectory (src)
 add_subdirectory (data)
 #add_subdirectory (po)
 add_subdirectory (schemas)
-
-#libclutter-gtk-1.0-dev
-#libclutter-gst-3.0-dev

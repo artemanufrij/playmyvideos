@@ -1,0 +1,20 @@
+Source: com.github.artemanufrij.playmyvideos
+Section: x11
+Priority: optional
+Maintainer: Artem Anufrij <artem.anufrij@live.de>
+Build-Depends: cmake (>= 2.8),
+               cmake-elementary,
+               debhelper (>= 9),
+               libgranite-dev,
+               libsqlite3-dev,
+               libgstreamer-plugins-base1.0-dev,
+               libclutter-gtk-1.0-dev,
+               libclutter-gst-3.0-dev,
+               valac (>= 0.26)
+Standards-Version: 3.9.3
+
+Package: com.github.artemanufrij.playmyvideos
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Simple video player
+ A video player for watching local video files, written especially for elementary OS

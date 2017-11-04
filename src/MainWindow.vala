@@ -60,6 +60,7 @@ namespace PlayMyVideos {
             load_content_from_database.begin ((obj, res) => {
                 library_manager.scan_local_library (settings.library_location);
             });
+
             this.configure_event.connect ((event) => {
                 if (!player_view.playback.playing) {
                     settings.window_width = event.width;
@@ -67,12 +68,10 @@ namespace PlayMyVideos {
                 }
                 return false;
             });
-
             this.motion_notify_event.connect ((event) => {
                 show_mouse_cursor ();
                 return false;
             });
-
             this.destroy.connect (() => {
                 save_settings ();
             });
