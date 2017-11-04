@@ -13,6 +13,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Widgets/Video.vala
     Widgets/Playlist.vala
     Widgets/VideoTimeLine.vala
+    Widgets/Views/Welcome.vala
     Widgets/Views/BoxesView.vala
     Widgets/Views/BoxView.vala
     Widgets/Views/PlayerView.vala

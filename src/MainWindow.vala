@@ -40,6 +40,14 @@ namespace PlayMyVideos {
         construct {
             settings = PlayMyVideos.Settings.get_default ();
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            library_manager.added_new_box.connect ((box) => {
+                Idle.add (() => {
+                    if (content.visible_child_name == "welcome") {
+                        content.visible_child_name = "boxes";
+                    }
+                    return false;
+                });
+            });
         }
 
         public MainWindow () {
@@ -80,7 +88,7 @@ namespace PlayMyVideos {
 
             //SETTINGS MENU
             var app_menu = new Gtk.MenuButton ();
-            app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
+            app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
 
             var settings_menu = new Gtk.Menu ();
 
@@ -142,18 +150,18 @@ namespace PlayMyVideos {
                 headerbar.title = video.title;
             });
             player_view.player_frame_resized.connect ((width, height) => {
-
                 var current_width = this.get_allocated_width ();
                 double w_r = (double)(current_width - 156) / width;
                 int new_height = (int)(height * w_r) + 206;
-
                 if (current_width <= 0 || new_height <=0) {
                     return;
                 }
-
                 this.get_window ().resize (current_width, new_height);
             });
 
+            var welcome = new Widgets.Views.Welcome ();
+
+            content.add_named (welcome, "welcome");
             content.add_named (boxes_view, "boxes");
             content.add_named (player_view, "player");
             this.add (content);
@@ -207,11 +215,15 @@ namespace PlayMyVideos {
         private void reset_all_views () {
             player_view.reset ();
             boxes_view.reset ();
+            content.visible_child_name = "welcome";
         }
 
         private async void load_content_from_database () {
             foreach (var box in library_manager.boxes) {
                 boxes_view.add_box (box);
+                if (content.visible_child_name == "welcome") {
+                    content.visible_child_name = "boxes";
+                }
             }
         }
 

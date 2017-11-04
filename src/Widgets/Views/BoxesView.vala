@@ -53,6 +53,7 @@ namespace PlayMyVideos.Widgets.Views {
             library_manager.added_new_box.connect ((box) => {
                 Idle.add (() => {
                     add_box (box);
+                    return false;
                 });
             });
         }
