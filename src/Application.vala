@@ -122,6 +122,7 @@ namespace PlayMyVideos {
             if (mainwindow == null) {
                 mainwindow = new MainWindow ();
                 mainwindow.application = this;
+                Interfaces.MediaKeyListener.listen ();
             }
             mainwindow.present ();
         }

@@ -51,7 +51,9 @@ namespace PlayMyVideos {
         }
 
         public MainWindow () {
-            events |= Gdk.EventMask.POINTER_MOTION_MASK;
+            this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
+            this.events |= Gdk.EventMask.KEY_RELEASE_MASK;
+
             load_settings ();
             this.window_position = Gtk.WindowPosition.CENTER;
             Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
@@ -71,6 +73,9 @@ namespace PlayMyVideos {
             this.motion_notify_event.connect ((event) => {
                 show_mouse_cursor ();
                 return false;
+            });
+            this.key_release_event.connect ((key) => {
+                return content.visible_child_name == "player";
             });
             this.destroy.connect (() => {
                 save_settings ();
@@ -211,9 +216,19 @@ namespace PlayMyVideos {
             }
         }
 
+        public void pause () {
+            if (content.visible_child_name == "player") {
+                player_view.playback.playing = false;
+            }
+        }
+
         public void toggle_playing () {
             if (content.visible_child_name == "player") {
                 player_view.toogle_playing ();
+            } else if (search_entry.has_focus) {
+                int position = search_entry.get_position ();
+                search_entry.insert_text (" ",-1, ref position);
+                search_entry.set_position (position + 1);
             }
         }
 
