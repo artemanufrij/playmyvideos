@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-04 20:50+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
+msgid "Set new Cover…"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:147
+msgid "Track %d (%s)"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:168
+msgid "disable"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:181
+msgid "Subtitle %d (%s)"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:44
+msgid "Change Video Folder"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:44
+msgid "Load videos from a folder, a network or an external disk."
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:45
+msgid "Import Videos"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:45
+msgid "Import videos from a source into your library."
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:117
+msgid "Choose an image…"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:119
+#: ../src/Services/LibraryManager.vala:140
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:120
+#: ../src/Services/LibraryManager.vala:141
+msgid "_Open"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:123
+msgid "Images"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:139
+msgid "Select a folder."
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:144
+msgid "Folder"
+msgstr ""
+
+#: ../src/MainWindow.vala:86 ../src/MainWindow.vala:184
+msgid "Play My Videos"
+msgstr ""
+
+#: ../src/MainWindow.vala:94
+msgid "Change Video Folder…"
+msgstr ""
+
+#: ../src/MainWindow.vala:103
+msgid "Import Videos…"
+msgstr ""
+
+#: ../src/MainWindow.vala:111
+msgid "Rescan Library"
+msgstr ""
+
+#: ../src/MainWindow.vala:127
+msgid "Search Videos"
+msgstr ""
+
+#: ../src/MainWindow.vala:133
+msgid "Library"
+msgstr ""
