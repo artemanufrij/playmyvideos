@@ -77,9 +77,10 @@ namespace PlayMyVideos.Interfaces {
             if (application == (PlayMyVideos.PlayMyVideosApp.instance.application_id)) {
                 if (key == "Play") {
                     PlayMyVideos.PlayMyVideosApp.instance.mainwindow.toggle_playing ();
-                }
-                else if (key == "Pause") {
+                } else if (key == "Pause") {
                     PlayMyVideos.PlayMyVideosApp.instance.mainwindow.pause ();
+                } else if (key == "Next") {
+                    PlayMyVideos.PlayMyVideosApp.instance.mainwindow.next ();
                 }
             }
         }

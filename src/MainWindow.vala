@@ -231,6 +231,12 @@ namespace PlayMyVideos {
             }
         }
 
+        public void next () {
+            if (content.visible_child_name == "player") {
+                player_view.next ();
+            }
+        }
+
         public void toggle_playing () {
             if (content.visible_child_name == "player") {
                 player_view.toogle_playing ();
