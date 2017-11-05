@@ -93,6 +93,24 @@ namespace PlayMyVideos {
                 }
             });
 
+            var action_forward_10_seconds = new SimpleAction ("forward-10-seconds", null);
+            add_action (action_forward_10_seconds);
+            add_accelerator ("Right", "app.forward-10-seconds", null);
+            action_forward_10_seconds.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.seek_seconds (10);
+                }
+            });
+
+            var action_back_10_seconds = new SimpleAction ("back-10-seconds", null);
+            add_action (action_back_10_seconds);
+            add_accelerator ("Left", "app.back-10-seconds", null);
+            action_back_10_seconds.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.seek_seconds (-10);
+                }
+            });
+
             create_cache_folders ();
         }
 

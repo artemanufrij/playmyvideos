@@ -163,6 +163,13 @@ namespace PlayMyVideos.Widgets.Views {
             playback.playing = !playback.playing;
         }
 
+        public void seek_seconds (int seconds) {
+            var duration = playback.duration;
+            var progress = playback.progress;
+            var new_progress = ((duration * progress) + (double)seconds) / duration;
+            playback.progress = new_progress.clamp (0.0, 1.0);
+        }
+
         private bool mouse_over () {
             if (mouse_move_timer != 0) {
                 Source.remove (mouse_move_timer);

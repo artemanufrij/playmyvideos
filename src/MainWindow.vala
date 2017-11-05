@@ -259,6 +259,10 @@ namespace PlayMyVideos {
             }
         }
 
+        public void seek_seconds (int seconds) {
+            player_view.seek_seconds (seconds);
+        }
+
         private void reset_all_views () {
             player_view.reset ();
             boxes_view.reset ();
