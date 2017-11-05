@@ -38,6 +38,7 @@
                     <li>Toggle playing [SPACE]</li>
                     <li>Toggle fullscreen [F11]</li>
                     <li>Media key support</li>
+                    <li>Seek function [LEFT/RIGHT]</li>
                 </ul>
             </description>
         </release>

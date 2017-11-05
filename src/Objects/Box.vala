@@ -82,17 +82,6 @@ namespace PlayMyVideos.Objects {
             this.title = title;
         }
 
-        private void add_video (Video video) {
-        lock (_videos) {
-            video.box = this;
-            if (_videos == null) {
-                _videos = new GLib.List<Video> ();
-            }
-            this._videos.append (video);
-            video_added (video);
-        }
-        }
-
         public void add_video_if_not_exists (Video new_video) {
             lock (_videos) {
                 foreach (var video in videos) {
@@ -100,10 +89,19 @@ namespace PlayMyVideos.Objects {
                        return;
                     }
                 }
-                add_video (new_video);
+                new_video.box = this;
                 db_manager.insert_video (new_video);
+                this._videos.insert_sorted_with_data (new_video, sort_function);
+                video_added (new_video);
             }
             load_cover_async.begin ();
+        }
+
+        private int sort_function (Video a, Video b) {
+            if (a.year != b.year) {
+                return a.year - b.year;
+            }
+            return a.title.collate (b.title);
         }
 
         public Video? get_next_video (Video current) {
