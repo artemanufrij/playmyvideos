@@ -84,6 +84,15 @@ namespace PlayMyVideos {
                 }
             });
 
+            var action_fullscreen = new SimpleAction ("toggle-fullscreen", null);
+            add_action (action_fullscreen);
+            add_accelerator ("F11", "app.toggle-fullscreen", null);
+            action_fullscreen.activate.connect (() => {
+                if (mainwindow != null) {
+                    mainwindow.toggle_fullscreen ();
+                }
+            });
+
             create_cache_folders ();
         }
 

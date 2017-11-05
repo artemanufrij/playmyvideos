@@ -30,6 +30,8 @@ namespace PlayMyVideos {
         PlayMyVideos.Services.LibraryManager library_manager;
         PlayMyVideos.Settings settings;
 
+        Gdk.WindowState current_state;
+
         Gtk.HeaderBar headerbar;
         Gtk.SearchEntry search_entry;
         Gtk.Stack content;
@@ -76,6 +78,10 @@ namespace PlayMyVideos {
             });
             this.key_release_event.connect ((key) => {
                 return content.visible_child_name == "player";
+            });
+            this.window_state_event.connect ((event) => {
+                current_state = event.new_window_state;
+                return false;
             });
             this.destroy.connect (() => {
                 save_settings ();
@@ -183,6 +189,7 @@ namespace PlayMyVideos {
         }
 
         public void show_boxes () {
+            this.unfullscreen ();
             content.visible_child_name = "boxes";
             player_view.pause ();
             navigation_button.hide ();
@@ -205,12 +212,14 @@ namespace PlayMyVideos {
         }
 
         public void search () {
-            this.search_entry.grab_focus ();
+            search_entry.grab_focus ();
         }
 
         public void search_reset () {
-            if (this.search_entry.text != "") {
-                this.search_entry.text = "";
+            if (content.visible_child_name == "player") {
+                this.unfullscreen ();
+            } else if (this.search_entry.text != "") {
+                search_entry.text = "";
             } else {
                 boxes_view.unselect_all ();
             }
@@ -229,6 +238,18 @@ namespace PlayMyVideos {
                 int position = search_entry.get_position ();
                 search_entry.insert_text (" ",-1, ref position);
                 search_entry.set_position (position + 1);
+            }
+        }
+
+        public void toggle_fullscreen () {
+            if (content.visible_child_name != "player") {
+                return;
+            }
+            // FIXME: doesn't work without .to_string ()
+            if (current_state.to_string () == Gdk.WindowState.FULLSCREEN.to_string ()) {
+                this.unfullscreen ();
+            } else {
+                this.fullscreen ();
             }
         }
 

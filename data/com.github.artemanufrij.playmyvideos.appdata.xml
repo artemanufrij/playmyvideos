@@ -26,6 +26,9 @@
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/artemanufrij/playmyvideos/master/Screenshot.png</image>
         </screenshot>
+        <screenshot>
+            <image>https://raw.githubusercontent.com/artemanufrij/playmyvideos/master/Screenshot_Player.png</image>
+        </screenshot>
     </screenshots>
     <releases>
         <release version="0.1.0" date="2017-11-5">
