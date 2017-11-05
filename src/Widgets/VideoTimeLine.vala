@@ -162,8 +162,7 @@ namespace PlayMyVideos.Widgets {
                 row.destroy ();
             }
 
-            if (player_view.playback.subtitle_tracks.length () > 1 || player_view.current_video.local_subtitles.length () > 1) {
-
+            if (player_view.playback.subtitle_tracks.length () > 0 || player_view.current_video.local_subtitles.length () > 0) {
                 int i = 0;
                 var lab = new Gtk.Label (_("disable"));
                 lab.margin = 4;
