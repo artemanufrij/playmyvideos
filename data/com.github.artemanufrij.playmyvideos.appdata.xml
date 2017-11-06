@@ -31,6 +31,21 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.1.2" date="2017-11-10">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Toggle playing [SPACE]</li>
+                    <li>Toggle fullscreen [F11]</li>
+                    <li>Media key support</li>
+                    <li>Seek function [LEFT/RIGHT]</li>
+                </ul>
+                <p>Fix:</p>
+                <ul>
+                    <li>Subtitle button wasn't visible of only one Subtitle was available</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.1" date="2017-11-7">
             <description>
                 <p>New:</p>
