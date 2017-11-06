@@ -7,6 +7,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Services/DataBaseManager.vala
     Services/LocalFilesManager.vala
     Services/LibraryManager.vala
+    Interfaces/Inhibitor.vala
     Interfaces/MediaKeys.vala
     Interfaces/Thubnailer.vala
     Widgets/Box.vala

@@ -81,11 +81,13 @@ namespace PlayMyVideos.Widgets.Views {
                         progress_changed (playback.progress);
                         return true;
                     });
+                    Interfaces.Inhibitor.instance.inhibit ();
                 } else {
                     if (progress_timer != 0) {
                         Source.remove (progress_timer);
                         progress_timer = 0;
                     }
+                    Interfaces.Inhibitor.instance.uninhibit ();
                 }
                 toggled (playback.playing);
             });
