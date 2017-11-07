@@ -6,3 +6,10 @@
 
 ![screenshot](Screenshot.png)
 ![screenshot](Screenshot_Player.png)
+
+## Install from Github.
+
+As first you need elementary SDK
+```
+sudo apt install elementary-sdk
+```
