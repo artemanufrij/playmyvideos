@@ -66,7 +66,7 @@ namespace PlayMyVideos.Interfaces {
             if (screensaver_iface != null && !inhibited) {
                 try {
                     inhibited = true;
-                    inhibit_cookie = screensaver_iface.Inhibit ("com.github.artemanufrij.playmymusic", "Playing movie");
+                    inhibit_cookie = screensaver_iface.Inhibit ("com.github.artemanufrij.playmyvideos", "Playing movie");
                     if (simulator_started) {
                         return;
                     }
