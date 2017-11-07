@@ -35,10 +35,7 @@
             <description>
                 <p>New:</p>
                 <ul>
-                    <li>Toggle playing [SPACE]</li>
-                    <li>Toggle fullscreen [F11]</li>
-                    <li>Media key support</li>
-                    <li>Seek function [LEFT/RIGHT]</li>
+                    <li>Disable screensaver while playing</li>
                 </ul>
                 <p>Fix:</p>
                 <ul>
