@@ -82,11 +82,15 @@ namespace PlayMyVideos.Interfaces {
         }
 
         public void uninhibit () {
-            if (timer > 0) {
+            if (timer > 0 ) {
                 Source.remove (timer);
                 timer = 0;
+            }
+
+            if (inhibit_cookie == null) {
                 try {
                     screensaver_iface.UnInhibit (inhibit_cookie);
+                    inhibit_cookie = null;
                 } catch (Error e) {
                     warning ("Could not uninhibit screen: %s", e.message);
                 }
