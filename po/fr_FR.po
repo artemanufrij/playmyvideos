@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
+"Language: fr_FR\n"
 
 #: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
 msgid "Set new Cover…"
