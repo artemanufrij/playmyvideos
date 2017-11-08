@@ -107,6 +107,7 @@ namespace PlayMyVideos.Services {
             GLib.List<PlayMyVideos.Objects.Box> return_value = new GLib.List<PlayMyVideos.Objects.Box> ();
 
             Sqlite.Statement stmt;
+
             string sql = """
                 SELECT id, title FROM boxes ORDER BY title;
             """;
@@ -135,6 +136,7 @@ namespace PlayMyVideos.Services {
             string sql = """
                 DELETE FROM boxes WHERE id=$ID;
             """;
+
             db.prepare_v2 (sql, sql.length, out stmt);
             set_parameter_int (stmt, sql, "$ID", box.ID);
 
@@ -146,6 +148,7 @@ namespace PlayMyVideos.Services {
 
         public void insert_box (PlayMyVideos.Objects.Box box) {
             Sqlite.Statement stmt;
+
             string sql = """
                 INSERT OR IGNORE INTO boxes (title) VALUES ($TITLE);
             """;
@@ -231,6 +234,7 @@ namespace PlayMyVideos.Services {
             string sql = """
                 DELETE FROM videos WHERE id=$ID;
             """;
+
             db.prepare_v2 (sql, sql.length, out stmt);
             set_parameter_int (stmt, sql, "$ID", video.ID);
 
@@ -246,6 +250,7 @@ namespace PlayMyVideos.Services {
             string sql = """
                 INSERT OR IGNORE INTO videos (box_id, path, mime_type) VALUES ($BOX_ID, $PATH, $MIME_TYPE);
             """;
+
             db.prepare_v2 (sql, sql.length, out stmt);
             set_parameter_int (stmt, sql, "$BOX_ID", video.box.ID);
             set_parameter_str (stmt, sql, "$PATH", video.path);
