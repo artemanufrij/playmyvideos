@@ -1,6 +1,6 @@
 <div>
   <h1 align="center">Play My Videos</h1>
-  <h3 align="center">A video player for watching local music files</h3>
+  <h3 align="center">A video player for watching local video files</h3>
 </div>
 
 <br/>
