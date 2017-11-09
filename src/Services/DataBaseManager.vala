@@ -210,11 +210,7 @@ namespace PlayMyVideos.Services {
 
             while (stmt.step () == Sqlite.ROW) {
                 var video = _fill_video (stmt, box);
-                if (video.file_exists ()) {
-                    return_value.append (video);
-                } else {
-                    remove_video (video);
-                }
+                return_value.append (video);
             }
             stmt.reset ();
             return return_value;
@@ -228,7 +224,7 @@ namespace PlayMyVideos.Services {
             return return_value;
         }
 
-        private void remove_video (PlayMyVideos.Objects.Video video) {
+        public void remove_video (PlayMyVideos.Objects.Video video) {
             Sqlite.Statement stmt;
 
             string sql = """
