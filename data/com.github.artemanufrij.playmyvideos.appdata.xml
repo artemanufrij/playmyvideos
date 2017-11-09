@@ -36,10 +36,15 @@
                 <p>New:</p>
                 <ul>
                     <li>Disable screensaver while playing</li>
+                    <li>Improved start up</li>
                 </ul>
                 <p>Fix:</p>
                 <ul>
                     <li>Subtitle button wasn't visible of only one Subtitle was available</li>
+                </ul>
+                <p>Translation:</p>
+                <ul>
+                    <li>French (by nvivant)</li>
                 </ul>
             </description>
         </release>
