@@ -91,7 +91,7 @@ namespace PlayMyVideos.Services {
             lf_manager.scan (path);
         }
 
-        private void found_local_video_file (string path, string mime_type) {
+        public void found_local_video_file (string path, string mime_type) {
             new Thread<void*> (null, () => {
                 if (!db_manager.video_file_exists (path)) {
                     insert_video_file (path, mime_type);

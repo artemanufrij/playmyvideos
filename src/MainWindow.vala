@@ -39,6 +39,10 @@ namespace PlayMyVideos {
         Widgets.Views.BoxesView boxes_view;
         Widgets.Views.PlayerView player_view;
 
+        const Gtk.TargetEntry[] targets = {
+            {"text/uri-list",0,0}
+        };
+
         construct {
             settings = PlayMyVideos.Settings.get_default ();
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
@@ -49,6 +53,34 @@ namespace PlayMyVideos {
                     }
                     return false;
                 });
+            });
+
+            Gtk.drag_dest_set (this, Gtk.DestDefaults.ALL, targets, Gdk.DragAction.LINK);
+
+            drag_motion.connect ((context, x, y, time) => {
+                Gtk.drag_unhighlight (this);
+                return true;
+            });
+
+            drag_data_received.connect ((drag_context, x, y, data, info, time) => {
+                foreach (var uri in data.get_uris ()) {
+                    var file = File.new_for_uri (uri);
+                    try {
+                        var file_info = file.query_info ("standard::*", GLib.FileQueryInfoFlags.NONE);
+
+                        if (file_info.get_file_type () == FileType.DIRECTORY) {
+                            library_manager.scan_local_library (file.get_path ());
+                            continue;
+                        }
+
+                        string mime_type = file_info.get_content_type ();
+                        if (mime_type.has_prefix ("video/")) {
+                            library_manager.found_local_video_file (file.get_path (), mime_type);
+                        }
+                    } catch (Error err) {
+                        warning (err.message);
+                    }
+                }
             });
         }
 
