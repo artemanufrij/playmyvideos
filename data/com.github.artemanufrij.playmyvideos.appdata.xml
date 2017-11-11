@@ -4,7 +4,7 @@
     <id>com.github.artemanufrij.playmyvideos.desktop</id>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0+</project_license>
-    <name>Video Player</name>
+    <name>Play My Videos</name>
     <summary>A video player for watching local video files.</summary>
     <description>
         <p>A very fast video player designed extra for large local libraries.</p>
