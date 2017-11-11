@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.1.4" date="2017-11-15">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Import files by Drag and Drop</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.3" date="2017-11-10">
             <description>
                 <p>New:</p>
