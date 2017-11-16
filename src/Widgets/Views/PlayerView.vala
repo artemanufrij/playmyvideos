@@ -82,6 +82,7 @@ namespace PlayMyVideos.Widgets.Views {
                         return true;
                     });
                     Interfaces.Inhibitor.instance.inhibit ();
+                    hide_controls ();
                 } else {
                     if (progress_timer != 0) {
                         Source.remove (progress_timer);
@@ -128,7 +129,7 @@ namespace PlayMyVideos.Widgets.Views {
             this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
 
             this.motion_notify_event.connect ((event) => {
-                return mouse_over ();
+                return hide_controls ();
             });
             this.add (clutter);
         }
@@ -172,7 +173,7 @@ namespace PlayMyVideos.Widgets.Views {
             playback.progress = new_progress.clamp (0.0, 1.0);
         }
 
-        private bool mouse_over () {
+        private bool hide_controls () {
             if (mouse_move_timer != 0) {
                 Source.remove (mouse_move_timer);
                 mouse_move_timer = 0;
