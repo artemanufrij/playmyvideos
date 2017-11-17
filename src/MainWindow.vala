@@ -57,12 +57,12 @@ namespace PlayMyVideos {
 
             Gtk.drag_dest_set (this, Gtk.DestDefaults.ALL, targets, Gdk.DragAction.LINK);
 
-            drag_motion.connect ((context, x, y, time) => {
+            this.drag_motion.connect ((context, x, y, time) => {
                 Gtk.drag_unhighlight (this);
                 return true;
             });
 
-            drag_data_received.connect ((drag_context, x, y, data, info, time) => {
+            this.drag_data_received.connect ((drag_context, x, y, data, info, time) => {
                 foreach (var uri in data.get_uris ()) {
                     var file = File.new_for_uri (uri);
                     try {
