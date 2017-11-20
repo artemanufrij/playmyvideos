@@ -133,6 +133,7 @@ namespace PlayMyVideos.Widgets {
                     });
                 }
             });
+
             if (video.thumbnail_large != null && cover.icon_name == video_symbolic) {
                 cover.pixbuf = PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (video.thumbnail_large).scale_simple (128, 181, Gdk.InterpType.BILINEAR);
             }
