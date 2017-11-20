@@ -128,6 +128,13 @@ namespace PlayMyVideos.Widgets.Views {
         private void build_ui () {
             this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
 
+            this.button_press_event.connect ((event) => {
+                if (event.button == 1) {
+                    toogle_playing ();
+                }
+                return false;
+            });
+
             this.motion_notify_event.connect ((event) => {
                 return hide_controls ();
             });
