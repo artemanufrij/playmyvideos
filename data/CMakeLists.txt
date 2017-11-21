@@ -3,6 +3,7 @@ install (FILES com.github.artemanufrij.playmyvideos.appdata.xml DESTINATION ${CM
 
 install (FILES icons/com.github.artemanufrij.playmyvideos.svg DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/)
 install (FILES icons/16/com.github.artemanufrij.playmyvideos.svg DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/16x16/apps/)
+install (FILES icons/24/com.github.artemanufrij.playmyvideos.svg DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/24x24/apps/)
 install (FILES icons/32/com.github.artemanufrij.playmyvideos.svg DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/32x32/apps/)
 install (FILES icons/48/com.github.artemanufrij.playmyvideos.svg DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/48x48/apps/)
 install (FILES icons/com.github.artemanufrij.playmyvideos.svg DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/64x64/apps/)
