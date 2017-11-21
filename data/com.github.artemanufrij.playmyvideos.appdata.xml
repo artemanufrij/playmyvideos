@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.1.5" date="2017-11-25">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Repeat mode</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.4" date="2017-11-21">
             <description>
                 <p>New:</p>

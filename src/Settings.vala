@@ -26,6 +26,12 @@
  */
 
 namespace PlayMyVideos {
+    public enum RepeatMode {
+        OFF = 0,
+        ALL = 1,
+        ONE = 2
+    }
+
     public class Settings : Granite.Services.Settings {
         private static Settings settings;
         public static Settings get_default () {
@@ -37,13 +43,27 @@ namespace PlayMyVideos {
         public int window_width { get; set; }
         public int window_height { get; set; }
         public bool window_maximized { get; set; }
-        public bool repeat_mode { get; set; }
+        public RepeatMode repeat_mode { get; set; }
         public bool look_for_new_files { get; set; }
         public string [] covers { get; set; }
         public string library_location { get; set; }
 
         private Settings () {
             base ("com.github.artemanufrij.playmyvideos");
+        }
+
+        public void switch_repeat_mode () {
+            switch (settings.repeat_mode) {
+                case RepeatMode.ALL:
+                    settings.repeat_mode = RepeatMode.ONE;
+                    break;
+                case RepeatMode.ONE:
+                    settings.repeat_mode = RepeatMode.OFF;
+                    break;
+                default:
+                    settings.repeat_mode = RepeatMode.ALL;
+                    break;
+            }
         }
     }
 }

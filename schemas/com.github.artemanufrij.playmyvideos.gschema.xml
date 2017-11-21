@@ -1,4 +1,9 @@
 <schemalist>
+	<enum id="com.github.artemanufrij.playmyvideos.repeat-mode">
+		<value nick="off" value="0" />
+		<value nick="all" value="1" />
+		<value nick="one" value="2" />
+	</enum>
 	<schema path="/com/github/artemanufrij/playmyvideos/" id="com.github.artemanufrij.playmyvideos" gettext-domain="com.github.artemanufrij.playmyvideos">
 		<key name="window-width" type="i">
 			<default>1024</default>
@@ -15,8 +20,8 @@
 			<summary>Maximized window.</summary>
 			<description>Maximized window.</description>
 		</key>
-		<key name="repeat-mode" type="b">
-			<default>false</default>
+		<key name="repeat-mode" enum="com.github.artemanufrij.playmyvideos.repeat-mode">
+			<default>"off"</default>
 			<summary>Repeat mode.</summary>
 			<description>Repeat mode.</description>
 		</key>

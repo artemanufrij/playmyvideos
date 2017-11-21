@@ -27,6 +27,7 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class PlayerView : Gtk.Grid {
+        PlayMyVideos.Settings settings;
 
         public signal void ended ();
         public signal void started (Objects.Video video);
@@ -51,6 +52,8 @@ namespace PlayMyVideos.Widgets.Views {
         Playlist playlist;
 
         construct {
+            settings = PlayMyVideos.Settings.get_default ();
+
             clutter = new GtkClutter.Embed ();
 
             playback = new ClutterGst.Playback ();
@@ -71,7 +74,25 @@ namespace PlayMyVideos.Widgets.Views {
             });
 
             playback.eos.connect (() => {
-                next ();
+                playback.playing = false;
+                playback.uri = null;
+                var vid = current_video;
+                current_video = null;
+                if (settings.repeat_mode == RepeatMode.ONE) {
+                    play (vid);
+                    return;
+                }
+
+                if (next ()) {
+                    return;
+                }
+
+                if (settings.repeat_mode == RepeatMode.ALL) {
+                    play (vid.box.videos.first ().data);
+                    return;
+                }
+                playlist.unselect_all ();
+                ended ();
             });
 
             playback.notify["playing"].connect (() => {
@@ -160,13 +181,13 @@ namespace PlayMyVideos.Widgets.Views {
             playback.playing = false;
         }
 
-        public void next () {
+        public bool next () {
             var next = current_video.box.get_next_video (current_video);
             if (next != null) {
                 play (next);
-            } else {
-                ended ();
+                return true;
             }
+            return false;
         }
 
         public void toogle_playing () {

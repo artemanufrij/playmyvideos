@@ -112,5 +112,9 @@ namespace PlayMyVideos.Widgets {
                 }
             }
         }
+
+        public void unselect_all () {
+            videos.unselect_all ();
+        }
     }
 }

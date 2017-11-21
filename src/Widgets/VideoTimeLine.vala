@@ -27,6 +27,8 @@
 
 namespace PlayMyVideos.Widgets {
     public class VideoTimeLine : Gtk.Revealer {
+        PlayMyVideos.Settings settings;
+
         Views.PlayerView player_view;
         Granite.SeekBar timeline;
         Gtk.Button audio_stream;
@@ -35,10 +37,22 @@ namespace PlayMyVideos.Widgets {
         Gtk.Button subtitle_track;
         Gtk.Popover subtitle_track_popover;
         Gtk.ListBox subtitle_tracks;
+        Gtk.Button repeat_button;
 
         Gtk.Button play_button;
         Gtk.Image icon_play;
         Gtk.Image icon_pause;
+
+        Gtk.Image icon_repeat_one;
+        Gtk.Image icon_repeat_all;
+        Gtk.Image icon_repeat_off;
+
+        construct {
+            settings = PlayMyVideos.Settings.get_default ();
+            settings.notify["repeat-mode"].connect (() => {
+                set_repeat_symbol ();
+            });
+        }
 
         public VideoTimeLine (Views.PlayerView player_view) {
             this.player_view = player_view;
@@ -125,9 +139,22 @@ namespace PlayMyVideos.Widgets {
             });
             subtitle_track_popover.add (subtitle_tracks);
 
+            icon_repeat_one = new Gtk.Image.from_icon_name ("media-playlist-repeat-one-symbolic", Gtk.IconSize.BUTTON);
+            icon_repeat_all = new Gtk.Image.from_icon_name ("media-playlist-repeat-symbolic", Gtk.IconSize.BUTTON);
+            icon_repeat_off = new Gtk.Image.from_icon_name ("media-playlist-no-repeat-symbolic", Gtk.IconSize.BUTTON);
+
+            repeat_button = new Gtk.Button ();
+            set_repeat_symbol ();
+            repeat_button.tooltip_text = _("Repeat");
+            repeat_button.can_focus = false;
+            repeat_button.clicked.connect (() => {
+                settings.switch_repeat_mode ();
+            });
+
             var content = new Gtk.ActionBar ();
             content.pack_start (play_button);
             content.pack_start (timeline);
+            content.pack_end (repeat_button);
             content.pack_end (audio_stream);
             content.pack_end (subtitle_track);
 
@@ -195,6 +222,21 @@ namespace PlayMyVideos.Widgets {
             } else {
                 subtitle_track.hide ();
             }
+        }
+
+        private void set_repeat_symbol () {
+            switch (settings.repeat_mode) {
+                case RepeatMode.ALL:
+                    repeat_button.set_image (icon_repeat_all);
+                    break;
+                case RepeatMode.ONE:
+                    repeat_button.set_image (icon_repeat_one);
+                    break;
+                default:
+                    repeat_button.set_image (icon_repeat_off);
+                    break;
+            }
+            repeat_button.show_all ();
         }
     }
 }
