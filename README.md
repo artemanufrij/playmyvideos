@@ -1,6 +1,7 @@
 <div>
   <h1 align="center">Play My Videos</h1>
   <h3 align="center">A video player for watching local video files</h3>
+  <p align="center">Designed for <a href="https://elementary.io"> elementary OS</p>
 </div>
 
 <br/>
