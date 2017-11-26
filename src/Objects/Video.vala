@@ -89,7 +89,7 @@ namespace PlayMyVideos.Objects {
                             FileInfo file_info;
                             while ((file_info = children.next_file ()) != null) {
                                 foreach (var ext in Utils.subtitle_extentions ()) {
-                                    if (file_info.get_name ().has_suffix (ext)) {
+                                    if (file_info.get_name ().has_suffix (ext) && file_info.get_name ().has_prefix (this.title)) {
                                         _local_subtitles.append (file_info.get_name ());
                                         break;
                                     }

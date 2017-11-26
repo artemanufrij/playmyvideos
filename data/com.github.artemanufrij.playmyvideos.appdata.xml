@@ -36,6 +36,7 @@
                 <p>Fix:</p>
                 <ul>
                     <li>[only if no items in library] Open welcome screen instead empty library after finished playing</li>
+                    <li>Subtiles in Series/Seasons folder</li>
                 </ul>
             </description>
         </release>
