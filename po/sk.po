@@ -1,5 +1,101 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-26 18:02+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
+msgid "Set new Cover…"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:148
+msgid "Repeat"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:174
+msgid "Track %d (%s)"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:194
+msgid "disable"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:207
+msgid "Subtitle %d (%s)"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:44
+msgid "Change Video Folder"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:44
+msgid "Load videos from a folder, a network or an external disk."
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:45
+msgid "Import Videos"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:45
+msgid "Import videos from a source into your library."
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:117
+msgid "Choose an image…"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:119
+#: ../src/Services/LibraryManager.vala:140
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:120
+#: ../src/Services/LibraryManager.vala:141
+msgid "_Open"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:123
+msgid "Images"
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:139
+msgid "Select a folder."
+msgstr ""
+
+#: ../src/Services/LibraryManager.vala:144
+msgid "Folder"
+msgstr ""
+
+#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
+msgid "Play My Videos"
+msgstr ""
+
+#: ../src/MainWindow.vala:151
+msgid "Change Video Folder…"
+msgstr ""
+
+#: ../src/MainWindow.vala:160
+msgid "Import Videos…"
+msgstr ""
+
+#: ../src/MainWindow.vala:168
+msgid "Rescan Library"
+msgstr ""
+
+#: ../src/MainWindow.vala:174
+msgid "Preferences"
+msgstr ""
+
+#: ../src/MainWindow.vala:192
+msgid "Search Videos"
+msgstr ""
+
+#: ../src/MainWindow.vala:198
+msgid "Library"
+msgstr ""
+
+#: ../src/Dialogs/Preferences.vala:60
+msgid "Use Dark Theme"
+msgstr ""

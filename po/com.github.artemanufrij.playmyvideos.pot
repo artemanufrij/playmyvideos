@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-04 20:50+0100\n"
+"POT-Creation-Date: 2017-11-26 18:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,15 +21,19 @@ msgstr ""
 msgid "Set new Cover…"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:147
+#: ../src/Widgets/VideoTimeLine.vala:148
+msgid "Repeat"
+msgstr ""
+
+#: ../src/Widgets/VideoTimeLine.vala:174
 msgid "Track %d (%s)"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:168
+#: ../src/Widgets/VideoTimeLine.vala:194
 msgid "disable"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:181
+#: ../src/Widgets/VideoTimeLine.vala:207
 msgid "Subtitle %d (%s)"
 msgstr ""
 
@@ -75,26 +79,34 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: ../src/MainWindow.vala:86 ../src/MainWindow.vala:184
+#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
 msgid "Play My Videos"
 msgstr ""
 
-#: ../src/MainWindow.vala:94
+#: ../src/MainWindow.vala:151
 msgid "Change Video Folder…"
 msgstr ""
 
-#: ../src/MainWindow.vala:103
+#: ../src/MainWindow.vala:160
 msgid "Import Videos…"
 msgstr ""
 
-#: ../src/MainWindow.vala:111
+#: ../src/MainWindow.vala:168
 msgid "Rescan Library"
 msgstr ""
 
-#: ../src/MainWindow.vala:127
+#: ../src/MainWindow.vala:174
+msgid "Preferences"
+msgstr ""
+
+#: ../src/MainWindow.vala:192
 msgid "Search Videos"
 msgstr ""
 
-#: ../src/MainWindow.vala:133
+#: ../src/MainWindow.vala:198
 msgid "Library"
+msgstr ""
+
+#: ../src/Dialogs/Preferences.vala:60
+msgid "Use Dark Theme"
 msgstr ""
