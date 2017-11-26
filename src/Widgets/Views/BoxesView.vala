@@ -48,6 +48,12 @@ namespace PlayMyVideos.Widgets.Views {
             }
         }
 
+        public bool has_items {
+            get {
+                return boxes.get_children ().length () > 0;
+            }
+        }
+
         construct {
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
             library_manager.added_new_box.connect ((box) => {

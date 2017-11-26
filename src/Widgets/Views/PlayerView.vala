@@ -182,6 +182,10 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         public bool next () {
+            if (current_video == null || current_video.box == null) {
+                return false;
+            }
+
             var next = current_video.box.get_next_video (current_video);
             if (next != null) {
                 play (next);

@@ -195,7 +195,7 @@ namespace PlayMyVideos {
             });
 
             navigation_button = new Gtk.Button ();
-            navigation_button.label = _("Library");
+            navigation_button.label = _("Back");
             navigation_button.valign = Gtk.Align.CENTER;
             navigation_button.can_focus = false;
             navigation_button.get_style_context ().add_class ("back-button");
@@ -247,11 +247,15 @@ namespace PlayMyVideos {
 
         public void show_boxes () {
             this.unfullscreen ();
-            content.visible_child_name = "boxes";
+            if (boxes_view.has_items) {
+                content.visible_child_name = "boxes";
+                search_entry.show ();
+            } else {
+                content.visible_child_name = "welcome";
+            }
             player_view.pause ();
             navigation_button.hide ();
             headerbar.title = _("Play My Videos");
-            search_entry.show ();
             this.get_window ().resize (settings.window_width, settings.window_height);
         }
 
