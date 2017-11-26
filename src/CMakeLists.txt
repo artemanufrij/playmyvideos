@@ -21,6 +21,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Widgets/Views/PlayerView.vala
     Utils/Utils.vala
     Utils/Pixbuf.vala
+    Dialogs/Preferences.vala
     Settings.vala
     MainWindow.vala
     Application.vala

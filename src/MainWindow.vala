@@ -36,6 +36,7 @@ namespace PlayMyVideos {
         Gtk.SearchEntry search_entry;
         Gtk.Stack content;
         Gtk.Button navigation_button;
+        Gtk.MenuButton app_menu;
         Widgets.Views.BoxesView boxes_view;
         Widgets.Views.PlayerView player_view;
 
@@ -45,6 +46,15 @@ namespace PlayMyVideos {
 
         construct {
             settings = PlayMyVideos.Settings.get_default ();
+            settings.notify["use-dark-theme"].connect (() => {
+                Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = settings.use_dark_theme;
+                if (settings.use_dark_theme) {
+                    app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
+                } else {
+                    app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
+                }
+            });
+
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
             library_manager.added_new_box.connect ((box) => {
                 Idle.add (() => {
@@ -90,7 +100,7 @@ namespace PlayMyVideos {
 
             load_settings ();
             this.window_position = Gtk.WindowPosition.CENTER;
-            Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = true;
+            Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = settings.use_dark_theme;
             build_ui ();
 
             load_content_from_database.begin ((obj, res) => {
@@ -129,8 +139,12 @@ namespace PlayMyVideos {
             headerbar.title = _("Play My Videos");
 
             //SETTINGS MENU
-            var app_menu = new Gtk.MenuButton ();
-            app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
+            app_menu = new Gtk.MenuButton ();
+            if (settings.use_dark_theme) {
+                app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
+            } else {
+                app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
+            }
 
             var settings_menu = new Gtk.Menu ();
 
@@ -157,10 +171,18 @@ namespace PlayMyVideos {
                 library_manager.rescan_library ();
             });
 
+            var menu_item_preferences = new Gtk.MenuItem.with_label (_("Preferences"));
+            menu_item_preferences.activate.connect (() => {
+                var preferences = new Dialogs.Preferences (this);
+                preferences.run ();
+            });
+
             settings_menu.append (menu_item_library);
             settings_menu.append (menu_item_import);
             settings_menu.append (new Gtk.SeparatorMenuItem ());
             settings_menu.append (menu_item_rescan);
+            settings_menu.append (new Gtk.SeparatorMenuItem ());
+            settings_menu.append (menu_item_preferences);
             settings_menu.show_all ();
 
             app_menu.popup = settings_menu;
