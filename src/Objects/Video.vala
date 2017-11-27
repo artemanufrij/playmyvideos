@@ -35,6 +35,7 @@ namespace PlayMyVideos.Objects {
 
         public signal void thumbnail_normal_changed ();
         public signal void thumbnail_large_changed ();
+        public signal void removed ();
 
         string thumbnail_large_path;
         string thumbnail_normal_path;
@@ -154,6 +155,11 @@ namespace PlayMyVideos.Objects {
 
         construct {
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            removed.connect (() => {
+                if (box != null) {
+                    box.video_removed (this);
+                }
+            });
         }
 
         public Video (Box? box = null) {

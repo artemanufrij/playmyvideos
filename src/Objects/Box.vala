@@ -31,7 +31,9 @@ namespace PlayMyVideos.Objects {
         PlayMyVideos.Services.DataBaseManager db_manager;
 
         public signal void video_added (Video video);
+        public signal void video_removed (Video video);
         public signal void cover_changed ();
+        public signal void removed ();
 
         string cover_path = "";
 
@@ -76,6 +78,12 @@ namespace PlayMyVideos.Objects {
         construct {
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
             db_manager = library_manager.db_manager;
+            video_removed.connect ((video) => {
+                this._videos.remove (video);
+                if (this.videos.length () == 0) {
+                    db_manager.remove_box (this);
+                }
+            });
         }
 
         public Box (string title = "") {

@@ -79,7 +79,7 @@ namespace PlayMyVideos {
                         var file_info = file.query_info ("standard::*", GLib.FileQueryInfoFlags.NONE);
 
                         if (file_info.get_file_type () == FileType.DIRECTORY) {
-                            library_manager.scan_local_library (file.get_path ());
+                            library_manager.scan_local_library_for_new_files (file.get_path ());
                             continue;
                         }
 
@@ -104,7 +104,7 @@ namespace PlayMyVideos {
             build_ui ();
 
             load_content_from_database.begin ((obj, res) => {
-                library_manager.scan_local_library (settings.library_location);
+                library_manager.sync_library_content.begin ();
             });
 
             this.configure_event.connect ((event) => {
@@ -153,7 +153,7 @@ namespace PlayMyVideos {
                 var folder = library_manager.choose_folder ();
                 if(folder != null) {
                     settings.library_location = folder;
-                    library_manager.scan_local_library (folder);
+                    library_manager.scan_local_library_for_new_files (folder);
                 }
             });
 
@@ -161,7 +161,7 @@ namespace PlayMyVideos {
             menu_item_import.activate.connect (() => {
                 var folder = library_manager.choose_folder ();
                 if(folder != null) {
-                    library_manager.scan_local_library (folder);
+                    library_manager.scan_local_library_for_new_files (folder);
                 }
             });
 

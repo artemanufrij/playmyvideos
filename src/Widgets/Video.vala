@@ -38,6 +38,12 @@ namespace PlayMyVideos.Widgets {
             this.video.thumbnail_normal_changed.connect (() => {
                 thumbnail.pixbuf = video.thumbnail_normal;
             });
+            this.video.removed.connect (() => {
+                Idle.add (() => {
+                    this.destroy ();
+                    return false;
+                });
+            });
             build_ui ();
         }
 

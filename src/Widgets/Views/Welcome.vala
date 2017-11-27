@@ -49,13 +49,13 @@ namespace PlayMyVideos.Widgets.Views {
                         var folder = library_manager.choose_folder ();
                         if(folder != null) {
                             settings.library_location = folder;
-                            library_manager.scan_local_library (folder);
+                            library_manager.scan_local_library_for_new_files (folder);
                         }
                         break;
                     case 1:
                         var folder = library_manager.choose_folder ();
                         if(folder != null) {
-                            library_manager.scan_local_library (folder);
+                            library_manager.scan_local_library_for_new_files (folder);
                         }
                         break;
                 }

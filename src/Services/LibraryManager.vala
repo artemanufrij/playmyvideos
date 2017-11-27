@@ -83,11 +83,31 @@ namespace PlayMyVideos.Services {
 
         public void rescan_library () {
             reset_library ();
-            scan_local_library (settings.library_location);
+            scan_local_library_for_new_files (settings.library_location);
         }
 
         // LOCAL FILES REGION
-        public void scan_local_library (string path) {
+        public async void sync_library_content () {
+            new Thread <void*> (null, () => {
+                remove_non_existent_items ();
+                scan_local_library_for_new_files (settings.library_location);
+                return null;
+            });
+        }
+
+        public void remove_non_existent_items () {
+            foreach (var box in boxes) {
+                var videos = box.videos.copy ();
+                foreach (var video in videos) {
+                    if (!video.file_exists ()) {
+                        db_manager.remove_video (video);
+                    }
+                }
+            }
+        }
+
+
+        public void scan_local_library_for_new_files (string path) {
             lf_manager.scan (path);
         }
 

@@ -33,6 +33,10 @@
     <releases>
         <release version="0.1.6" date="2017-11-30">
             <description>
+                <p>New:</p>
+                <ul>
+                    <li>Improved Sync: don't show video item if video file doesn't exist.</li>
+                </ul>
                 <p>Fix:</p>
                 <ul>
                     <li>[only if no items in library] Open welcome screen instead empty library after finished playing</li>
