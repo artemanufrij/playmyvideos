@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.1.7" date="2017-12-04">
+            <description>
+                <p>Fix:</p>
+                <ul>
+                    <li>Episode playing</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.6" date="2017-11-30">
             <description>
                 <p>New:</p>

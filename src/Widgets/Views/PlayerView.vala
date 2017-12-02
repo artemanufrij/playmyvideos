@@ -77,8 +77,8 @@ namespace PlayMyVideos.Widgets.Views {
                 playback.playing = false;
                 playback.uri = null;
                 var vid = current_video;
-                current_video = null;
                 if (settings.repeat_mode == RepeatMode.ONE) {
+                    current_video = null;
                     play (vid);
                     return;
                 }
@@ -185,7 +185,6 @@ namespace PlayMyVideos.Widgets.Views {
             if (current_video == null || current_video.box == null) {
                 return false;
             }
-
             var next = current_video.box.get_next_video (current_video);
             if (next != null) {
                 play (next);
