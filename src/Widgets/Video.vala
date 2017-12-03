@@ -34,6 +34,7 @@ namespace PlayMyVideos.Widgets {
         Gtk.Image thumbnail;
 
         public Video (Objects.Video video) {
+
             this.video = video;
             this.video.thumbnail_normal_changed.connect (() => {
                 thumbnail.pixbuf = video.thumbnail_normal;
@@ -51,20 +52,40 @@ namespace PlayMyVideos.Widgets {
             this.tooltip_text = video.title;
 
             var content = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-            content.halign = Gtk.Align.FILL;
             content.spacing = 6;
             content.margin = 6;
 
             thumbnail = new Gtk.Image ();
             thumbnail.pixbuf = video.thumbnail_normal;
-            content.pack_start (thumbnail, false, false, 0);
+
+            var icon_play = new Gtk.Image.from_icon_name ("media-playback-start-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
+            icon_play.opacity = 0;
+            var grid = new Gtk.Grid ();
+
+            grid.attach (icon_play, 0, 0);
+            grid.attach (thumbnail, 0, 0);
 
             var title = new Gtk.Label (video.title);
             title.xalign = 0;
             title.ellipsize = Pango.EllipsizeMode.END;
+            content.pack_start (grid, false, false, 0);
             content.pack_start (title, true, true, 0);
 
-            this.add (content);
+            var event_box = new Gtk.EventBox ();
+            event_box.events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
+            event_box.events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
+            event_box.add (content);
+
+            this.add (event_box);
+
+            event_box.enter_notify_event.connect (() => {
+                icon_play.opacity = 1;
+                return false;
+            });
+            event_box.leave_notify_event.connect (() => {
+                icon_play.opacity = 0;
+                return false;
+            });
         }
     }
 }

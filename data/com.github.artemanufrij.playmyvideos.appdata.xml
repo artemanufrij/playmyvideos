@@ -33,6 +33,7 @@
     <releases>
         <release version="0.1.7" date="2017-12-04">
             <description>
+                This patch includes some UI improvements.
                 <p>Fix:</p>
                 <ul>
                     <li>Episode playing</li>
