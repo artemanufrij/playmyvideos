@@ -214,7 +214,7 @@ namespace PlayMyVideos {
                 headerbar.title = video.title;
             });
             player_view.player_frame_resized.connect ((width, height) => {
-                if (width > 0 && height > 0) {
+                if (width < 0 || height < 0) {
                     return;
                 }
                 var current_width = this.get_allocated_width ();

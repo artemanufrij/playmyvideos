@@ -56,6 +56,11 @@ namespace PlayMyVideos.Widgets.Views {
 
             clutter = new GtkClutter.Embed ();
 
+            ended.connect (() => {
+                playlist.unselect_all ();
+                current_video = null;
+            });
+
             playback = new ClutterGst.Playback ();
             playback.new_frame.connect ((frame) => {
                 var current_width = frame.resolution.width;
@@ -91,7 +96,6 @@ namespace PlayMyVideos.Widgets.Views {
                     play (vid.box.videos.first ().data);
                     return;
                 }
-                playlist.unselect_all ();
                 ended ();
             });
 
