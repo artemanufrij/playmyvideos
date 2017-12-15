@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-26 18:02+0100\n"
+"POT-Creation-Date: 2017-12-15 20:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
+#: ../src/Widgets/Box.vala:75 ../src/Widgets/Views/BoxView.vala:61
 msgid "Set new Cover…"
 msgstr ""
 
@@ -53,33 +53,33 @@ msgstr ""
 msgid "Import videos from a source into your library."
 msgstr ""
 
-#: ../src/Services/LibraryManager.vala:117
+#: ../src/Services/LibraryManager.vala:137
 msgid "Choose an image…"
 msgstr ""
 
-#: ../src/Services/LibraryManager.vala:119
-#: ../src/Services/LibraryManager.vala:140
+#: ../src/Services/LibraryManager.vala:139
+#: ../src/Services/LibraryManager.vala:160
 msgid "_Cancel"
 msgstr ""
 
-#: ../src/Services/LibraryManager.vala:120
-#: ../src/Services/LibraryManager.vala:141
+#: ../src/Services/LibraryManager.vala:140
+#: ../src/Services/LibraryManager.vala:161
 msgid "_Open"
 msgstr ""
 
-#: ../src/Services/LibraryManager.vala:123
+#: ../src/Services/LibraryManager.vala:143
 msgid "Images"
 msgstr ""
 
-#: ../src/Services/LibraryManager.vala:139
+#: ../src/Services/LibraryManager.vala:159
 msgid "Select a folder."
 msgstr ""
 
-#: ../src/Services/LibraryManager.vala:144
+#: ../src/Services/LibraryManager.vala:164
 msgid "Folder"
 msgstr ""
 
-#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
+#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:258
 msgid "Play My Videos"
 msgstr ""
 
@@ -104,9 +104,13 @@ msgid "Search Videos"
 msgstr ""
 
 #: ../src/MainWindow.vala:198
-msgid "Library"
+msgid "Back"
 msgstr ""
 
 #: ../src/Dialogs/Preferences.vala:60
 msgid "Use Dark Theme"
+msgstr ""
+
+#: ../src/Dialogs/Preferences.vala:68
+msgid "Save custom Covers in Library folder"
 msgstr ""
