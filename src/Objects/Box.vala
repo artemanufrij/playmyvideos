@@ -120,6 +120,21 @@ namespace PlayMyVideos.Objects {
             return null;
         }
 
+        public void set_custom_cover_file (string uri) {
+            var first_video = this.videos.first ().data;
+            if (first_video != null) {
+                var destination = File.new_for_uri (GLib.Path.get_dirname (first_video.uri) + "/cover.jpg");
+                var source = File.new_for_path (uri);
+                try {
+                    source.copy (destination, GLib.FileCopyFlags.OVERWRITE);
+                } catch (Error err) {
+                    warning (err.message);
+                }
+                destination.dispose ();
+                source.dispose ();
+            }
+        }
+
 // COVER REGION
         private async void load_cover_async () {
             if (is_cover_loading || _cover != null || this.ID == 0 || this.videos.length () == 0) {

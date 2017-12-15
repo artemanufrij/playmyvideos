@@ -28,6 +28,7 @@
 namespace PlayMyVideos.Widgets.Views {
     public class BoxView : Gtk.Grid {
         PlayMyVideos.Services.LibraryManager library_manager;
+        PlayMyVideos.Settings settings;
         public PlayMyVideos.Objects.Box current_box { get; private set; }
 
         public signal void video_selected (Objects.Video video);
@@ -38,6 +39,7 @@ namespace PlayMyVideos.Widgets.Views {
 
         construct {
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            settings = PlayMyVideos.Settings.get_default ();
         }
 
         public BoxView () {
@@ -63,6 +65,9 @@ namespace PlayMyVideos.Widgets.Views {
                     try {
                         var pixbuf = new Gdk.Pixbuf.from_file (new_cover);
                         current_box.set_new_cover (pixbuf);
+                        if (settings.save_custom_covers) {
+                            current_box.set_custom_cover_file (new_cover);
+                        }
                     } catch (Error err) {
                         warning (err.message);
                     }

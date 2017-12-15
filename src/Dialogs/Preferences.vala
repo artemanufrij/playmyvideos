@@ -65,8 +65,18 @@ namespace PlayMyVideos.Dialogs {
                 settings.use_dark_theme = use_dark_theme.active;
             });
 
+            var save_custom_covers_label = new Gtk.Label (_("Save custom Covers in Library folder"));
+            save_custom_covers_label.halign = Gtk.Align.START;
+            var save_custom_covers = new Gtk.Switch ();
+            save_custom_covers.active = settings.save_custom_covers;
+            save_custom_covers.notify["active"].connect (() => {
+                settings.save_custom_covers = save_custom_covers.active;
+            });
+
             grid.attach (use_dark_theme_label, 0, 0);
             grid.attach (use_dark_theme, 1, 0);
+            grid.attach (save_custom_covers_label, 0, 1);
+            grid.attach (save_custom_covers, 1, 1);
 
             content.pack_start (grid, false, false, 0);
 

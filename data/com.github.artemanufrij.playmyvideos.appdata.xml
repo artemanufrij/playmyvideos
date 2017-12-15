@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.1.8" date="2017-12-15">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Option for saving custom covers into library</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.7" date="2017-12-04">
             <description>
                 This patch includes small UI improvements.

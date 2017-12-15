@@ -28,6 +28,8 @@
 namespace PlayMyVideos.Widgets {
     public class Box : Gtk.FlowBoxChild {
         PlayMyVideos.Services.LibraryManager library_manager;
+        PlayMyVideos.Settings settings;
+
         public Objects.Box box { get; private set; }
         public string title { get { return box.title; } }
 
@@ -38,6 +40,7 @@ namespace PlayMyVideos.Widgets {
 
         construct {
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            settings = PlayMyVideos.Settings.get_default ();
         }
 
         public Box (Objects.Box box) {
@@ -76,6 +79,9 @@ namespace PlayMyVideos.Widgets {
                     try {
                         var pixbuf = new Gdk.Pixbuf.from_file (new_cover);
                         box.set_new_cover (pixbuf);
+                        if (settings.save_custom_covers) {
+                            box.set_custom_cover_file (new_cover);
+                        }
                     } catch (Error err) {
                         warning (err.message);
                     }
