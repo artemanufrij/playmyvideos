@@ -79,28 +79,23 @@ namespace PlayMyVideos.Widgets.Views {
             });
 
             playback.eos.connect (() => {
-                stdout.printf ("EOS\n");
                 playback.playing = false;
                 playback.uri = null;
                 var vid = current_video;
                 if (settings.repeat_mode == RepeatMode.ONE) {
-                    stdout.printf ("RepeatMode.ONE\n");
                     current_video = null;
                     play (vid);
                     return;
                 }
 
                 if (next ()) {
-                    stdout.printf ("NEXT\n");
                     return;
                 }
 
                 if (settings.repeat_mode == RepeatMode.ALL) {
-                    stdout.printf ("RepeatMode.ALL\n");
                     play (vid.box.videos.first ().data);
                     return;
                 }
-                stdout.printf ("Ended\n");
                 ended ();
             });
 
