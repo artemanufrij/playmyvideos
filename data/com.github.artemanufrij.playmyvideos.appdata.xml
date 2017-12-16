@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.1.9" date="2017-12-20">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Resume playing last video</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.8" date="2017-12-15">
             <description>
                 <p>New:</p>
