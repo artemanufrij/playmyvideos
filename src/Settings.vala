@@ -49,6 +49,8 @@ namespace PlayMyVideos {
         public string library_location { get; set; }
         public bool use_dark_theme { get; set; }
         public bool save_custom_covers { get; set; }
+        public string last_played_video_uri { get; set; }
+        public double last_played_video_progress { get; set; }
 
         private Settings () {
             base ("com.github.artemanufrij.playmyvideos");

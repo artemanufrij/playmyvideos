@@ -184,6 +184,7 @@ namespace PlayMyVideos.Widgets.Views {
             }
             playback.uri = video.uri;
             playback.playing = true;
+            settings.last_played_video_uri = video.uri;
         }
 
         public void pause () {

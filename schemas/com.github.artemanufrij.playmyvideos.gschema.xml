@@ -50,5 +50,15 @@
 			<summary>Save custom Cover in Music folder.</summary>
 			<description>Save custom Cover in Music folder.</description>
 		</key>
+		<key name="last-played-video-uri" type="s">
+			<default>""</default>
+			<summary>Last played video.</summary>
+			<description>Last played video.</description>
+		</key>
+		<key name="last-played-video-progress" type="d">
+			<default>0</default>
+			<summary>Last played progress.</summary>
+			<description>Last played progress.</description>
+		</key>
 	</schema>
 </schemalist>
