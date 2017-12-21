@@ -8,94 +8,94 @@ msgstr ""
 
 #: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
 msgid "Set new Cover…"
-msgstr ""
+msgstr "Definir nova capa…"
 
 #: ../src/Widgets/VideoTimeLine.vala:148
 msgid "Repeat"
-msgstr ""
+msgstr "Repetir"
 
 #: ../src/Widgets/VideoTimeLine.vala:174
 msgid "Track %d (%s)"
-msgstr ""
+msgstr "Faixa %d (%s)"
 
 #: ../src/Widgets/VideoTimeLine.vala:194
 msgid "disable"
-msgstr ""
+msgstr "desativar"
 
 #: ../src/Widgets/VideoTimeLine.vala:207
 msgid "Subtitle %d (%s)"
-msgstr ""
+msgstr "Subtítulo %d (%s)"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
-msgstr ""
+msgstr "Mudar Pasta dos Videos"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
-msgstr ""
+msgstr "Carregar videos de uma pasta, disco externoou na rede."
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import Videos"
-msgstr ""
+msgstr "Importe Videos"
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import videos from a source into your library."
-msgstr ""
+msgstr "Importe videos de uma fonte para sua biblioteca"
 
 #: ../src/Services/LibraryManager.vala:117
 msgid "Choose an image…"
-msgstr ""
+msgstr "Escolha uma imagem…"
 
 #: ../src/Services/LibraryManager.vala:119
 #: ../src/Services/LibraryManager.vala:140
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
 
 #: ../src/Services/LibraryManager.vala:120
 #: ../src/Services/LibraryManager.vala:141
 msgid "_Open"
-msgstr ""
+msgstr "_Abrir"
 
 #: ../src/Services/LibraryManager.vala:123
 msgid "Images"
-msgstr ""
+msgstr "Imagens"
 
 #: ../src/Services/LibraryManager.vala:139
 msgid "Select a folder."
-msgstr ""
+msgstr "Selecione uma pasta."
 
 #: ../src/Services/LibraryManager.vala:144
 msgid "Folder"
-msgstr ""
+msgstr "Pasta"
 
 #: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
 msgid "Play My Videos"
-msgstr ""
+msgstr "Reproduzir meus videos"
 
 #: ../src/MainWindow.vala:151
 msgid "Change Video Folder…"
-msgstr ""
+msgstr "Mudar pastas dos videos…"
 
 #: ../src/MainWindow.vala:160
 msgid "Import Videos…"
-msgstr ""
+msgstr "Importar videos…"
 
 #: ../src/MainWindow.vala:168
 msgid "Rescan Library"
-msgstr ""
+msgstr "Re-escanear a biblioteca"
 
 #: ../src/MainWindow.vala:174
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #: ../src/MainWindow.vala:192
 msgid "Search Videos"
-msgstr ""
+msgstr "Procurar videos"
 
 #: ../src/MainWindow.vala:198
 msgid "Library"
-msgstr ""
+msgstr "Biblioteca"
 
 #: ../src/Dialogs/Preferences.vala:60
 msgid "Use Dark Theme"
-msgstr ""
+msgstr "Usar tema escuro"
