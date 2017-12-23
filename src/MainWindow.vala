@@ -104,6 +104,7 @@ namespace PlayMyVideos {
 
             load_content_from_database.begin ((obj, res) => {
                 library_manager.sync_library_content.begin ();
+                visible_playing_button ();
             });
 
             this.configure_event.connect ((event) => {
@@ -126,6 +127,7 @@ namespace PlayMyVideos {
             });
             this.destroy.connect (() => {
                 save_settings ();
+                player_view.reset ();
             });
         }
 
@@ -256,15 +258,14 @@ namespace PlayMyVideos {
             content.add_named (player_view, "player");
             this.add (content);
             this.show_all ();
-
             navigation_button.hide ();
-            visible_playing_button ();
         }
 
         private void visible_playing_button () {
             if (settings.last_played_video_uri != "") {
                 var f = File.new_for_uri (settings.last_played_video_uri);
                 play_button.visible = f.query_exists ();
+                boxes_view.select_file (f);
             } else {
                 play_button.visible = false;
             }
