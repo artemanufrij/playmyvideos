@@ -31,10 +31,11 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.1.10" date="2017-12-25">
+        <release version="0.1.9" date="2017-12-25">
             <description>
                 <p>New:</p>
                 <ul>
+                    <li>Resume playing last video</li>
                     <li>Open box of last viewed video</li>
                 </ul>
                 <p>Fix:</p>
@@ -44,14 +45,6 @@
                 <p>Translation:</p>
                 <ul>
                     <li>Portuguese (Brazil) (by Cleiton Floss)</li>
-                </ul>
-            </description>
-        </release>
-        <release version="0.1.9" date="2017-12-20">
-            <description>
-                <p>New:</p>
-                <ul>
-                    <li>Resume playing last video</li>
                 </ul>
             </description>
         </release>
