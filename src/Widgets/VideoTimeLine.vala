@@ -47,6 +47,8 @@ namespace PlayMyVideos.Widgets {
         Gtk.Image icon_repeat_all;
         Gtk.Image icon_repeat_off;
 
+        Widgets.PreviewPopover preview_popover;
+
         construct {
             settings = PlayMyVideos.Settings.get_default ();
             settings.notify["repeat-mode"].connect (() => {
@@ -73,10 +75,14 @@ namespace PlayMyVideos.Widgets {
                     play_button.image = icon_play;
                 }
             });
+            this.player_view.started.connect ((video) => {
+                preview_popover.current_video = video;
+            });
         }
 
         private void build_ui () {
             this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+
             timeline = new Granite.SeekBar (0);
             timeline.hexpand = true;
             timeline.valign = Gtk.Align.CENTER;
@@ -86,20 +92,23 @@ namespace PlayMyVideos.Widgets {
                 }
                 return false;
             });
-            /*timeline.scale.enter_notify_event.connect ((event) => {
-                preview_popover.schedule_show ();
+            timeline.scale.enter_notify_event.connect ((event) => {
+                preview_popover.show ();
                 return false;
             });
             timeline.scale.leave_notify_event.connect ((event) => {
-                preview_popover.schedule_hide ();
+                preview_popover.hide ();
                 return false;
-            });*/
+            });
             timeline.scale.motion_notify_event.connect ((event) => {
-                stdout.printf ("%f\n", event.x / ((double) event.window.get_width ()));
-                //preview_popover.update_pointing ((int) event.x);
+                preview_popover.update_pointing ((int) event.x);
+                preview_popover.show ();
                 //preview_popover.set_preview_progress (event.x / ((double) event.window.get_width ()), !main_playback.playing);
                 return false;
             });
+
+            preview_popover = new Widgets.PreviewPopover ();
+            preview_popover.relative_to = timeline.scale;
 
             icon_play = new Gtk.Image.from_icon_name ("media-playback-start-symbolic", Gtk.IconSize.MENU);
             icon_pause = new Gtk.Image.from_icon_name ("media-playback-pause-symbolic", Gtk.IconSize.MENU);
