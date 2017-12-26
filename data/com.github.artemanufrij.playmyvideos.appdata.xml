@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.2.0" date="2017-12-27">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Preview Popup on Timeline</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.9" date="2017-12-25">
             <description>
                 <p>New:</p>
