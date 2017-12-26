@@ -164,10 +164,11 @@ namespace PlayMyVideos.Widgets {
                 foreach (var child in audio_streams.get_children ()) {
                     if (child == row) {
                         player_view.playback.audio_stream = i;
-                        return;
+                        break;
                     }
                     i++;
                 }
+                audio_stream_popover.hide ();
             });
             audio_stream_popover.add (audio_streams);
 
@@ -188,7 +189,7 @@ namespace PlayMyVideos.Widgets {
                         } else {
                             player_view.playback.subtitle_track = i;
                         }
-                        return;
+                        break;
                     }
                     i++;
                 }

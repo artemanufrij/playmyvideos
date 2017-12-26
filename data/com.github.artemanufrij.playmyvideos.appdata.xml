@@ -37,6 +37,10 @@
                 <ul>
                     <li>Preview Popup on Timeline</li>
                 </ul>
+                <p>Improved:</p>
+                <ul>
+                    <li>Some popup behaviors</li>
+                </ul>
             </description>
         </release>
         <release version="0.1.9" date="2017-12-25">
