@@ -140,6 +140,7 @@ namespace PlayMyVideos.Widgets.Views {
             stage.add_child (right_actor);
 
             timeline = new VideoTimeLine (this);
+
             var bottom_actor = new GtkClutter.Actor.with_contents (timeline);
             bottom_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
             bottom_actor.add_constraint (new Clutter.AlignConstraint (stage, Clutter.AlignAxis.Y_AXIS, 1));
@@ -215,7 +216,7 @@ namespace PlayMyVideos.Widgets.Views {
                 mouse_move_timer = 0;
             }
 
-            if (playback.playing) {
+            if (playback.playing && !timeline.is_mouse_over) {
                 mouse_move_timer = GLib.Timeout.add (2000, () => {
                     timeline.set_reveal_child (false);
                     playlist.set_reveal_child (false);

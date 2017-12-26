@@ -29,6 +29,8 @@ namespace PlayMyVideos.Widgets {
     public class VideoTimeLine : Gtk.Revealer {
         PlayMyVideos.Settings settings;
 
+        public bool is_mouse_over { get; private set; }
+
         Views.PlayerView player_view;
         Granite.SeekBar timeline;
         Gtk.Button audio_stream;
@@ -48,6 +50,8 @@ namespace PlayMyVideos.Widgets {
         Gtk.Image icon_repeat_off;
 
         Widgets.PreviewPopover preview_popover;
+
+        uint popover_timer_id = 0;
 
         construct {
             settings = PlayMyVideos.Settings.get_default ();
@@ -82,6 +86,26 @@ namespace PlayMyVideos.Widgets {
 
         private void build_ui () {
             this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+            this.events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
+            this.events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
+            this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
+
+            this.enter_notify_event.connect ((event) => {
+                is_mouse_over = true;
+                return false;
+            });
+            this.leave_notify_event.connect ((event) => {
+                is_mouse_over = false;
+                if (popover_timer_id > 0) {
+                    Source.remove (popover_timer_id);
+                    popover_timer_id = 0;
+                }
+                return false;
+            });
+            this.motion_notify_event.connect ((event) => {
+                is_mouse_over = true;
+                return false;
+            });
 
             timeline = new Granite.SeekBar (0);
             timeline.hexpand = true;
@@ -92,19 +116,29 @@ namespace PlayMyVideos.Widgets {
                 }
                 return false;
             });
-            timeline.scale.enter_notify_event.connect ((event) => {
-                preview_popover.show ();
-                return false;
-            });
             timeline.scale.leave_notify_event.connect ((event) => {
                 preview_popover.hide ();
                 return false;
             });
             timeline.scale.motion_notify_event.connect ((event) => {
-                preview_popover.update_pointing ((int) event.x);
-                preview_popover.show ();
-                //preview_popover.set_preview_progress (event.x / ((double) event.window.get_width ()), !main_playback.playing);
-                return false;
+                preview_popover.hide ();
+                is_mouse_over = true;
+
+                if (popover_timer_id > 0) {
+                    Source.remove (popover_timer_id);
+                    popover_timer_id = 0;
+                }
+
+                popover_timer_id = Timeout.add (300, () => {
+                    popover_timer_id = 0;
+                    if (is_mouse_over) {
+                        preview_popover.update_position ((int) event.x);
+                        preview_popover.preview_progress ((event.x - 8) / ((double) timeline.scale.get_allocated_width () - 16));
+                    }
+                    return false;
+                });
+
+                return true;
             });
 
             preview_popover = new Widgets.PreviewPopover ();

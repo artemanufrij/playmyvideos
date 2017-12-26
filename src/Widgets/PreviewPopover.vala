@@ -28,35 +28,76 @@
 namespace PlayMyVideos.Widgets {
     public class PreviewPopover : Gtk.Popover {
 
+        ClutterGst.Playback playback;
+        GtkClutter.Embed clutter;
+
+        uint looping_timer_id = 0;
+
         Objects.Video _current_video = null;
         public Objects.Video current_video {
             get {
                 return _current_video;
             } set {
                 _current_video = value;
+                new Thread<void*> (null, () => {
+                    playback.uri = current_video.uri;
+                    int flags;
+                    playback.get_pipeline ().get ("flags", out flags);
+                    flags &= ~Utils.PlayFlags.TEXT;
+                    flags &= ~Utils.PlayFlags.AUDIO;
+                    playback.get_pipeline ().set ("flags", flags);
+                    return null;
+                });
             }
         }
 
         public PreviewPopover () {
+            clutter = new GtkClutter.Embed ();
+            clutter.margin = 2;
+            var stage = clutter.get_stage ();
+            stage.background_color = {0, 0, 0, 0};
+
+            playback = new ClutterGst.Playback ();
+
+            var aspect_ratio = new ClutterGst.Aspectratio ();
+            aspect_ratio.paint_borders = false;
+            aspect_ratio.player = playback;
+            aspect_ratio.size_change.connect ((width, height) => {
+                clutter.set_size_request (200, (int)(((double) (height * 200)) / ((double) width)));
+            });
+
+            var video_actor = new Clutter.Actor ();
+            video_actor.content = aspect_ratio;
+            video_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+            video_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
+
+            stage.add_child (video_actor);
+
             build_ui ();
+
+            this.hide.connect (() => {
+                playback.playing = false;
+                if (looping_timer_id > 0) {
+                    Source.remove (looping_timer_id);
+                    looping_timer_id = 0;
+                }
+            });
         }
 
         private void build_ui () {
             this.modal = false;
             this.can_focus = false;
 
-            var but = new Gtk.Label ("asdfasdf");
+            this.add (clutter);
 
-            this.add (but);
-            this.can_focus = false;
             this.show_all ();
+            this.hide ();
         }
 
-        public void update_pointing (int x) {
-            var pointing = pointing_to;
+        public void update_position (int x) {
+            var pointing = this.pointing_to;
             pointing.x = x;
 
-            // changing the width properly updates arrow position when popover hits the edge
             if (pointing.width == 0) {
                 pointing.width = 2;
                 pointing.x -= 1;
@@ -64,7 +105,27 @@ namespace PlayMyVideos.Widgets {
                 pointing.width = 0;
             }
 
-            set_pointing_to (pointing);
+            this.set_pointing_to (pointing);
+        }
+
+        public void preview_progress (double progress) {
+            if (looping_timer_id > 0) {
+                Source.remove (looping_timer_id);
+                looping_timer_id = 0;
+            }
+            if (progress > 1 || progress < 0) {
+                return;
+            }
+            playback.progress = progress;
+            playback.playing = true;
+
+            this.show ();
+
+            looping_timer_id = Timeout.add (5000, () => {
+                playback.playing = false;
+                preview_progress (progress);
+                return false;
+            });
         }
     }
 }
