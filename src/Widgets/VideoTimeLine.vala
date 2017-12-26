@@ -138,7 +138,7 @@ namespace PlayMyVideos.Widgets {
                     return false;
                 });
 
-                return true;
+                return false;
             });
 
             preview_popover = new Widgets.PreviewPopover ();
