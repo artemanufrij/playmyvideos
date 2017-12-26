@@ -27,7 +27,6 @@
 
 namespace PlayMyVideos.Widgets {
     public class PreviewPopover : Gtk.Popover {
-
         ClutterGst.Playback playback;
         GtkClutter.Embed clutter;
 
@@ -53,7 +52,7 @@ namespace PlayMyVideos.Widgets {
 
         public PreviewPopover () {
             clutter = new GtkClutter.Embed ();
-            clutter.margin = 2;
+            clutter.margin = 1;
             var stage = clutter.get_stage ();
             stage.background_color = {0, 0, 0, 0};
 
@@ -97,7 +96,7 @@ namespace PlayMyVideos.Widgets {
         public void update_position (int x) {
             var pointing = this.pointing_to;
             pointing.x = x;
-
+            pointing.y = -2;
             if (pointing.width == 0) {
                 pointing.width = 2;
                 pointing.x -= 1;
