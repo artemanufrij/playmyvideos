@@ -373,9 +373,17 @@ namespace PlayMyVideos {
         public override bool key_press_event (Gdk.EventKey key) {
             if (content.visible_child_name == "player") {
                 if (key.keyval == Gdk.Key.Left) {
-                    seek_seconds (-10);
+                    if (Gdk.ModifierType.SHIFT_MASK in key.state) {
+                        seek_seconds (-300);
+                    } else {
+                        seek_seconds (-10);
+                    }
                 } else if (key.keyval == Gdk.Key.Right) {
-                    seek_seconds (10);
+                    if (Gdk.ModifierType.SHIFT_MASK in key.state) {
+                        seek_seconds (300);
+                    } else {
+                        seek_seconds (10);
+                    }
                 }
                 return true;
             } else if (!search_entry.is_focus && key.str.strip ().length > 0) {
