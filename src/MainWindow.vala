@@ -372,7 +372,22 @@ namespace PlayMyVideos {
         }
 
         public void seek_seconds (int seconds) {
-            player_view.seek_seconds (seconds);
+            if (content.visible_child_name == "player") {
+                player_view.seek_seconds (seconds);
+            }
+        }
+
+        public override bool key_press_event (Gdk.EventKey e) {
+            if (content.visible_child_name == "player") {
+                if (e.keyval == Gdk.Key.Left) {
+                    seek_seconds (-10);
+                } else if (e.keyval == Gdk.Key.Right) {
+                    seek_seconds (10);
+                }
+            } else if (!search_entry.is_focus && e.str.strip ().length > 0) {
+                search_entry.grab_focus ();
+            }
+            return base.key_press_event (e);
         }
 
         private void reset_all_views () {

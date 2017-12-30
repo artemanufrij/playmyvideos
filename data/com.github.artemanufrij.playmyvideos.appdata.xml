@@ -31,6 +31,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.2.1" date="2018-01-02">
+            <description>
+                <p>Improved:</p>
+                <ul>
+                    <li>Start searching instand on key press</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.2.0" date="2017-12-27">
             <description>
                 <p>New:</p>
