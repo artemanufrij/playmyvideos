@@ -57,15 +57,6 @@ namespace PlayMyVideos {
                 }
             });
 
-            var action_search = new SimpleAction ("search", null);
-            add_action (action_search);
-            add_accelerator ("<Control>f", "app.search", null);
-            action_search.activate.connect (() => {
-                if (mainwindow != null) {
-                    mainwindow.search ();
-                }
-            });
-
             var action_search_reset = new SimpleAction ("search-reset", null);
             add_action (action_search_reset);
             add_accelerator ("Escape", "app.search-reset", null);

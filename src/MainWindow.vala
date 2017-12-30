@@ -323,10 +323,6 @@ namespace PlayMyVideos {
             }
         }
 
-        public void search () {
-            search_entry.grab_focus ();
-        }
-
         public void search_reset () {
             if (content.visible_child_name == "player") {
                 this.unfullscreen ();
