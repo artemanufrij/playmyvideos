@@ -106,7 +106,6 @@ namespace PlayMyVideos.Services {
             }
         }
 
-
         public void scan_local_library_for_new_files (string path) {
             lf_manager.scan (path);
         }

@@ -122,8 +122,11 @@ namespace PlayMyVideos {
                 current_state = event.new_window_state;
                 return false;
             });
-            this.destroy.connect (() => {
+            this.delete_event.connect (() => {
                 save_settings ();
+                return false;
+            });
+            this.destroy.connect (() => {
                 player_view.reset ();
             });
         }
@@ -307,7 +310,11 @@ namespace PlayMyVideos {
                 this.set_default_size (settings.window_width, settings.window_height);
             }
 
-            this.window_position = Gtk.WindowPosition.CENTER;
+            if (settings.window_x < 0 && settings.window_y < 0 ) {
+                this.window_position = Gtk.WindowPosition.CENTER;
+            } else {
+                this.move (settings.window_x, settings.window_y);
+            }
             Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = settings.use_dark_theme;
         }
 
@@ -317,6 +324,13 @@ namespace PlayMyVideos {
                 settings.last_played_video_progress = player_view.playback.progress;
             } else {
                 settings.last_played_video_progress = 0;
+            }
+
+            if (!settings.window_maximized) {
+                int x, y;
+                this.get_position (out x, out y);
+                settings.window_x = x;
+                settings.window_y = y;
             }
         }
 
