@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class BoxesView : Gtk.Grid {
-        PlayMyVideos.Services.LibraryManager library_manager;
+        Services.LibraryManager library_manager;
 
         public signal void video_selected (Objects.Video video);
 
@@ -54,8 +54,10 @@ namespace PlayMyVideos.Widgets.Views {
             }
         }
 
+        uint timer_sort = 0;
+
         construct {
-            library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            library_manager = Services.LibraryManager.instance;
             library_manager.added_new_box.connect ((box) => {
                 Idle.add (() => {
                     add_box (box);
@@ -76,7 +78,6 @@ namespace PlayMyVideos.Widgets.Views {
             boxes.column_spacing = 24;
             boxes.max_children_per_line = 24;
             boxes.valign = Gtk.Align.START;
-            boxes.set_sort_func (boxes_sort_func);
             boxes.set_filter_func (boxes_filter_func);
             boxes.child_activated.connect (show_box_viewer);
 
@@ -100,26 +101,42 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         public void add_box (Objects.Box box) {
+            var b = new Widgets.Box (box);
             lock (boxes) {
-                var b = new Widgets.Box (box);
                 boxes.add (b);
             }
+            do_sort ();
+        }
+
+        private void do_sort () {
+            if (timer_sort != 0) {
+                Source.remove (timer_sort);
+                timer_sort = 0;
+            }
+
+            timer_sort = Timeout.add (500, () => {
+                boxes.set_sort_func (boxes_sort_func);
+                boxes.set_sort_func (null);
+                Source.remove (timer_sort);
+                timer_sort = 0;
+                return false;
+            });
         }
 
         private void show_box_viewer (Gtk.FlowBoxChild item) {
-            action_revealer.set_reveal_child (true);
-            var box = (item as PlayMyVideos.Widgets.Box).box;
+            action_revealer.reveal_child = true;
+            var box = (item as Widgets.Box).box;
             box_view.show_box (box);
         }
 
         public void unselect_all () {
             boxes.unselect_all ();
-            action_revealer.set_reveal_child (false);
+            action_revealer.reveal_child = false;
         }
 
         private int boxes_sort_func (Gtk.FlowBoxChild child1, Gtk.FlowBoxChild child2) {
-            var item1 = (PlayMyVideos.Widgets.Box)child1;
-            var item2 = (PlayMyVideos.Widgets.Box)child2;
+            var item1 = (Widgets.Box)child1;
+            var item2 = (Widgets.Box)child2;
             if (item1 != null && item2 != null) {
                 return item1.title.collate (item2.title);
             }
@@ -152,7 +169,7 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         public void reset () {
-            action_revealer.set_reveal_child (false);
+            action_revealer.reveal_child = false;
             box_view.reset ();
             foreach (var child in boxes.get_children ()) {
                 child.destroy ();

@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,8 +27,8 @@
 
 namespace PlayMyVideos {
     public class MainWindow : Gtk.Window {
-        PlayMyVideos.Services.LibraryManager library_manager;
-        PlayMyVideos.Settings settings;
+        Services.LibraryManager library_manager;
+        Settings settings;
 
         Gdk.WindowState current_state;
 
@@ -46,7 +46,7 @@ namespace PlayMyVideos {
         };
 
         construct {
-            settings = PlayMyVideos.Settings.get_default ();
+            settings = Settings.get_default ();
             settings.notify["use-dark-theme"].connect (() => {
                 Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = settings.use_dark_theme;
                 if (settings.use_dark_theme) {
@@ -409,6 +409,9 @@ namespace PlayMyVideos {
         private void reset_all_views () {
             player_view.reset ();
             boxes_view.reset ();
+            settings.last_played_video_progress = 0;
+            settings.last_played_video_uri = "";
+            visible_playing_button ();
             content.visible_child_name = "welcome";
         }
 
