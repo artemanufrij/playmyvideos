@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class PlayerView : Gtk.Grid {
-        PlayMyVideos.Settings settings;
+        Settings settings;
 
         public signal void ended ();
         public signal void started (Objects.Video video);
@@ -52,7 +52,7 @@ namespace PlayMyVideos.Widgets.Views {
         Playlist playlist;
 
         construct {
-            settings = PlayMyVideos.Settings.get_default ();
+            settings = Settings.get_default ();
 
             clutter = new GtkClutter.Embed ();
 
@@ -218,18 +218,16 @@ namespace PlayMyVideos.Widgets.Views {
 
             if (playback.playing && !timeline.is_mouse_over) {
                 mouse_move_timer = GLib.Timeout.add (2000, () => {
-                    timeline.set_reveal_child (false);
-                    playlist.set_reveal_child (false);
+                    timeline.reveal_child = false;
+                    playlist.reveal_child = false;
                     PlayMyVideosApp.instance.mainwindow.hide_mouse_cursor ();
                     mouse_move_timer = 0;
                     return false;
                 });
             }
 
-            timeline.set_reveal_child (true);
-            if (playlist.has_episodes) {
-                playlist.set_reveal_child (true);
-            }
+            timeline.reveal_child = true;
+            playlist.reveal_child = true;
             return false;
         }
 

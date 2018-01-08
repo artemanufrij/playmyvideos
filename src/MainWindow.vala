@@ -97,7 +97,6 @@ namespace PlayMyVideos {
 
         public MainWindow () {
             this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
-            this.events |= Gdk.EventMask.KEY_RELEASE_MASK;
 
             load_settings ();
             build_ui ();
@@ -128,6 +127,38 @@ namespace PlayMyVideos {
             });
             this.destroy.connect (() => {
                 player_view.reset ();
+            });
+            this.key_press_event.connect ((key) => {
+                if (content.visible_child_name == "player") {
+                    switch (key.keyval) {
+                        case Gdk.Key.Left:
+                            if (Gdk.ModifierType.MOD1_MASK in key.state) {
+                                break;
+                            }
+                            if (Gdk.ModifierType.SHIFT_MASK in key.state) {
+                                seek_seconds (-300);
+                            } else {
+                                seek_seconds (-10);
+                            }
+                            return true;
+                        case Gdk.Key.Right:
+                            if (Gdk.ModifierType.MOD1_MASK in key.state) {
+                                break;
+                            }
+                            if (Gdk.ModifierType.SHIFT_MASK in key.state) {
+                                seek_seconds (300);
+                            } else {
+                                seek_seconds (10);
+                            }
+                            return true;
+                        case Gdk.Key.space:
+                            toggle_playing ();
+                            return true;
+                    }
+                } else if (!search_entry.is_focus && key.str.strip ().length > 0) {
+                    search_entry.grab_focus ();
+                }
+                return false;
             });
         }
 
@@ -359,10 +390,6 @@ namespace PlayMyVideos {
         public void toggle_playing () {
             if (content.visible_child_name == "player") {
                 player_view.toogle_playing ();
-            } else if (search_entry.has_focus) {
-                int position = search_entry.get_position ();
-                search_entry.insert_text (" ",-1, ref position);
-                search_entry.set_position (position + 1);
             }
         }
 
@@ -382,28 +409,6 @@ namespace PlayMyVideos {
             if (content.visible_child_name == "player") {
                 player_view.seek_seconds (seconds);
             }
-        }
-
-        public override bool key_press_event (Gdk.EventKey key) {
-            if (content.visible_child_name == "player") {
-                if (key.keyval == Gdk.Key.Left) {
-                    if (Gdk.ModifierType.SHIFT_MASK in key.state) {
-                        seek_seconds (-300);
-                    } else {
-                        seek_seconds (-10);
-                    }
-                } else if (key.keyval == Gdk.Key.Right) {
-                    if (Gdk.ModifierType.SHIFT_MASK in key.state) {
-                        seek_seconds (300);
-                    } else {
-                        seek_seconds (10);
-                    }
-                }
-                return true;
-            } else if (!search_entry.is_focus && key.str.strip ().length > 0) {
-                search_entry.grab_focus ();
-            }
-            return base.key_press_event (key);
         }
 
         private void reset_all_views () {

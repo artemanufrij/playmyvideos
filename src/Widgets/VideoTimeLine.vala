@@ -80,7 +80,9 @@ namespace PlayMyVideos.Widgets {
                 }
             });
             this.player_view.started.connect ((video) => {
-                preview_popover.current_video = video;
+                if (preview_popover.current_video != video) {
+                    preview_popover.current_video = video;
+                }
             });
         }
 

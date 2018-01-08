@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -51,6 +51,18 @@ namespace PlayMyVideos.Widgets {
         }
 
         public PreviewPopover () {
+            build_ui ();
+
+            this.hide.connect (() => {
+                playback.playing = false;
+                if (looping_timer_id > 0) {
+                    Source.remove (looping_timer_id);
+                    looping_timer_id = 0;
+                }
+            });
+        }
+
+        private void build_ui () {
             clutter = new GtkClutter.Embed ();
             clutter.margin = 1;
             var stage = clutter.get_stage ();
@@ -72,18 +84,6 @@ namespace PlayMyVideos.Widgets {
 
             stage.add_child (video_actor);
 
-            build_ui ();
-
-            this.hide.connect (() => {
-                playback.playing = false;
-                if (looping_timer_id > 0) {
-                    Source.remove (looping_timer_id);
-                    looping_timer_id = 0;
-                }
-            });
-        }
-
-        private void build_ui () {
             this.modal = false;
             this.can_focus = false;
 
