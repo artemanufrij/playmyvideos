@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
 
 namespace PlayMyVideos.Widgets {
     public class VideoTimeLine : Gtk.Revealer {
-        PlayMyVideos.Settings settings;
+        Settings settings;
 
         public bool is_mouse_over { get; private set; }
 
@@ -54,7 +54,7 @@ namespace PlayMyVideos.Widgets {
         uint popover_timer_id = 0;
 
         construct {
-            settings = PlayMyVideos.Settings.get_default ();
+            settings = Settings.get_default ();
             settings.notify["repeat-mode"].connect (() => {
                 set_repeat_symbol ();
             });
@@ -229,9 +229,9 @@ namespace PlayMyVideos.Widgets {
 
             if (player_view.playback.audio_streams.length () > 1) {
                 int i = 0;
-                foreach (string stream in player_view.playback.audio_streams) {
+                foreach (var stream in player_view.playback.audio_streams) {
                     var lab = new Gtk.Label ("");
-                    lab.label = _("Track %d (%s)").printf (++i, stream.to_ascii ());
+                    lab.label = _("Track %d (%s)").printf (++i, (stream == null ? "" : stream).to_ascii ());
                     lab.margin = 4;
                     var row = new Gtk.ListBoxRow ();
                     row.add (lab);
