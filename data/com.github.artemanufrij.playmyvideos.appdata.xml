@@ -31,11 +31,15 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.2.2" date="2018-01-15">
+        <release version="0.2.3" date="2018-01-20">
             <description>
                 <p>Fix:</p>
                 <ul>
                     <li>Empty Playlist if open an external Video file</li>
+                </ul>
+                <p>Changes:</p>
+                <ul>
+                    <li>Lazy cover loading -> less memory on startup</li>
                 </ul>
             </description>
         </release>

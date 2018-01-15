@@ -45,7 +45,10 @@ namespace PlayMyVideos.Widgets {
 
         public Box (Objects.Box box) {
             this.box = box;
+            this.draw.connect (first_draw);
+
             build_ui ();
+
             this.box.cover_changed.connect (() => {
                 Idle.add (() => {
                     cover.pixbuf = this.box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
@@ -58,6 +61,23 @@ namespace PlayMyVideos.Widgets {
                     return false;
                 });
             });
+        }
+
+        private bool first_draw () {
+            this.draw.disconnect (first_draw);
+            if (box.cover == null) {
+                cover.set_from_icon_name (video_symbolic, Gtk.IconSize.DIALOG);
+                if (box.videos.length () > 0) {
+                    var first = box.videos.first ().data;
+                    load_cover_from_video (first);
+                } else {
+                    box.video_added.connect (load_cover_from_video);
+                }
+
+            } else {
+                cover.pixbuf = box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
+            }
+            return false;
         }
 
         private void build_ui () {
@@ -93,6 +113,8 @@ namespace PlayMyVideos.Widgets {
             cover = new Gtk.Image ();
             cover.get_style_context ().add_class ("card");
             cover.halign = Gtk.Align.CENTER;
+            cover.height_request = 181;
+            cover.width_request = 128;
 
             var title = new Gtk.Label (box.title);
             title.max_width_chars = 0;
@@ -108,22 +130,6 @@ namespace PlayMyVideos.Widgets {
             this.valign = Gtk.Align.START;
 
             this.show_all ();
-
-            if (box.cover == null) {
-                cover.set_from_icon_name (video_symbolic, Gtk.IconSize.DIALOG);
-                cover.height_request = 181;
-                cover.width_request = 128;
-
-                if (box.videos.length () > 0) {
-                    var first = box.videos.first ().data;
-                    load_cover_from_video (first);
-                } else {
-                    box.video_added.connect (load_cover_from_video);
-                }
-
-            } else {
-                cover.pixbuf = box.cover.scale_simple (128, 181, Gdk.InterpType.BILINEAR);
-            }
         }
 
         private bool show_context_menu (Gtk.Widget sender, Gdk.EventButton evt) {
