@@ -227,7 +227,9 @@ namespace PlayMyVideos.Widgets.Views {
             }
 
             timeline.reveal_child = true;
-            playlist.reveal_child = true;
+            if (current_video.box != null) {
+                playlist.reveal_child = true;
+            }
             return false;
         }
 
