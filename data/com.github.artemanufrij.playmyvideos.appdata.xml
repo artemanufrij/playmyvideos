@@ -33,6 +33,14 @@
     <releases>
         <release version="0.2.2" date="2018-01-15">
             <description>
+                <p>Fix:</p>
+                <ul>
+                    <li>Empty Playlist if open an external Video file</li>
+                </ul>
+            </description>
+        </release>
+        <release version="0.2.2" date="2018-01-15">
+            <description>
                 <p>Translation:</p>
                 <ul>
                     <li>Spanish (by Alain)</li>
