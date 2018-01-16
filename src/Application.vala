@@ -120,9 +120,7 @@ namespace PlayMyVideos {
 
         public override void open (File[] files, string hint) {
             activate ();
-            if (files [0].query_exists ()) {
-                mainwindow.open_file (files [0]);
-            }
+            mainwindow.open_files (files);
         }
     }
 }

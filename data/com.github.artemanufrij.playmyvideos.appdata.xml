@@ -31,14 +31,19 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.2.3" date="2018-01-20">
+        <release version="0.2.3" date="2018-01-17">
             <description>
+                <p>New:</p>
+                <ul>
+                    <li>Open multi selected files</li>
+                </ul>
                 <p>Fix:</p>
                 <ul>
-                    <li>Empty Playlist if open an external Video file</li>
+                    <li>Empty playlist if open an external video file</li>
                 </ul>
-                <p>Changes:</p>
+                <p>Improved:</p>
                 <ul>
+                    <li>If path looks like '…\Best Comedy Ever\Season 01\…' player bulds following title 'Best Comedy Ever - Season 01'</li>
                     <li>Lazy cover loading -> less memory on startup</li>
                 </ul>
             </description>

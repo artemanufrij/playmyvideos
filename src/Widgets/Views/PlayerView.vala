@@ -93,7 +93,7 @@ namespace PlayMyVideos.Widgets.Views {
                 }
 
                 if (settings.repeat_mode == RepeatMode.ALL) {
-                    play (vid.box.videos.first ().data);
+                    play (vid.box.get_first_video ());
                     return;
                 }
                 ended ();
