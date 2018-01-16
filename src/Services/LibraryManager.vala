@@ -120,7 +120,7 @@ namespace PlayMyVideos.Services {
         }
 
         private void insert_video_file (string path, string mime_type) {
-            var box = new Objects.Box (Path.get_basename (Path.get_dirname (path)));
+            var box = new Objects.Box (Utils.get_box_title_from_path (path));
             var db_box = db_manager.insert_box_if_not_exists (box);
             var video = new Objects.Video ();
             video.path = path;

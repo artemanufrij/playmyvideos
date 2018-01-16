@@ -34,6 +34,23 @@ namespace PlayMyVideos.Utils {
         return basename;
     }
 
+    public static string get_box_title_from_path (string path) {
+        string directory = Path.get_dirname (path);
+        string return_value = Path.get_basename (directory);
+
+        try {
+            var regex = new GLib.Regex ("^season(\\s)?\\d*");
+            MatchInfo match_info;
+            if (regex.match (return_value.down (), 0, out match_info)) {
+                return_value = Path.get_basename (Path.get_dirname(directory)) + " - " + return_value;
+            }
+        } catch(Error err) {
+            warning (err.message);
+        }
+
+        return return_value;
+    }
+
     public static int get_year_from_basename (string basename) {
         int return_value = 0;
 
