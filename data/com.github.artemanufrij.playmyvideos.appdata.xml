@@ -43,7 +43,7 @@
                 </ul>
                 <p>Improved:</p>
                 <ul>
-                    <li>If path looks like '…\Best Comedy Ever\Season 01\…' player bulds following title 'Best Comedy Ever - Season 01'</li>
+                    <li>Title builder from '…\Best Comedy Ever\Season 01\…' to 'Best Comedy Ever - Season 01'</li>
                     <li>Lazy cover loading -> less memory on startup</li>
                 </ul>
             </description>
