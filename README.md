@@ -9,9 +9,9 @@
   </a>
 </p>
 <p align="center">
-  <img src="Screenshot.png"/>
+  <img src="screenshots/Screenshot.png"/>
   <br/>
-  <img src="Screenshot_Player.png"/>
+  <img src="screenshots/Screenshot_Player.png"/>
 </p>
 
 ## Donations
