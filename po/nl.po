@@ -3,40 +3,41 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-26 18:02+0100\n"
 "MIME-Version: 1.0\n"
+"Last-Translator: L Voorintholt <levi.voorintholt+trns@gmail.com>\n" 
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
 msgid "Set new Cover…"
-msgstr ""
+msgstr "Zet nieuwe poster…"
 
 #: ../src/Widgets/VideoTimeLine.vala:148
 msgid "Repeat"
-msgstr ""
+msgstr "Herhaal"
 
 #: ../src/Widgets/VideoTimeLine.vala:174
 msgid "Track %d (%s)"
-msgstr ""
+msgstr "Geluidsspoor %d (%s)"
 
 #: ../src/Widgets/VideoTimeLine.vala:194
 msgid "disable"
-msgstr ""
+msgstr "deactiveer"
 
 #: ../src/Widgets/VideoTimeLine.vala:207
 msgid "Subtitle %d (%s)"
-msgstr ""
+msgstr "Ondertiteling %d (%s)"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
-msgstr ""
+msgstr "Verander Video Map"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
-msgstr ""
+msgstr "Laad video's van een map, het netwerk of externe opslag."
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import Videos"
-msgstr ""
+msgstr "Importeer Video's"
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import videos from a source into your library."
@@ -44,29 +45,29 @@ msgstr ""
 
 #: ../src/Services/LibraryManager.vala:117
 msgid "Choose an image…"
-msgstr ""
+msgstr "Kies een afbeelding…"
 
 #: ../src/Services/LibraryManager.vala:119
 #: ../src/Services/LibraryManager.vala:140
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annuleer"
 
 #: ../src/Services/LibraryManager.vala:120
 #: ../src/Services/LibraryManager.vala:141
 msgid "_Open"
-msgstr ""
+msgstr "_Open"
 
 #: ../src/Services/LibraryManager.vala:123
 msgid "Images"
-msgstr ""
+msgstr "Afbeeldingen"
 
 #: ../src/Services/LibraryManager.vala:139
 msgid "Select a folder."
-msgstr ""
+msgstr "Selecteer een map."
 
 #: ../src/Services/LibraryManager.vala:144
 msgid "Folder"
-msgstr ""
+msgstr "Map"
 
 #: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
 msgid "Play My Videos"
@@ -74,28 +75,28 @@ msgstr ""
 
 #: ../src/MainWindow.vala:151
 msgid "Change Video Folder…"
-msgstr ""
+msgstr "Verander Video map…"
 
 #: ../src/MainWindow.vala:160
 msgid "Import Videos…"
-msgstr ""
+msgstr "Importeer Video's…"
 
 #: ../src/MainWindow.vala:168
 msgid "Rescan Library"
-msgstr ""
+msgstr "Bibliotheek Bijwerken"
 
 #: ../src/MainWindow.vala:174
 msgid "Preferences"
-msgstr ""
+msgstr "Voorkeuren"
 
 #: ../src/MainWindow.vala:192
 msgid "Search Videos"
-msgstr ""
+msgstr "Doorzoek Video's"
 
 #: ../src/MainWindow.vala:198
 msgid "Library"
-msgstr ""
+msgstr "Bibliotheek"
 
 #: ../src/Dialogs/Preferences.vala:60
 msgid "Use Dark Theme"
-msgstr ""
+msgstr "Gebruik Donker Thema"
