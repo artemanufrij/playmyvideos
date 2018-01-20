@@ -33,6 +33,10 @@
     <releases>
         <release version="0.2.4" date="2018-01-25">
             <description>
+                <p>Fix:</p>
+                <ul>
+                    <li>Sort episodes in playlist</li>
+                </ul>
                 <p>Translation:</p>
                 <ul>
                     <li>Dutch (by Levi Voorintholt)</li>

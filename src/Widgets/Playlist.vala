@@ -58,6 +58,7 @@ namespace PlayMyVideos.Widgets {
 
             var videos_scroll = new Gtk.ScrolledWindow (null, null);
             videos = new Gtk.ListBox ();
+            videos.set_sort_func (videos_sort_func);
             videos.selected_rows_changed.connect (play_video);
             videos_scroll.add (videos);
 
@@ -115,6 +116,18 @@ namespace PlayMyVideos.Widgets {
 
         public void unselect_all () {
             videos.unselect_all ();
+        }
+
+        private int videos_sort_func (Gtk.ListBoxRow child1, Gtk.ListBoxRow child2) {
+            var item1 = (PlayMyVideos.Widgets.Video)child1;
+            var item2 = (PlayMyVideos.Widgets.Video)child2;
+            if (item1 != null && item2 != null) {
+                if (item1.year != item2.year) {
+                    return item1.year - item2.year;
+                }
+                return item1.title.collate (item2.title);
+            }
+            return 0;
         }
     }
 }
