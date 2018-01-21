@@ -269,6 +269,7 @@ namespace PlayMyVideos {
                 () => {
                     settings.last_played_video_progress = player_view.playback.progress;
                     show_boxes ();
+                    player_view.clear_last_size ();
                 });
 
             headerbar.pack_start (navigation_button);

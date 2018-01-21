@@ -56,67 +56,71 @@ namespace PlayMyVideos.Widgets.Views {
 
             clutter = new GtkClutter.Embed ();
 
-            ended.connect (() => {
-                playlist.unselect_all ();
-                current_video = null;
-            });
+            ended.connect (
+                () => {
+                    playlist.unselect_all ();
+                    current_video = null;
+                });
 
             playback = new ClutterGst.Playback ();
-            playback.new_frame.connect ((frame) => {
-                var current_width = frame.resolution.width;
-                var current_height = frame.resolution.height;
-                var current_dur = playback.duration;
-                if (last_width != current_width || last_height != current_height) {
-                    last_width = current_width;
-                    last_height = current_height;
-                    player_frame_resized (last_width, last_height);
-                }
-                if (last_dur != current_dur) {
-                    last_dur = current_dur;
-                    duration_changed (current_dur);
-                    progress_changed (0);
-                }
-            });
-
-            playback.eos.connect (() => {
-                playback.playing = false;
-                playback.uri = null;
-                var vid = current_video;
-                if (settings.repeat_mode == RepeatMode.ONE) {
-                    current_video = null;
-                    play (vid);
-                    return;
-                }
-
-                if (next ()) {
-                    return;
-                }
-
-                if (settings.repeat_mode == RepeatMode.ALL) {
-                    play (vid.box.get_first_video ());
-                    return;
-                }
-                ended ();
-            });
-
-            playback.notify["playing"].connect (() => {
-                if (playback.playing) {
-                    started (current_video);
-                    progress_timer = GLib.Timeout.add (250, () => {
-                        progress_changed (playback.progress);
-                        return true;
-                    });
-                    Interfaces.Inhibitor.instance.inhibit ();
-                    hide_controls ();
-                } else {
-                    if (progress_timer != 0) {
-                        Source.remove (progress_timer);
-                        progress_timer = 0;
+            playback.new_frame.connect (
+                (frame) => {
+                    var current_width = frame.resolution.width;
+                    var current_height = frame.resolution.height;
+                    var current_dur = playback.duration;
+                    if (last_width != current_width || last_height != current_height) {
+                        last_width = current_width;
+                        last_height = current_height;
+                        player_frame_resized (last_width, last_height);
                     }
-                    Interfaces.Inhibitor.instance.uninhibit ();
-                }
-                toggled (playback.playing);
-            });
+                    if (last_dur != current_dur) {
+                        last_dur = current_dur;
+                        duration_changed (current_dur);
+                        progress_changed (0);
+                    }
+                });
+
+            playback.eos.connect (
+                () => {
+                    playback.playing = false;
+                    playback.uri = null;
+                    var vid = current_video;
+                    if (settings.repeat_mode == RepeatMode.ONE) {
+                        current_video = null;
+                        play (vid);
+                        return;
+                    }
+
+                    if (next ()) {
+                        return;
+                    }
+
+                    if (settings.repeat_mode == RepeatMode.ALL) {
+                        play (vid.box.get_first_video ());
+                        return;
+                    }
+                    ended ();
+                });
+
+            playback.notify["playing"].connect (
+                () => {
+                    if (playback.playing) {
+                        started (current_video);
+                        progress_timer = GLib.Timeout.add (250, () => {
+                                                               progress_changed (playback.progress);
+                                                               return true;
+                                                           });
+                        Interfaces.Inhibitor.instance.inhibit ();
+                        hide_controls ();
+                    } else {
+                        if (progress_timer != 0) {
+                            Source.remove (progress_timer);
+                            progress_timer = 0;
+                        }
+                        Interfaces.Inhibitor.instance.uninhibit ();
+                    }
+                    toggled (playback.playing);
+                });
 
             video_actor = new Clutter.Actor ();
 
@@ -154,16 +158,18 @@ namespace PlayMyVideos.Widgets.Views {
         private void build_ui () {
             this.events |= Gdk.EventMask.POINTER_MOTION_MASK;
 
-            this.button_press_event.connect ((event) => {
-                if (event.button == 1) {
-                    toogle_playing ();
-                }
-                return false;
-            });
+            this.button_press_event.connect (
+                (event) => {
+                    if (event.button == 1) {
+                        toogle_playing ();
+                    }
+                    return false;
+                });
 
-            this.motion_notify_event.connect ((event) => {
-                return hide_controls ();
-            });
+            this.motion_notify_event.connect (
+                (event) => {
+                    return hide_controls ();
+                });
             this.add (clutter);
         }
 
@@ -217,13 +223,15 @@ namespace PlayMyVideos.Widgets.Views {
             }
 
             if (playback.playing && !timeline.is_mouse_over) {
-                mouse_move_timer = GLib.Timeout.add (2000, () => {
-                    timeline.reveal_child = false;
-                    playlist.reveal_child = false;
-                    PlayMyVideosApp.instance.mainwindow.hide_mouse_cursor ();
-                    mouse_move_timer = 0;
-                    return false;
-                });
+                mouse_move_timer = GLib.Timeout.add (
+                    2000,
+                    () => {
+                        timeline.reveal_child = false;
+                        playlist.reveal_child = false;
+                        PlayMyVideosApp.instance.mainwindow.hide_mouse_cursor ();
+                        mouse_move_timer = 0;
+                        return false;
+                    });
             }
 
             timeline.reveal_child = true;
@@ -238,6 +246,11 @@ namespace PlayMyVideos.Widgets.Views {
                 playback.playing = false;
             }
             playback.uri = null;
+        }
+
+        public void clear_last_size () {
+            last_width = 0;
+            last_height = 0;
         }
     }
 }
