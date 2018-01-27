@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Video Player
-GenericName=Video Player
+Name=Cinema
+GenericName=Cinema
 Comment=Watch your videos
 Keywords=videos;movies;shows;
 Exec=com.github.artemanufrij.playmyvideos %U
