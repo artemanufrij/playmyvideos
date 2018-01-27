@@ -187,6 +187,7 @@ namespace PlayMyVideos.Widgets {
                     if (child == row) {
                         if (child is SubTitleRow) {
                             var uri = (child as SubTitleRow).get_uri ();
+                            player_view.playback.subtitle_track = 0;
                             player_view.playback.subtitle_uri = uri;
                         } else {
                             player_view.playback.subtitle_track = i;

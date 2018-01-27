@@ -31,10 +31,11 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.2.4" date="2018-01-25">
+        <release version="0.2.4" date="2018-01-28">
             <description>
                 <p>Fix:</p>
                 <ul>
+                    <li>External subtitles</li>
                     <li>Sort episodes in playlist</li>
                     <li>Black bars</li>
                 </ul>
