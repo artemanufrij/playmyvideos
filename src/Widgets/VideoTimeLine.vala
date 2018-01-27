@@ -190,6 +190,7 @@ namespace PlayMyVideos.Widgets {
                             player_view.playback.subtitle_track = 0;
                             player_view.playback.subtitle_uri = uri;
                         } else {
+                            player_view.playback.subtitle_uri = "";
                             player_view.playback.subtitle_track = i;
                         }
                         break;
