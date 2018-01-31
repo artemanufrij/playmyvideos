@@ -31,6 +31,15 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.2.5" date="2018-02-15">
+            <description>
+                <p>Translation:</p>
+                <ul>
+                    <li>French (by papou84)</li>
+                    <li>Italian (by papou84)</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.2.4" date="2018-01-28">
             <description>
                 <p>Fix:</p>
