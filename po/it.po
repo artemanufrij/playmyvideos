@@ -5,68 +5,75 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
 msgid "Set new Cover…"
-msgstr ""
+msgstr "Cambiare Copertina"
 
 #: ../src/Widgets/VideoTimeLine.vala:148
 msgid "Repeat"
-msgstr ""
+msgstr "Ripeti"
 
 #: ../src/Widgets/VideoTimeLine.vala:174
 msgid "Track %d (%s)"
-msgstr ""
+msgstr "Traccia %d (%s)"
 
 #: ../src/Widgets/VideoTimeLine.vala:194
 msgid "disable"
-msgstr ""
+msgstr "Disattivare"
 
 #: ../src/Widgets/VideoTimeLine.vala:207
 msgid "Subtitle %d (%s)"
-msgstr ""
+msgstr "Sottotitoli %d (%s)"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
-msgstr ""
+msgstr "Cambiare Cartella"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
-msgstr ""
+msgstr "Caricare video da una cartella, una rete o un disco esterno"
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import Videos"
-msgstr ""
+msgstr "aggiungi Video"
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import videos from a source into your library."
-msgstr ""
+msgstr "Aggiungi video da un media alla libreria."
 
 #: ../src/Services/LibraryManager.vala:117
 msgid "Choose an image…"
-msgstr ""
+msgstr "Scegli un immagine..."
 
 #: ../src/Services/LibraryManager.vala:119
 #: ../src/Services/LibraryManager.vala:140
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancella"
 
 #: ../src/Services/LibraryManager.vala:120
 #: ../src/Services/LibraryManager.vala:141
 msgid "_Open"
-msgstr ""
+msgstr "_Aprire"
 
 #: ../src/Services/LibraryManager.vala:123
 msgid "Images"
-msgstr ""
+msgstr "Immagini"
 
 #: ../src/Services/LibraryManager.vala:139
 msgid "Select a folder."
-msgstr ""
+msgstr "Scegli Cartella"
 
 #: ../src/Services/LibraryManager.vala:144
 msgid "Folder"
-msgstr ""
+msgstr "Cartella"
 
 #: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
 msgid "Play My Videos"
@@ -74,28 +81,28 @@ msgstr ""
 
 #: ../src/MainWindow.vala:151
 msgid "Change Video Folder…"
-msgstr ""
+msgstr "Cambiare Cartella Video..."
 
 #: ../src/MainWindow.vala:160
 msgid "Import Videos…"
-msgstr ""
+msgstr "Aggiungi Video..."
 
 #: ../src/MainWindow.vala:168
 msgid "Rescan Library"
-msgstr ""
+msgstr "Riscanerizare la Libreria"
 
 #: ../src/MainWindow.vala:174
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: ../src/MainWindow.vala:192
 msgid "Search Videos"
-msgstr ""
+msgstr "Cercare Video"
 
 #: ../src/MainWindow.vala:198
 msgid "Library"
-msgstr ""
+msgstr "Riscanerizare la Libreria"
 
 #: ../src/Dialogs/Preferences.vala:60
 msgid "Use Dark Theme"
-msgstr ""
+msgstr "Tema Scuro"
