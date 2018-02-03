@@ -27,7 +27,7 @@
 
 namespace PlayMyVideos.Services {
     public class LibraryManager : GLib.Object {
-        PlayMyVideos.Settings settings;
+        Settings settings;
 
         static LibraryManager _instance = null;
         public static LibraryManager instance {
@@ -39,39 +39,48 @@ namespace PlayMyVideos.Services {
             }
         }
 
-        public signal void added_new_box (PlayMyVideos.Objects.Box box);
+        public signal void added_new_box (Objects.Box box);
+        public signal void sync_started ();
+        public signal void sync_finished ();
 
-        public PlayMyVideos.Services.DataBaseManager db_manager { get; construct set; }
-        public PlayMyVideos.Services.LocalFilesManager lf_manager { get; construct set; }
+        public Services.DataBaseManager db_manager { get; construct set; }
+        public Services.LocalFilesManager lf_manager { get; construct set; }
 
-        public GLib.List<PlayMyVideos.Objects.Box> boxes {
+        public GLib.List<Objects.Box> boxes {
             get {
                 return db_manager.boxes;
             }
         }
 
-        construct {
-            settings = PlayMyVideos.Settings.get_default ();
+        uint finish_timer = 0;
 
-            lf_manager = PlayMyVideos.Services.LocalFilesManager.instance;
+        construct {
+            settings = Settings.get_default ();
+
+            lf_manager = Services.LocalFilesManager.instance;
             lf_manager.found_video_file.connect (found_local_video_file);
 
-            db_manager = PlayMyVideos.Services.DataBaseManager.instance;
-            db_manager.added_new_box.connect ((box) => { added_new_box (box); });
+            db_manager = Services.DataBaseManager.instance;
+            db_manager.added_new_box.connect (
+                (box) => {
+                    call_finsish_signal ();
+                    added_new_box (box);
+                });
         }
 
-        private LibraryManager () { }
+        private LibraryManager () {
+        }
 
         public void reset_library () {
             db_manager.reset_database ();
-            File directory = File.new_for_path (PlayMyVideos.PlayMyVideosApp.instance.COVER_FOLDER);
+            File directory = File.new_for_path (PlayMyVideosApp.instance.COVER_FOLDER);
             try {
                 var children = directory.enumerate_children ("", 0);
                 FileInfo file_info;
                 while ((file_info = children.next_file ()) != null) {
-                     var file = File.new_for_path (GLib.Path.build_filename (PlayMyVideos.PlayMyVideosApp.instance.COVER_FOLDER, file_info.get_name ()));
-                     file.delete ();
-                     file.dispose ();
+                    var file = File.new_for_path (GLib.Path.build_filename (PlayMyVideosApp.instance.COVER_FOLDER, file_info.get_name ()));
+                    file.delete ();
+                    file.dispose ();
                 }
                 children.close ();
                 children.dispose ();
@@ -88,11 +97,13 @@ namespace PlayMyVideos.Services {
 
         // LOCAL FILES REGION
         public async void sync_library_content () {
-            new Thread <void*> (null, () => {
-                remove_non_existent_items ();
-                scan_local_library_for_new_files (settings.library_location);
-                return null;
-            });
+            new Thread <void*> (
+                null,
+                () => {
+                    remove_non_existent_items ();
+                    scan_local_library_for_new_files (settings.library_location);
+                    return null;
+                });
         }
 
         public void remove_non_existent_items () {
@@ -107,16 +118,20 @@ namespace PlayMyVideos.Services {
         }
 
         public void scan_local_library_for_new_files (string path) {
+            sync_started ();
             lf_manager.scan (path);
+            call_finsish_signal ();
         }
 
         public void found_local_video_file (string path, string mime_type) {
-            new Thread<void*> (null, () => {
-                if (!db_manager.video_file_exists (path)) {
-                    insert_video_file (path, mime_type);
-                }
-                return null;
-            });
+            new Thread<void*>(
+                null,
+                () => {
+                    if (!db_manager.video_file_exists (path)) {
+                        insert_video_file (path, mime_type);
+                    }
+                    return null;
+                });
         }
 
         private void insert_video_file (string path, string mime_type) {
@@ -129,17 +144,35 @@ namespace PlayMyVideos.Services {
             db_box.add_video_if_not_exists (video);
         }
 
+        public void call_finsish_signal () {
+                    reset_finish_timer ();
+            finish_timer = Timeout.add (
+                1000,
+                () => {
+                    reset_finish_timer ();
+                    sync_finished ();
+                    return false;
+                });
+        }
+
+        private void reset_finish_timer () {
+            if (finish_timer != 0) {
+                Source.remove (finish_timer);
+                finish_timer = 0;
+            }
+        }
+
         //PIXBUF
-        public string? choose_new_cover () {
-            string? return_value = null;
+        public string ? choose_new_cover () {
+            string ? return_value = null;
             var cover = new Gtk.FileChooserDialog (
-                _("Choose an image…"), PlayMyVideosApp.instance.mainwindow,
+                _ ("Choose an image…"), PlayMyVideosApp.instance.mainwindow,
                 Gtk.FileChooserAction.OPEN,
-                _("_Cancel"), Gtk.ResponseType.CANCEL,
-                _("_Open"), Gtk.ResponseType.ACCEPT);
+                _ ("_Cancel"), Gtk.ResponseType.CANCEL,
+                _ ("_Open"), Gtk.ResponseType.ACCEPT);
 
             var filter = new Gtk.FileFilter ();
-            filter.set_filter_name (_("Images"));
+            filter.set_filter_name (_ ("Images"));
             filter.add_mime_type ("image/*");
 
             cover.add_filter (filter);
@@ -148,19 +181,19 @@ namespace PlayMyVideos.Services {
                 return_value = cover.get_filename ();
             }
 
-            cover.destroy();
+            cover.destroy ();
             return return_value;
         }
 
-        public string? choose_folder () {
-            string? return_value = null;
+        public string ? choose_folder () {
+            string ? return_value = null;
             Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-                _("Select a folder."), PlayMyVideosApp.instance.mainwindow, Gtk.FileChooserAction.SELECT_FOLDER,
-                _("_Cancel"), Gtk.ResponseType.CANCEL,
-                _("_Open"), Gtk.ResponseType.ACCEPT);
+                _ ("Select a folder."), PlayMyVideosApp.instance.mainwindow, Gtk.FileChooserAction.SELECT_FOLDER,
+                _ ("_Cancel"), Gtk.ResponseType.CANCEL,
+                _ ("_Open"), Gtk.ResponseType.ACCEPT);
 
             var filter = new Gtk.FileFilter ();
-            filter.set_filter_name (_("Folder"));
+            filter.set_filter_name (_ ("Folder"));
             filter.add_mime_type ("inode/directory");
 
             chooser.add_filter (filter);

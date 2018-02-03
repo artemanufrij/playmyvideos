@@ -15,7 +15,7 @@
     <custom>
         <value key="x-appcenter-color-primary">#202020</value>
         <value key="x-appcenter-color-primary-text">rgb(255,255,255)</value>
-        <value key="x-appcenter-suggested-price">1</value>
+        <value key="x-appcenter-suggested-price">2</value>
     </custom>
     <developer_name>Artem Anufrij</developer_name>
     <url type="homepage">https://github.com/artemanufrij/playmyvideos</url>
@@ -31,8 +31,12 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.2.5" date="2018-02-15">
+        <release version="0.2.5" date="2018-02-05">
             <description>
+                <p>New:</p>
+                <ul>
+                    <li>Show Spinner until library is scanned</li>
+                </ul>
                 <p>Translation:</p>
                 <ul>
                     <li>French (by papou84)</li>

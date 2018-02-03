@@ -34,10 +34,12 @@ namespace PlayMyVideos {
 
         Gtk.HeaderBar headerbar;
         Gtk.SearchEntry search_entry;
+        Gtk.Spinner spinner;
         Gtk.Stack content;
         Gtk.Button navigation_button;
         Gtk.Button play_button;
         Gtk.MenuButton app_menu;
+        Gtk.MenuItem menu_item_rescan;
         Widgets.Views.BoxesView boxes_view;
         Widgets.Views.PlayerView player_view;
 
@@ -65,6 +67,24 @@ namespace PlayMyVideos {
                             if (content.visible_child_name == "welcome") {
                                 content.visible_child_name = "boxes";
                             }
+                            return false;
+                        });
+                });
+            library_manager.sync_started.connect (
+                () => {
+                    Idle.add (
+                        () => {
+                            spinner.active = true;
+                            menu_item_rescan.sensitive = false;
+                            return false;
+                        });
+                });
+            library_manager.sync_finished.connect (
+                () => {
+                    Idle.add (
+                        () => {
+                            spinner.active = false;
+                            menu_item_rescan.sensitive = true;
                             return false;
                         });
                 });
@@ -228,7 +248,7 @@ namespace PlayMyVideos {
                     }
                 });
 
-            var menu_item_rescan = new Gtk.MenuItem.with_label (_ ("Rescan Library"));
+            menu_item_rescan = new Gtk.MenuItem.with_label (_ ("Rescan Library"));
             menu_item_rescan.activate.connect (
                 () => {
                     reset_all_views ();
@@ -259,6 +279,11 @@ namespace PlayMyVideos {
                 () => {
                     boxes_view.filter = search_entry.text;
                 });
+            headerbar.pack_end (search_entry);
+
+            // SPINNER
+            spinner = new Gtk.Spinner ();
+            headerbar.pack_end (spinner);
 
             navigation_button = new Gtk.Button ();
             navigation_button.label = _ ("Back");
@@ -273,7 +298,7 @@ namespace PlayMyVideos {
                 });
 
             headerbar.pack_start (navigation_button);
-            headerbar.pack_end (search_entry);
+
             this.set_titlebar (headerbar);
 
             boxes_view = new Widgets.Views.BoxesView ();
