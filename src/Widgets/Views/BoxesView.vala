@@ -33,6 +33,7 @@ namespace PlayMyVideos.Widgets.Views {
 
         Gtk.FlowBox boxes;
         Gtk.Revealer action_revealer;
+        Gtk.Stack stack;
 
         Widgets.Views.BoxView box_view;
 
@@ -43,7 +44,7 @@ namespace PlayMyVideos.Widgets.Views {
             } set {
                 if (_filter != value) {
                     _filter = value;
-                    boxes.invalidate_filter ();
+                    do_search ();
                 }
             }
         }
@@ -55,15 +56,18 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         uint timer_sort = 0;
+        uint items_found = 0;
 
         construct {
             library_manager = Services.LibraryManager.instance;
-            library_manager.added_new_box.connect ((box) => {
-                Idle.add (() => {
-                    add_box (box);
-                    return false;
+            library_manager.added_new_box.connect (
+                (box) => {
+                    Idle.add (
+                        () => {
+                            add_box (box);
+                            return false;
+                        });
                 });
-            });
         }
 
         public BoxesView () {
@@ -96,8 +100,14 @@ namespace PlayMyVideos.Widgets.Views {
             content.pack_start (boxes_scroll, true, true, 0);
             content.pack_start (action_revealer, false, false, 0);
 
-            this.add (content);
-            action_revealer.set_reveal_child (false);
+            var alert_view = new Granite.Widgets.AlertView (_("No results"), _("Try another search"), "edit-find-symbolic");
+
+            stack = new Gtk.Stack ();
+            stack.add_named (content, "content");
+            stack.add_named (alert_view, "alert");
+
+            this.add (stack);
+            action_revealer.reveal_child = false;
         }
 
         public void add_box (Objects.Box box) {
@@ -114,13 +124,25 @@ namespace PlayMyVideos.Widgets.Views {
                 timer_sort = 0;
             }
 
-            timer_sort = Timeout.add (500, () => {
-                boxes.set_sort_func (boxes_sort_func);
-                boxes.set_sort_func (null);
-                Source.remove (timer_sort);
-                timer_sort = 0;
-                return false;
-            });
+            timer_sort = Timeout.add (
+                500,
+                () => {
+                    boxes.set_sort_func (boxes_sort_func);
+                    boxes.set_sort_func (null);
+                    Source.remove (timer_sort);
+                    timer_sort = 0;
+                    return false;
+                });
+        }
+
+        private void do_search () {
+            items_found = 0;
+            boxes.invalidate_filter ();
+            if (items_found == 0 && boxes.get_children ().length () > 0) {
+                stack.visible_child_name = "alert";
+            } else {
+                stack.visible_child_name = "content";
+            }
         }
 
         private void show_box_viewer (Gtk.FlowBoxChild item) {
@@ -145,6 +167,7 @@ namespace PlayMyVideos.Widgets.Views {
 
         private bool boxes_filter_func (Gtk.FlowBoxChild child) {
             if (filter.strip ().length == 0) {
+                items_found++;
                 return true;
             }
 
@@ -165,6 +188,7 @@ namespace PlayMyVideos.Widgets.Views {
                     return false;
                 }
             }
+            items_found++;
             return true;
         }
 

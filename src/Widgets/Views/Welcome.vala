@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -41,25 +41,26 @@ namespace PlayMyVideos.Widgets.Views {
 
         private void build_ui () {
             var welcome = new Granite.Widgets.Welcome ("Get Some Videos", "Add videos to your library.");
-            welcome.append ("folder-video", _("Change Video Folder"), _("Load videos from a folder, a network or an external disk."));
-            welcome.append ("document-import", _("Import Videos"), _("Import videos from a source into your library."));
-            welcome.activated.connect ((index) => {
-                switch (index) {
-                    case 0:
+            welcome.append ("folder-video", _ ("Change Video Folder"), _ ("Load videos from a folder, a network or an external disk."));
+            welcome.append ("document-import", _ ("Import Videos"), _ ("Import videos from a source into your library."));
+            welcome.activated.connect (
+                (index) => {
+                    switch (index) {
+                    case 0 :
                         var folder = library_manager.choose_folder ();
-                        if(folder != null) {
+                        if (folder != null) {
                             settings.library_location = folder;
                             library_manager.scan_local_library_for_new_files (folder);
                         }
                         break;
-                    case 1:
+                    case 1 :
                         var folder = library_manager.choose_folder ();
-                        if(folder != null) {
+                        if (folder != null) {
                             library_manager.scan_local_library_for_new_files (folder);
                         }
                         break;
-                }
-            });
+                    }
+                });
 
             this.add (welcome);
             this.show_all ();

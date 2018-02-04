@@ -76,6 +76,7 @@ namespace PlayMyVideos {
                         () => {
                             spinner.active = true;
                             menu_item_rescan.sensitive = false;
+                            search_entry.text = "";
                             return false;
                         });
                 });
