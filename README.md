@@ -3,7 +3,10 @@
   <h3 align="center">A video player for watching local video files</h3>
   <p align="center">Designed for <a href="https://elementary.io"> elementary OS</p>
 </div>
-<a href="https://liberapay.com/Artem/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a>
+
+### Donate
+<a href="https://www.paypal.me/ArtemAnufrij">PayPal</a> | <a href="https://liberapay.com/Artem/donate">LiberaPay</a> | <a href="https://www.patreon.com/ArtemAnufrij">Patreon</a>
+
 <p align="center">
   <a href="https://appcenter.elementary.io/com.github.artemanufrij.playmyvideos">
     <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
@@ -14,9 +17,6 @@
   <br/>
   <img src="screenshots/Screenshot_Player.png"/>
 </p>
-
-## Donations
-If you liked _Play My Videos_, and would like to support it's development of this app and more, consider [buying me a coffee](https://www.paypal.me/ArtemAnufrij) :)
 
 ## Install from Github.
 
