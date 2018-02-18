@@ -37,6 +37,10 @@
                 <ul>
                     <li>Show "No Result" message if search term hasn't any results</li>
                 </ul>
+                <p>Translation:</p>
+                <ul>
+                    <li>Turkish (by Şenol Alan)</li>
+                </ul>
             </description>
         </release>
         <release version="0.2.5" date="2018-02-05">

@@ -1,101 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-26 18:02+0100\n"
+"POT-Creation-Date: 2018-02-17 23:20+0300\n"
+"PO-Revision-Date: 2018-02-17 23:25+0300\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr_TR\n"
 
-#: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
+#: ../src/Widgets/Box.vala:75 ../src/Widgets/Views/BoxView.vala:61
 msgid "Set new Cover…"
-msgstr ""
+msgstr "Yeni Kapak Belirle"
 
 #: ../src/Widgets/VideoTimeLine.vala:148
 msgid "Repeat"
-msgstr ""
+msgstr "Tekrarla"
 
 #: ../src/Widgets/VideoTimeLine.vala:174
 msgid "Track %d (%s)"
-msgstr ""
+msgstr "İz %d (%s)"
 
 #: ../src/Widgets/VideoTimeLine.vala:194
 msgid "disable"
-msgstr ""
+msgstr "devre dışı"
 
 #: ../src/Widgets/VideoTimeLine.vala:207
 msgid "Subtitle %d (%s)"
-msgstr ""
+msgstr "Altyazı %d (%s)"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
-msgstr ""
+msgstr "Video Dizinini Değiştir"
 
 #: ../src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
-msgstr ""
+msgstr "Videoları bir dizin, ağ ya da bir harici diskden yükle"
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import Videos"
-msgstr ""
+msgstr "Videoları içeri aktar"
 
 #: ../src/Widgets/Views/Welcome.vala:45
 msgid "Import videos from a source into your library."
-msgstr ""
+msgstr "Videoları bir kaynaktan kütüphanenize aktarın"
 
-#: ../src/Services/LibraryManager.vala:117
+#: ../src/Services/LibraryManager.vala:137
 msgid "Choose an image…"
-msgstr ""
-
-#: ../src/Services/LibraryManager.vala:119
-#: ../src/Services/LibraryManager.vala:140
-msgid "_Cancel"
-msgstr ""
-
-#: ../src/Services/LibraryManager.vala:120
-#: ../src/Services/LibraryManager.vala:141
-msgid "_Open"
-msgstr ""
-
-#: ../src/Services/LibraryManager.vala:123
-msgid "Images"
-msgstr ""
+msgstr "Bir resim seç.."
 
 #: ../src/Services/LibraryManager.vala:139
+#: ../src/Services/LibraryManager.vala:160
+msgid "_Cancel"
+msgstr "_İptal"
+
+#: ../src/Services/LibraryManager.vala:140
+#: ../src/Services/LibraryManager.vala:161
+msgid "_Open"
+msgstr "_Aç"
+
+#: ../src/Services/LibraryManager.vala:143
+msgid "Images"
+msgstr "Resimler"
+
+#: ../src/Services/LibraryManager.vala:159
 msgid "Select a folder."
-msgstr ""
+msgstr "Dizin seç"
 
-#: ../src/Services/LibraryManager.vala:144
+#: ../src/Services/LibraryManager.vala:164
 msgid "Folder"
-msgstr ""
+msgstr "Dizin"
 
-#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
+#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:258
 msgid "Play My Videos"
-msgstr ""
+msgstr "Videolarımı Oynat"
 
 #: ../src/MainWindow.vala:151
 msgid "Change Video Folder…"
-msgstr ""
+msgstr "Video Dizinini Değiştir ..."
 
 #: ../src/MainWindow.vala:160
 msgid "Import Videos…"
-msgstr ""
+msgstr "Videoları içeri aktar..."
 
 #: ../src/MainWindow.vala:168
 msgid "Rescan Library"
-msgstr ""
+msgstr "Kütüphaneyi yeniden tara"
 
 #: ../src/MainWindow.vala:174
 msgid "Preferences"
-msgstr ""
+msgstr "Tercihler"
 
 #: ../src/MainWindow.vala:192
 msgid "Search Videos"
-msgstr ""
+msgstr "Videoları Ara"
 
 #: ../src/MainWindow.vala:198
-msgid "Library"
-msgstr ""
+msgid "Back"
+msgstr "Geri"
 
 #: ../src/Dialogs/Preferences.vala:60
 msgid "Use Dark Theme"
-msgstr ""
+msgstr "Koyu Temayı Kullan"
+
+#: ../src/Dialogs/Preferences.vala:68
+msgid "Save custom Covers in Library folder"
+msgstr "Özel kapakları Kütüphane klasörüne kaydet"
