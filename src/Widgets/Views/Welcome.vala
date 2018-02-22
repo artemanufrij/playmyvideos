@@ -27,12 +27,12 @@
 
 namespace PlayMyVideos.Widgets.Views {
     public class Welcome : Gtk.Grid {
-        PlayMyVideos.Services.LibraryManager library_manager;
-        PlayMyVideos.Settings settings;
+        Services.LibraryManager library_manager;
+        Settings settings;
 
         construct {
-            library_manager = PlayMyVideos.Services.LibraryManager.instance;
-            settings = PlayMyVideos.Settings.get_default ();
+            library_manager = Services.LibraryManager.instance;
+            settings = Settings.get_default ();
         }
 
         public Welcome () {

@@ -27,7 +27,7 @@
 
 namespace PlayMyVideos.Widgets {
     public class Video : Gtk.ListBoxRow {
-        public PlayMyVideos.Objects.Video video { get; private set; }
+        public Objects.Video video { get; private set; }
         public string title { get { return video.title; } }
         public int year { get { return video.year; } }
 

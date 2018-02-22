@@ -106,10 +106,12 @@ namespace PlayMyVideos.Widgets.Views {
                 () => {
                     if (playback.playing) {
                         started (current_video);
-                        progress_timer = GLib.Timeout.add (250, () => {
-                                                               progress_changed (playback.progress);
-                                                               return true;
-                                                           });
+                        progress_timer = GLib.Timeout.add (
+                            250,
+                            () => {
+                                progress_changed (playback.progress);
+                                return true;
+                            });
                         Interfaces.Inhibitor.instance.inhibit ();
                         hide_controls ();
                     } else {

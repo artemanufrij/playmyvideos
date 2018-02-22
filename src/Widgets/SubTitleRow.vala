@@ -27,22 +27,33 @@
 
 namespace PlayMyVideos.Widgets {
     public class SubTitleRow : Gtk.ListBoxRow {
-        public Objects.Video video { get; private set; }
         public string subtitle { get; private set; }
+        string _path = "";
+        public new string path {
+            get {
+                return _path;
+            } set {
+                _path = value;
+                subtitle = Path.get_basename (_path);
+                uri = File.new_for_path (path).get_uri ();
+            }
+        }
 
-        public SubTitleRow (Objects.Video video, string subtitle) {
-            this.video = video;
-            this.subtitle = subtitle;
+        string _uri = "";
+        public string uri {
+            get {
+                return _uri;
+            } private set {
+                _uri = value;
+            }
+        }
+
+        public SubTitleRow (Objects.Video video, string path) {
+            this.path = path;
             var lab = new Gtk.Label (subtitle);
             lab.margin = 4;
             lab.halign = Gtk.Align.START;
             this.add (lab);
-        }
-
-        public string get_uri () {
-            var directory = GLib.Path.get_dirname (video.path);
-            var path = GLib.Path.build_filename (directory, subtitle);
-            return File.new_for_path (path).get_uri ();
         }
     }
 }

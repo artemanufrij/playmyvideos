@@ -205,5 +205,27 @@ namespace PlayMyVideos.Services {
             chooser.destroy ();
             return return_value;
         }
+
+        public string ? choose_external_subtitle () {
+            string ? return_value = null;
+            var cover = new Gtk.FileChooserDialog (
+                _ ("Choose a subtitle file…"), PlayMyVideosApp.instance.mainwindow,
+                Gtk.FileChooserAction.OPEN,
+                _ ("_Cancel"), Gtk.ResponseType.CANCEL,
+                _ ("_Open"), Gtk.ResponseType.ACCEPT);
+
+            var filter = new Gtk.FileFilter ();
+            filter.set_filter_name (_ ("Subtitles"));
+            filter.add_mime_type ("application/x-subrip");
+
+            cover.add_filter (filter);
+
+            if (cover.run () == Gtk.ResponseType.ACCEPT) {
+                return_value = cover.get_filename ();
+            }
+
+            cover.destroy ();
+            return return_value;
+        }
     }
 }
