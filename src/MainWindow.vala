@@ -154,11 +154,8 @@ namespace PlayMyVideos {
             this.delete_event.connect (
                 () => {
                     save_settings ();
-                    return false;
-                });
-            this.destroy.connect (
-                () => {
                     player_view.reset ();
+                    return false;
                 });
             this.key_press_event.connect (
                 (key) => {
