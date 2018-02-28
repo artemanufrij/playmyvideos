@@ -31,8 +31,12 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.2.6" date="2018-02-20">
+        <release version="0.2.6" date="2018-03-03">
             <description>
+                <p>New:</p>
+                <ul>
+                    <li>Fetch cover from themoviedb.org</li>
+                </ul>
                 <p>Improvements:</p>
                 <ul>
                     <li>Show "No Result" message if search term hasn't any results</li>
