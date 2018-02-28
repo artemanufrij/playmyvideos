@@ -20,6 +20,7 @@ pkg_check_modules (DEPS REQUIRED
     gtk+-3.0>=3.11.6
     granite>=0.5
     sqlite3
+    libsoup-2.4
     clutter-gtk-1.0
     clutter-gst-3.0
 )

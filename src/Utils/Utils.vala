@@ -71,6 +71,39 @@ namespace PlayMyVideos.Utils {
         return {"sub", "srt", "smi", "ssa", "ass", "asc"};
     }
 
+    public static void get_title_items (string box_title ,out string title, out int season, out int year) {
+        season = 0;
+        year = 0;
+        GLib.Regex regex;
+        // CHECK IF SEASON
+        try {
+            regex = new GLib.Regex ("(?<=\\- season )\\d*$");
+            MatchInfo match_info;
+            if (regex.match (box_title.down (), 0, out match_info)) {
+                season = int.parse (match_info.fetch (0));
+                title = box_title.substring (0, box_title.last_index_of ("-")).strip ();
+                return;
+            }
+        } catch(Error err) {
+            warning (err.message);
+        }
+
+        // CHECK IF TITLE HAS YAER ITEM
+        try {
+            regex = new GLib.Regex ("(?<=\\()[12]\\d\\d\\d(?=\\)$)");
+            MatchInfo match_info;
+            if (regex.match (box_title.down (), 0, out match_info)) {
+                year = int.parse (match_info.fetch (0));
+                title = box_title.substring (0, box_title.last_index_of ("(")).strip ();
+                return;
+            }
+        } catch(Error err) {
+            warning (err.message);
+        }
+
+        title = box_title;
+    }
+
     public enum PlayFlags {
         VIDEO         = (1 << 0),
         AUDIO         = (1 << 1),

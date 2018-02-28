@@ -35,7 +35,7 @@ namespace PlayMyVideos.Objects {
         public signal void cover_changed ();
         public signal void removed ();
 
-        string cover_path = "";
+        public string cover_path { get; private set; default = ""; }
 
         int _ID = 0;
         public int ID {
@@ -147,7 +147,7 @@ namespace PlayMyVideos.Objects {
         }
 
 // COVER REGION
-        private async void load_cover_async () {
+        public async void load_cover_async () {
             if (is_cover_loading || _cover != null || this.ID == 0 || this.videos.length () == 0) {
                 return;
             }
@@ -157,6 +157,8 @@ namespace PlayMyVideos.Objects {
                     Gdk.Pixbuf ? return_value = load_or_create_cover.end (res);
                     if (return_value != null) {
                         this.cover = return_value;
+                    } else {
+                        Services.MovieDatabaseManager.instance.fill_box_cover_queue (this);
                     }
                     is_cover_loading = false;
                 });
@@ -237,7 +239,6 @@ namespace PlayMyVideos.Objects {
                             }
                         }
                     }
-
                     Idle.add ((owned) callback);
                     cover_full_path.dispose ();
                     return null;

@@ -7,6 +7,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Services/DataBaseManager.vala
     Services/LocalFilesManager.vala
     Services/LibraryManager.vala
+    Services/MovieDatabaseManager.vala
     Interfaces/Inhibitor.vala
     Interfaces/MediaKeys.vala
     Interfaces/Thubnailer.vala
@@ -22,6 +23,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
     Widgets/Views/PlayerView.vala
     Utils/Utils.vala
     Utils/Pixbuf.vala
+    Utils/MovieDatabase.vala
     Dialogs/Preferences.vala
     Settings.vala
     MainWindow.vala
@@ -29,6 +31,7 @@ vala_precompile (VALA_C ${CMAKE_PROJECT_NAME}
 PACKAGES
     granite
     gtk+-3.0
+    libsoup-2.4
     sqlite3
     clutter-gtk-1.0
     clutter-gst-3.0
