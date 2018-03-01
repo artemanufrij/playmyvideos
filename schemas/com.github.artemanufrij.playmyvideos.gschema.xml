@@ -50,15 +50,20 @@
 			<summary>Default library location.</summary>
 			<description>Default library location.</description>
 		</key>
+		<key name="load-content-from-moviedb" type="b">
+			<default>true</default>
+			<summary>Load Cover from The Movie DB.</summary>
+			<description>Load Cover from The Movie DB.</description>
+		</key>
 		<key name="use-dark-theme" type="b">
 			<default>true</default>
 			<summary>Use Dark Theme.</summary>
 			<description>Use Dark Theme.</description>
 		</key>
 		<key name="save-custom-covers" type="b">
-			<default>false</default>
-			<summary>Save custom Cover in Music folder.</summary>
-			<description>Save custom Cover in Music folder.</description>
+			<default>true</default>
+			<summary>Save custom Cover in Video folder.</summary>
+			<description>Save custom Cover in Video folder.</description>
 		</key>
 		<key name="last-played-video-uri" type="s">
 			<default>""</default>

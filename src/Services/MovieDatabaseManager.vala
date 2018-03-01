@@ -92,6 +92,9 @@ namespace PlayMyVideos.Services {
                             pixbuf = Utils.align_and_scale_pixbuf_for_cover (pixbuf);
                             try {
                                 if (pixbuf.save (first.cover_path, "jpeg", "quality", "100")) {
+                                    if (Settings.get_default ().save_custom_covers) {
+                                        first.set_custom_cover_file (first.cover_path);
+                                    }
                                     first.load_cover_async.begin ();
                                 }
                             } catch (Error err) {

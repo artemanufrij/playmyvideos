@@ -49,6 +49,7 @@ namespace PlayMyVideos {
         public bool look_for_new_files { get; set; }
         public string [] covers { get; set; }
         public string library_location { get; set; }
+        public bool load_content_from_moviedb { get; set; }
         public bool use_dark_theme { get; set; }
         public bool save_custom_covers { get; set; }
         public string last_played_video_uri { get; set; }

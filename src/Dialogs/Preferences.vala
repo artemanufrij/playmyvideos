@@ -65,6 +65,14 @@ namespace PlayMyVideos.Dialogs {
                 settings.use_dark_theme = use_dark_theme.active;
             });
 
+            var load_content_label = new Gtk.Label (_("Load Content from The Movie DB"));
+            load_content_label.halign = Gtk.Align.START;
+            var load_content = new Gtk.Switch ();
+            load_content.active = settings.load_content_from_moviedb;
+            load_content.notify["active"].connect (() => {
+                settings.load_content_from_moviedb = load_content.active;
+            });
+
             var save_custom_covers_label = new Gtk.Label (_("Save custom Covers in Library folder"));
             save_custom_covers_label.halign = Gtk.Align.START;
             var save_custom_covers = new Gtk.Switch ();
@@ -75,8 +83,11 @@ namespace PlayMyVideos.Dialogs {
 
             grid.attach (use_dark_theme_label, 0, 0);
             grid.attach (use_dark_theme, 1, 0);
-            grid.attach (save_custom_covers_label, 0, 1);
-            grid.attach (save_custom_covers, 1, 1);
+            grid.attach (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), 0, 1, 2, 1);
+            grid.attach (load_content_label, 0, 2);
+            grid.attach (load_content, 1, 2);
+            grid.attach (save_custom_covers_label, 0, 3);
+            grid.attach (save_custom_covers, 1, 3);
 
             content.pack_start (grid, false, false, 0);
 
