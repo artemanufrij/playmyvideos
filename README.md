@@ -31,6 +31,7 @@ sudo apt install cmake-elementary
 sudo apt install debhelper
 sudo apt install libgranite-dev
 sudo apt install libsqlite3-dev
+sodo apt install libsoup2.4-dev
 sudo apt install libgstreamer-plugins-base1.0-dev
 sudo apt install libclutter-gtk-1.0-dev
 sudo apt install libclutter-gst-3.0-dev
