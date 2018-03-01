@@ -273,6 +273,7 @@ namespace PlayMyVideos {
 
             search_entry = new Gtk.SearchEntry ();
             search_entry.placeholder_text = _ ("Search Videos");
+            search_entry.valign = Gtk.Align.CENTER;
             search_entry.search_changed.connect (
                 () => {
                     boxes_view.filter = search_entry.text;
