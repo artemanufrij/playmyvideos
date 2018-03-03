@@ -35,7 +35,8 @@ namespace PlayMyVideos.Dialogs {
 
         public Preferences (Gtk.Window parent) {
             Object (
-                transient_for: parent
+                transient_for: parent,
+                deletable: false
             );
             build_ui ();
 
