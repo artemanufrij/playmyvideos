@@ -82,6 +82,13 @@ namespace PlayMyVideos.Services {
 
                         Utils.get_title_items (first.title, out title, out season, out year);
 
+                        if (year == 0) {
+                            var video = first.get_first_video ();
+                            if (video != null && video.year > 0) {
+                                year = video.year;
+                            }
+                        }
+
                         Gdk.Pixbuf ? pixbuf = null;
                         if (season > 0) {
                             pixbuf = get_pixbuf_by_season_number (title, season);
@@ -121,7 +128,7 @@ namespace PlayMyVideos.Services {
         }
 
         private Gdk.Pixbuf ? get_pixbuf_by_tv_id (int tv_id, int season) {
-            string url = "https://api.themoviedb.org/3/tv/%d/season/%d?api_key=%s&language=en-US".printf (tv_id, season, key);
+            string url = "https://api.themoviedb.org/3/tv/%d/season/%d?api_key=%s".printf (tv_id, season, key);
             var body = get_body_from_url (url);
             if (body != null) {
                 var img_path = Utils.get_poster_path (body);
@@ -134,6 +141,12 @@ namespace PlayMyVideos.Services {
 
         private Gdk.Pixbuf ? get_pixbuf_by_movie_title (string title, int year = 0) {
             string url = "https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s&page=1&include_adult=false".printf (key, title);
+            if (year > 0) {
+                url = "https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s&page=1&primary_release_year=%d&include_adult=false".printf (key, title, year);
+            }
+
+            stdout.printf ("%s\n", url);
+
             var body = get_body_from_url (url);
             if (body != null) {
                 var img_path = Utils.get_poster_path (body);

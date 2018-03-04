@@ -31,8 +31,12 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.3.1" date="2018-03-10">
+        <release version="0.3.1" date="2018-03-05">
             <description>
+                <p>Improved:</p>
+                <ul>
+                    <li>Regard release year for better cover fetching</li>
+                </ul>
                 <p>Misc:</p>
                 <ul>
                     <li>Prepare for JUNO</li>
