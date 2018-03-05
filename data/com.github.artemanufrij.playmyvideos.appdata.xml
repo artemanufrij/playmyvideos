@@ -8,6 +8,12 @@
     <summary>A video player for watching local video files.</summary>
     <description>
         <p>A very fast video player designed extra for large local libraries.</p>
+        <p>Features:</p>
+        <ul>
+            <li>Season playlist</li>
+            <li>Subtiles support</li>
+            <li>'TheMovieDB.org' integration for fetching covers</li>
+        </ul>
     </description>
     <categories>
         <category>Video</category>
