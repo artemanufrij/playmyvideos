@@ -143,6 +143,7 @@ namespace PlayMyVideos.Services {
             if (stmt.step () != Sqlite.DONE) {
                 warning ("Error: %d: %s", db.errcode (), db.errmsg ());
             } else {
+                _boxes.remove (box);
                 box.removed ();
             }
             stmt.reset ();

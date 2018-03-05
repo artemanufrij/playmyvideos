@@ -342,8 +342,12 @@ namespace PlayMyVideos {
         private void visible_playing_button () {
             if (settings.last_played_video_uri != "") {
                 var f = File.new_for_uri (settings.last_played_video_uri);
-                play_button.visible = f.query_exists ();
-                boxes_view.select_file (f);
+                if (f.query_exists ()) {
+                    play_button.visible = f.query_exists ();
+                    boxes_view.select_file (f);
+                } else {
+                    play_button.visible = false;
+                }
             } else {
                 play_button.visible = false;
             }

@@ -107,9 +107,10 @@ namespace PlayMyVideos.Services {
         }
 
         public void remove_non_existent_items () {
-            foreach (var box in boxes) {
-                var videos = box.videos.copy ();
-                foreach (var video in videos) {
+            var boxes_copy = boxes.copy ();
+            foreach (var box in boxes_copy) {
+                var videos_copy = box.videos.copy ();
+                foreach (var video in videos_copy) {
                     if (!video.file_exists ()) {
                         db_manager.remove_video (video);
                     }

@@ -32,6 +32,7 @@ namespace PlayMyVideos.Widgets.Views {
         public PlayMyVideos.Objects.Box current_box { get; private set; }
 
         public signal void video_selected (Objects.Video video);
+        public signal void box_removed ();
 
         Gtk.ListBox videos;
         Gtk.Image cover;
@@ -98,6 +99,7 @@ namespace PlayMyVideos.Widgets.Views {
             if (current_box != null) {
                 current_box.video_added.disconnect (add_video);
                 current_box.cover_changed.disconnect (change_cover);
+                current_box.removed.disconnect (current_box_removed);
             }
 
             current_box = box;
@@ -110,6 +112,11 @@ namespace PlayMyVideos.Widgets.Views {
             }
             current_box.cover_changed.connect (change_cover);
             current_box.video_added.connect (add_video);
+            current_box.removed.connect (current_box_removed);
+        }
+
+        private void current_box_removed () {
+            box_removed ();
         }
 
         private void change_cover () {

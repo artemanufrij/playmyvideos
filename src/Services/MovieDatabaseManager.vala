@@ -69,7 +69,7 @@ namespace PlayMyVideos.Services {
                     while (boxes.length () > 0) {
                         lock (boxes) {
                             first = boxes.first ().data;
-                            if (first == null) {
+                            if (first == null || first.cover != null) {
                                 continue;
                             }
                             boxes.remove (first);

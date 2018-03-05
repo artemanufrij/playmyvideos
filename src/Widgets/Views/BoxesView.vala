@@ -90,6 +90,7 @@ namespace PlayMyVideos.Widgets.Views {
 
             box_view = new Widgets.Views.BoxView ();
             box_view.video_selected.connect ((video) => { video_selected (video); });
+            box_view.box_removed.connect (() => { action_revealer.reveal_child = false; });
 
             action_revealer = new Gtk.Revealer ();
             action_revealer.add (box_view);
