@@ -87,12 +87,12 @@ namespace PlayMyVideos.Objects {
                 });
             removed.connect (
                 () => {
-                    var f = File.new_for_path (cover_path);
-                    f.trash_async.begin (
+                    var c = File.new_for_path (cover_path);
+                    c.trash_async.begin (
                         0,
                         null,
                         (obj, res) => {
-                            f.dispose ();
+                            c.dispose ();
                         });
                 });
         }
