@@ -85,6 +85,16 @@ namespace PlayMyVideos.Objects {
                         db_manager.remove_box (this);
                     }
                 });
+            removed.connect (
+                () => {
+                    var f = File.new_for_path (cover_path);
+                    f.trash_async.begin (
+                        0,
+                        null,
+                        (obj, res) => {
+                            f.dispose ();
+                        });
+                });
         }
 
         public Box (string title = "") {

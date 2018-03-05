@@ -81,12 +81,9 @@ namespace PlayMyVideos.Services {
                         int year;
 
                         Utils.get_title_items (first.title, out title, out season, out year);
-
-                        if (year == 0) {
-                            var video = first.get_first_video ();
-                            if (video != null && video.year > 0) {
-                                year = video.year;
-                            }
+                        var video = first.get_first_video ();
+                        if (year == 0 && video != null && video.year > 0) {
+                            year = video.year;
                         }
 
                         Gdk.Pixbuf ? pixbuf = null;
@@ -94,6 +91,9 @@ namespace PlayMyVideos.Services {
                             pixbuf = get_pixbuf_by_season_number (title, season);
                         } else {
                             pixbuf = get_pixbuf_by_movie_title (title, year);
+                            if (pixbuf == null && video != null && video.title != first.title) {
+                                pixbuf = get_pixbuf_by_movie_title (video.title, year);
+                            }
                         }
                         if (pixbuf != null) {
                             pixbuf = Utils.align_and_scale_pixbuf_for_cover (pixbuf);
