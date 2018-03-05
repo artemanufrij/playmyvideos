@@ -41,7 +41,7 @@
             <description>
                 <p>Fixed:</p>
                 <ul>
-                    <li>Error: database sync if a video file was moved</li>
+                    <li>Error: database sync if a video file was moved/renamed</li>
                 </ul>
                 <p>Improved:</p>
                 <ul>
