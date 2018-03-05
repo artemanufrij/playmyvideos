@@ -198,7 +198,7 @@ namespace PlayMyVideos {
 
             headerbar = new Gtk.HeaderBar ();
             headerbar.show_close_button = true;
-            headerbar.title = _ ("Play My Videos");
+            headerbar.title = _ ("Cinema");
 
             play_button = new Gtk.Button.from_icon_name ("media-playback-start-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
             play_button.valign = Gtk.Align.CENTER;
@@ -380,7 +380,7 @@ namespace PlayMyVideos {
             }
             player_view.pause ();
             navigation_button.hide ();
-            headerbar.title = _ ("Play My Videos");
+            headerbar.title = _ ("Cinema");
             this.get_window ().resize (settings.window_width, settings.window_height);
         }
 
