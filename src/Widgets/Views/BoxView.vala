@@ -85,9 +85,9 @@ namespace PlayMyVideos.Widgets.Views {
             videos_scroll.add (videos);
 
             content.pack_start (event_box, false, false, 0);
+            content.pack_start (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), false, false);
             content.pack_start (videos_scroll, true, true, 0);
-            var separator = new Gtk.Separator (Gtk.Orientation.VERTICAL);
-            this.attach (separator, 0, 0);
+            this.attach (new Gtk.Separator (Gtk.Orientation.VERTICAL), 0, 0);
             this.attach (content, 1, 0);
         }
 
