@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -31,7 +31,7 @@ namespace PlayMyVideos {
         public string COVER_FOLDER { get; private set; }
         public string CACHE_FOLDER { get; private set; }
 
-        PlayMyVideos.Settings settings;
+        Settings settings;
 
         static PlayMyVideosApp _instance = null;
         public static PlayMyVideosApp instance {
@@ -43,10 +43,14 @@ namespace PlayMyVideos {
             }
         }
 
+        [CCode (array_length = false, array_null_terminated = true)]
+        string[] ? arg_files = null;
+
         construct {
-            this.flags |= GLib.ApplicationFlags.HANDLES_OPEN;
+            this.flags |= ApplicationFlags.HANDLES_OPEN;
+            this.flags |= ApplicationFlags.HANDLES_COMMAND_LINE;
             this.application_id = "com.github.artemanufrij.playmyvideos";
-            settings = PlayMyVideos.Settings.get_default ();
+            settings = Settings.get_default ();
 
             var action_back = new SimpleAction ("back-action", null);
             add_action (action_back);
@@ -121,6 +125,64 @@ namespace PlayMyVideos {
         public override void open (File[] files, string hint) {
             activate ();
             mainwindow.open_files (files);
+        }
+
+        public override int command_line (ApplicationCommandLine cmd) {
+            command_line_interpreter (cmd);
+            return 0;
+        }
+
+        private void command_line_interpreter (ApplicationCommandLine cmd) {
+            string[] args_cmd = cmd.get_arguments ();
+            unowned string[] args = args_cmd;
+
+            bool next = false;
+            bool full = false;
+            bool play = false;
+
+            GLib.OptionEntry [] options = new OptionEntry [5];
+            options [0] = { "next", 0, 0, OptionArg.NONE, ref next, "Play next track", null };
+            options [1] = { "fullscreen", 0, 0, OptionArg.NONE, ref full, "Toggle fullscreen", null };
+            options [2] = { "play", 0, 0, OptionArg.NONE, ref play, "Toggle playing", null };
+            options [3] = { "", 0, 0, OptionArg.STRING_ARRAY, ref arg_files, null, "[URI...]" };
+            options [4] = { null };
+
+            var opt_context = new OptionContext ("actions");
+            opt_context.add_main_entries (options, null);
+            try {
+                opt_context.parse (ref args);
+            } catch (Error err) {
+                warning (err.message);
+                return;
+            }
+
+            if (next || full || play) {
+                if (next && mainwindow != null) {
+                    mainwindow.next ();
+                } else if (full && mainwindow != null) {
+                    mainwindow.toggle_fullscreen ();
+                } else if (play) {
+                    if (mainwindow == null) {
+                        activate ();
+                    }
+                    mainwindow.toggle_playing ();
+                }
+                return;
+            }
+
+            File[] files = null;
+            foreach (string arg_file in arg_files) {
+                if (GLib.FileUtils.test (arg_file, GLib.FileTest.EXISTS)) {
+                    files += (File.new_for_path (arg_file));
+                }
+            }
+
+            if (files != null && files.length > 0) {
+                open (files, "");
+                return;
+            }
+
+            activate ();
         }
     }
 }

@@ -205,14 +205,7 @@ namespace PlayMyVideos {
             play_button.tooltip_text = _ ("Resume playing");
             play_button.clicked.connect (
                 () => {
-                    if (player_view.playback.uri == settings.last_played_video_uri) {
-                        resume_playing ();
-                        player_view.playback.progress = settings.last_played_video_progress;
-                    } else {
-                        var f = File.new_for_uri (settings.last_played_video_uri);
-                        open_file (f);
-                        player_view.playback.progress = settings.last_played_video_progress;
-                    }
+                    toggle_playing ();
                 });
 
             headerbar.pack_start (play_button);
@@ -340,7 +333,7 @@ namespace PlayMyVideos {
         }
 
         private void visible_playing_button () {
-            if (settings.last_played_video_uri != "") {
+            if (settings.last_played_video_uri != "" && content.visible_child_name != "player") {
                 var f = File.new_for_uri (settings.last_played_video_uri);
                 if (f.query_exists ()) {
                     play_button.visible = f.query_exists ();
@@ -370,7 +363,6 @@ namespace PlayMyVideos {
         }
 
         public void show_boxes () {
-            visible_playing_button ();
             this.unfullscreen ();
             if (boxes_view.has_items) {
                 content.visible_child_name = "boxes";
@@ -378,6 +370,7 @@ namespace PlayMyVideos {
             } else {
                 content.visible_child_name = "welcome";
             }
+            visible_playing_button ();
             player_view.pause ();
             navigation_button.hide ();
             headerbar.title = _ ("Cinema");
@@ -441,6 +434,15 @@ namespace PlayMyVideos {
         public void toggle_playing () {
             if (content.visible_child_name == "player") {
                 player_view.toogle_playing ();
+            } else {
+                if (player_view.playback.uri == settings.last_played_video_uri) {
+                    resume_playing ();
+                    player_view.playback.progress = settings.last_played_video_progress;
+                } else {
+                    var f = File.new_for_uri (settings.last_played_video_uri);
+                    open_file (f);
+                    player_view.playback.progress = settings.last_played_video_progress;
+                }
             }
         }
 
