@@ -198,6 +198,7 @@ namespace PlayMyVideos {
 
             headerbar = new Gtk.HeaderBar ();
             headerbar.show_close_button = true;
+            headerbar.get_style_context ().add_class ("default-decoration");
             headerbar.title = _ ("Cinema");
 
             play_button = new Gtk.Button.from_icon_name ("media-playback-start-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
