@@ -39,6 +39,15 @@
     <releases>
         <release version="0.3.2" date="2018-03-10">
             <description>
+                <p>Improved:</p>
+                <ul>
+                    <li>Cover fetching</li>
+                    <li>Small UI fixes</li>
+                </ul>
+            </description>
+        </release>
+        <release version="0.3.2" date="2018-03-10">
+            <description>
                 <p>Fixed:</p>
                 <ul>
                     <li>Error: database sync if a video file was moved/renamed</li>
