@@ -40,7 +40,7 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         private void build_ui () {
-            var welcome = new Granite.Widgets.Welcome ("Get Some Videos", "Add videos to your library.");
+            var welcome = new Granite.Widgets.Welcome (_("Get Some Videos"), _("Add videos to your library."));
             welcome.append ("folder-video", _ ("Change Video Folder"), _ ("Load videos from a folder, a network or an external disk."));
             welcome.append ("document-import", _ ("Import Videos"), _ ("Import videos from a source into your library."));
             welcome.activated.connect (
