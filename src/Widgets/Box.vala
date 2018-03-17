@@ -30,6 +30,8 @@ namespace PlayMyVideos.Widgets {
         PlayMyVideos.Services.LibraryManager library_manager;
         PlayMyVideos.Settings settings;
 
+        public signal void video_selected (Objects.Video video);
+
         public Objects.Box box { get; private set; }
         public string title { get { return box.title; } }
 
@@ -90,6 +92,17 @@ namespace PlayMyVideos.Widgets {
 
             var event_box = new Gtk.EventBox ();
             event_box.button_press_event.connect (show_context_menu);
+            event_box.event.connect (
+                (event) => {
+                    if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
+                        var first = box.get_first_video ();
+                        if (first != null) {
+                            video_selected (first);
+                        }
+                        return true;
+                    }
+                    return false;
+                });
 
             menu = new Gtk.Menu ();
             var menu_new_cover = new Gtk.MenuItem.with_label (_("Set new Cover…"));

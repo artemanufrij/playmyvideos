@@ -37,6 +37,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.3.4" date="2018-03-20">
+            <description>
+                <p>New:</p>
+                <ul>
+                    <li>Double click on the box starts playing the video</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.3" date="2018-03-10">
             <description>
                 <p>Improved:</p>

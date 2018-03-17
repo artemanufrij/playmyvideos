@@ -113,6 +113,10 @@ namespace PlayMyVideos.Widgets.Views {
 
         public void add_box (Objects.Box box) {
             var b = new Widgets.Box (box);
+            b.video_selected.connect (
+                (video) => {
+                    video_selected (video);
+                });
             lock (boxes) {
                 boxes.add (b);
             }
