@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,8 +27,9 @@
 
 namespace PlayMyVideos.Objects {
     public class Box : GLib.Object {
-        PlayMyVideos.Services.LibraryManager library_manager;
-        PlayMyVideos.Services.DataBaseManager db_manager;
+        Services.LibraryManager library_manager;
+        Services.DataBaseManager db_manager;
+        Settings settings;
 
         public signal void video_added (Video video);
         public signal void video_removed (Video video);
@@ -44,7 +45,7 @@ namespace PlayMyVideos.Objects {
             } set {
                 _ID = value;
                 if (value > 0) {
-                    this.cover_path = GLib.Path.build_filename (PlayMyVideos.PlayMyVideosApp.instance.COVER_FOLDER, ("box_%d.jpg").printf (this.ID));
+                    this.cover_path = GLib.Path.build_filename (PlayMyVideosApp.instance.COVER_FOLDER, ("box_%d.jpg").printf (this.ID));
                     if (title == "") {
                         load_cover_async.begin ();
                     }
@@ -76,7 +77,8 @@ namespace PlayMyVideos.Objects {
         }
 
         construct {
-            library_manager = PlayMyVideos.Services.LibraryManager.instance;
+            settings = Settings.get_default ();
+            library_manager = Services.LibraryManager.instance;
             db_manager = library_manager.db_manager;
             video_removed.connect (
                 (video) => {
@@ -158,7 +160,7 @@ namespace PlayMyVideos.Objects {
 
 // COVER REGION
         public async void load_cover_async () {
-            if (is_cover_loading || _cover != null || this.ID == 0 || this.videos.length () == 0) {
+            if (is_cover_loading || _cover != null || ID == 0 || videos.length () == 0) {
                 return;
             }
             is_cover_loading = true;
@@ -166,8 +168,8 @@ namespace PlayMyVideos.Objects {
                 (obj, res) => {
                     Gdk.Pixbuf ? return_value = load_or_create_cover.end (res);
                     if (return_value != null) {
-                        this.cover = return_value;
-                    } else {
+                        cover = return_value;
+                    } else if (settings.load_content_from_moviedb) {
                         Services.MovieDatabaseManager.instance.fill_box_cover_queue (this);
                     }
                     is_cover_loading = false;
@@ -262,7 +264,7 @@ namespace PlayMyVideos.Objects {
         }
 
         protected Gdk.Pixbuf ? save_cover (Gdk.Pixbuf p) {
-            Gdk.Pixbuf ? pixbuf = PlayMyVideos.Utils.align_and_scale_pixbuf_for_cover (p);
+            Gdk.Pixbuf ? pixbuf = Utils.align_and_scale_pixbuf_for_cover (p);
             try {
                 pixbuf.save (cover_path, "jpeg", "quality", "100");
             } catch (Error err) {

@@ -37,6 +37,14 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="0.3.5" date="2018-03-30">
+            <description>
+                <p>Fix:</p>
+                <ul>
+                    <li>don't cover fetching from themoviedb.org if it was disabled</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.4" date="2018-03-20">
             <description>
                 <p>New:</p>
