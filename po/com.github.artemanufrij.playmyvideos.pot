@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-10 11:15+0100\n"
+"POT-Creation-Date: 2018-03-24 23:35+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,56 +17,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Widgets/Box.vala:95 ../src/Widgets/Views/BoxView.vala:62
-msgid "Set new Cover…"
+#: ../src/Dialogs/Preferences.vala:61
+msgid "Use Dark Theme"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:243
-msgid "Repeat"
+#: ../src/Dialogs/Preferences.vala:69
+msgid "Load Content from The Movie DB"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:270
-msgid "Track %d (%s)"
+#: ../src/Dialogs/Preferences.vala:77
+msgid "Save custom Covers in Library folder"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:288
-msgid "disable"
+#: ../src/Dialogs/Preferences.vala:95
+msgid "_Close"
 msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:300
-msgid "Subtitle %d (%s)"
+#: ../src/MainWindow.vala:202 ../src/MainWindow.vala:377
+msgid "Cinema"
 msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:43
-msgid "Get Some Videos"
+#: ../src/MainWindow.vala:206
+msgid "Resume playing"
 msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:43
-msgid "Add videos to your library."
+#: ../src/MainWindow.vala:224
+msgid "Change Video Folder…"
 msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:44
-msgid "Change Video Folder"
+#: ../src/MainWindow.vala:234
+msgid "Import Videos…"
 msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:44
-msgid "Load videos from a folder, a network or an external disk."
+#: ../src/MainWindow.vala:243
+msgid "Rescan Library"
 msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:45
-msgid "Import Videos"
+#: ../src/MainWindow.vala:250
+msgid "Preferences"
 msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:45
-msgid "Import videos from a source into your library."
+#: ../src/MainWindow.vala:269
+msgid "Search Videos"
 msgstr ""
 
-#: ../src/Widgets/Views/BoxesView.vala:104
-msgid "No results"
-msgstr ""
-
-#: ../src/Widgets/Views/BoxesView.vala:104
-msgid "Try another search"
+#: ../src/MainWindow.vala:282
+msgid "Back"
 msgstr ""
 
 #: ../src/Services/LibraryManager.vala:170
@@ -105,46 +101,54 @@ msgstr ""
 msgid "Subtitles"
 msgstr ""
 
-#: ../src/MainWindow.vala:202 ../src/MainWindow.vala:377
-msgid "Cinema"
+#: ../src/Widgets/Box.vala:108 ../src/Widgets/Views/BoxView.vala:62
+msgid "Set new Cover…"
 msgstr ""
 
-#: ../src/MainWindow.vala:206
-msgid "Resume playing"
+#: ../src/Widgets/VideoTimeLine.vala:243
+msgid "Repeat"
 msgstr ""
 
-#: ../src/MainWindow.vala:224
-msgid "Change Video Folder…"
+#: ../src/Widgets/VideoTimeLine.vala:270
+msgid "Track %d (%s)"
 msgstr ""
 
-#: ../src/MainWindow.vala:234
-msgid "Import Videos…"
+#: ../src/Widgets/VideoTimeLine.vala:288
+msgid "disable"
 msgstr ""
 
-#: ../src/MainWindow.vala:243
-msgid "Rescan Library"
+#: ../src/Widgets/VideoTimeLine.vala:300
+msgid "Subtitle %d (%s)"
 msgstr ""
 
-#: ../src/MainWindow.vala:250
-msgid "Preferences"
+#: ../src/Widgets/Views/BoxesView.vala:104
+msgid "No results"
 msgstr ""
 
-#: ../src/MainWindow.vala:269
-msgid "Search Videos"
+#: ../src/Widgets/Views/BoxesView.vala:104
+msgid "Try another search"
 msgstr ""
 
-#: ../src/MainWindow.vala:282
-msgid "Back"
+#: ../src/Widgets/Views/Welcome.vala:43
+msgid "Get Some Videos"
 msgstr ""
 
-#: ../src/Dialogs/Preferences.vala:61
-msgid "Use Dark Theme"
+#: ../src/Widgets/Views/Welcome.vala:43
+msgid "Add videos to your library."
 msgstr ""
 
-#: ../src/Dialogs/Preferences.vala:69
-msgid "Load Content from The Movie DB"
+#: ../src/Widgets/Views/Welcome.vala:44
+msgid "Change Video Folder"
 msgstr ""
 
-#: ../src/Dialogs/Preferences.vala:77
-msgid "Save custom Covers in Library folder"
+#: ../src/Widgets/Views/Welcome.vala:44
+msgid "Load videos from a folder, a network or an external disk."
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:45
+msgid "Import Videos"
+msgstr ""
+
+#: ../src/Widgets/Views/Welcome.vala:45
+msgid "Import videos from a source into your library."
 msgstr ""
