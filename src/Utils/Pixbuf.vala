@@ -27,17 +27,21 @@
 
 namespace PlayMyVideos.Utils {
     public static Gdk.Pixbuf? align_pixbuf_for_thumbnail_normal (Gdk.Pixbuf p) {
-        Gdk.Pixbuf? pixbuf = p;
+        Gdk.Pixbuf pixbuf = p;
         int dif = (pixbuf.height - 50) / 2;
         pixbuf = new Gdk.Pixbuf.subpixbuf (pixbuf, 8, dif, pixbuf.width - 16, 50);
         return pixbuf;
     }
 
     public static Gdk.Pixbuf? align_and_scale_pixbuf_for_cover (Gdk.Pixbuf p) {
-        Gdk.Pixbuf? pixbuf = p;
-
         int dest_height = 362;
         int dest_width = 256;
+
+        if (p.width == dest_width && p.height == dest_height) {
+            return p;
+        }
+
+        Gdk.Pixbuf pixbuf = p;
 
         int height = pixbuf.height;
         int width = pixbuf.width;

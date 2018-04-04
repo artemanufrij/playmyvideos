@@ -192,7 +192,7 @@ namespace PlayMyVideos.Objects {
                     foreach (var video in videos) {
                         var dir_name = GLib.Path.get_dirname (video.path);
                         foreach (var cover_file in cover_files) {
-                            cover_path = GLib.Path.build_filename (dir_name, cover_file);
+                            var cover_path = GLib.Path.build_filename (dir_name, cover_file);
                             if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                                 try {
                                     return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
@@ -204,7 +204,7 @@ namespace PlayMyVideos.Objects {
                             }
                         }
 
-                        cover_path = GLib.Path.build_filename (dir_name, video.box.title + ".jpg");
+                        var cover_path = GLib.Path.build_filename (dir_name, video.box.title + ".jpg");
                         if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                             try {
                                 return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
