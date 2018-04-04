@@ -89,13 +89,7 @@ namespace PlayMyVideos.Objects {
                 });
             removed.connect (
                 () => {
-                    var c = File.new_for_path (cover_path);
-                    c.trash_async.begin (
-                        0,
-                        null,
-                        (obj, res) => {
-                            c.dispose ();
-                        });
+                    FileUtils.remove (cover_path);
                 });
         }
 
@@ -183,8 +177,7 @@ namespace PlayMyVideos.Objects {
             new Thread<void*> (
                 "load_or_create_cover",
                 () => {
-                    var cover_full_path = File.new_for_path (cover_path);
-                    if (cover_full_path.query_exists ()) {
+                    if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                         try {
                             return_value = new Gdk.Pixbuf.from_file (cover_path);
                             Idle.add ((owned) callback);
@@ -199,13 +192,11 @@ namespace PlayMyVideos.Objects {
                     foreach (var video in videos) {
                         var dir_name = GLib.Path.get_dirname (video.path);
                         foreach (var cover_file in cover_files) {
-                            var cover_path = GLib.Path.build_filename (dir_name, cover_file);
-                            cover_full_path = File.new_for_path (cover_path);
-                            if (cover_full_path.query_exists ()) {
+                            cover_path = GLib.Path.build_filename (dir_name, cover_file);
+                            if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                                 try {
                                     return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                                     Idle.add ((owned) callback);
-                                    cover_full_path.dispose ();
                                     return null;
                                 } catch (Error err) {
                                     warning (err.message);
@@ -213,13 +204,11 @@ namespace PlayMyVideos.Objects {
                             }
                         }
 
-                        var cover_path = GLib.Path.build_filename (dir_name, video.box.title + ".jpg");
-                        cover_full_path = File.new_for_path (cover_path);
-                        if (cover_full_path.query_exists ()) {
+                        cover_path = GLib.Path.build_filename (dir_name, video.box.title + ".jpg");
+                        if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                             try {
                                 return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                                 Idle.add ((owned) callback);
-                                cover_full_path.dispose ();
                                 return null;
                             } catch (Error err) {
                                     warning (err.message);
@@ -227,24 +216,21 @@ namespace PlayMyVideos.Objects {
                         }
 
                         cover_path = GLib.Path.build_filename (dir_name, video.title + ".jpg");
-                        cover_full_path = File.new_for_path (cover_path);
-                        if (cover_full_path.query_exists ()) {
+                        if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                             try {
                                 return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                                 Idle.add ((owned) callback);
-                                cover_full_path.dispose ();
                                 return null;
                             } catch (Error err) {
                                     warning (err.message);
                             }
                         }
 
-                        cover_full_path = File.new_for_path ((video.path + ".jpg"));
-                        if (cover_full_path.query_exists ()) {
+                        cover_path = video.path + ".jpg";
+                        if (FileUtils.test (cover_path, FileTest.EXISTS)) {
                             try {
-                                return_value = save_cover (new Gdk.Pixbuf.from_file (cover_full_path.get_path ()));
+                                return_value = save_cover (new Gdk.Pixbuf.from_file (cover_path));
                                 Idle.add ((owned) callback);
-                                cover_full_path.dispose ();
                                 return null;
                             } catch (Error err) {
                                     warning (err.message);
@@ -252,7 +238,6 @@ namespace PlayMyVideos.Objects {
                         }
                     }
                     Idle.add ((owned) callback);
-                    cover_full_path.dispose ();
                     return null;
                 });
             yield;
