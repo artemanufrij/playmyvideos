@@ -52,27 +52,21 @@ namespace PlayMyVideos {
             this.application_id = "com.github.artemanufrij.playmyvideos";
             settings = Settings.get_default ();
 
-            var action_back = new SimpleAction ("back-action", null);
-            add_action (action_back);
-            add_accelerator ("<Alt>Left", "app.back-action", null);
+            var action_back = action_generator ("<Alt>Left", "back-action");
             action_back.activate.connect (() => {
                 if (mainwindow != null) {
                     mainwindow.show_boxes ();
                 }
             });
 
-            var action_search_reset = new SimpleAction ("search-reset", null);
-            add_action (action_search_reset);
-            add_accelerator ("Escape", "app.search-reset", null);
+            var action_search_reset = action_generator ("Escape", "search-reset");
             action_search_reset.activate.connect (() => {
                 if (mainwindow != null) {
                     mainwindow.search_reset ();
                 }
             });
 
-            var action_fullscreen = new SimpleAction ("toggle-fullscreen", null);
-            add_action (action_fullscreen);
-            add_accelerator ("F11", "app.toggle-fullscreen", null);
+            var action_fullscreen = action_generator ("F11", "toggle-fullscreen");
             action_fullscreen.activate.connect (() => {
                 if (mainwindow != null) {
                     mainwindow.toggle_fullscreen ();
@@ -80,6 +74,13 @@ namespace PlayMyVideos {
             });
 
             create_cache_folders ();
+        }
+
+        private SimpleAction action_generator (string command, string action) {
+            var return_value = new SimpleAction (action, null);
+            add_action (return_value);
+            set_accels_for_action ("app.%s".printf (action), {command});
+            return return_value;
         }
 
         public void create_cache_folders () {
