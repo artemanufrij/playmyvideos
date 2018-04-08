@@ -40,6 +40,10 @@
         <release version="1.0.0" date="2018-04-10">
             <description>
                 Switch to Meson
+                <p>Translation:</p>
+                <ul>
+                    <li>German</li>
+                </ul>
             </description>
         </release>
         <release version="0.3.5" date="2018-03-30">
