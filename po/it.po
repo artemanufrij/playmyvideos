@@ -1,108 +1,225 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-26 18:02+0100\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-08 13:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: ../src/Widgets/Box.vala:66 ../src/Widgets/Views/BoxView.vala:59
-msgid "Set new Cover…"
-msgstr "Cambiare Copertina"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:7
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:3
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:4
+#: src/MainWindow.vala:202 src/MainWindow.vala:377
+msgid "Cinema"
+msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:148
-msgid "Repeat"
-msgstr "Ripeti"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
+msgid "A video player for watching local video files."
+msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:174
-msgid "Track %d (%s)"
-msgstr "Traccia %d (%s)"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
+msgid "A very fast video player designed extra for large local libraries."
+msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:194
-msgid "disable"
-msgstr "Disattivare"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:11
+msgid "Features:"
+msgstr ""
 
-#: ../src/Widgets/VideoTimeLine.vala:207
-msgid "Subtitle %d (%s)"
-msgstr "Sottotitoli %d (%s)"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:13
+msgid "Season playlist"
+msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:44
-msgid "Change Video Folder"
-msgstr "Cambiare Cartella"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:14
+msgid "Subtiles support"
+msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:44
-msgid "Load videos from a folder, a network or an external disk."
-msgstr "Caricare video da una cartella, una rete o un disco esterno"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:15
+msgid "'TheMovieDB.org' integration for fetching covers"
+msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:45
-msgid "Import Videos"
-msgstr "aggiungi Video"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:26
+msgid "Artem Anufrij"
+msgstr ""
 
-#: ../src/Widgets/Views/Welcome.vala:45
-msgid "Import videos from a source into your library."
-msgstr "Aggiungi video da un media alla libreria."
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:5
+#, fuzzy
+msgid "Watch your videos"
+msgstr "Cercare Video"
 
-#: ../src/Services/LibraryManager.vala:117
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:6
+msgid "videos;movies;shows;"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:8
+msgid "com.github.artemanufrij.playmyvideos"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:17
+msgid "Play/Pause"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:19
+msgid "media-playback-start-symbolic"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:22
+msgid "Next"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:24
+msgid "media-skip-forward-symbolic"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:27
+msgid "Fullscreen"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:28
+msgid "view-fullscreen-symbolic"
+msgstr ""
+
+#: src/Services/LibraryManager.vala:170
 msgid "Choose an image…"
 msgstr "Scegli un immagine..."
 
-#: ../src/Services/LibraryManager.vala:119
-#: ../src/Services/LibraryManager.vala:140
+#: src/Services/LibraryManager.vala:172 src/Services/LibraryManager.vala:193
+#: src/Services/LibraryManager.vala:215
 msgid "_Cancel"
 msgstr "_Cancella"
 
-#: ../src/Services/LibraryManager.vala:120
-#: ../src/Services/LibraryManager.vala:141
+#: src/Services/LibraryManager.vala:173 src/Services/LibraryManager.vala:194
+#: src/Services/LibraryManager.vala:216
 msgid "_Open"
 msgstr "_Aprire"
 
-#: ../src/Services/LibraryManager.vala:123
+#: src/Services/LibraryManager.vala:176
 msgid "Images"
 msgstr "Immagini"
 
-#: ../src/Services/LibraryManager.vala:139
+#: src/Services/LibraryManager.vala:192
 msgid "Select a folder."
 msgstr "Scegli Cartella"
 
-#: ../src/Services/LibraryManager.vala:144
+#: src/Services/LibraryManager.vala:197
 msgid "Folder"
 msgstr "Cartella"
 
-#: ../src/MainWindow.vala:139 ../src/MainWindow.vala:253
-msgid "Play My Videos"
+#: src/Services/LibraryManager.vala:213
+#, fuzzy
+msgid "Choose a subtitle file…"
+msgstr "Scegli un immagine..."
+
+#: src/Services/LibraryManager.vala:219
+#, fuzzy
+msgid "Subtitles"
+msgstr "Sottotitoli %d (%s)"
+
+#: src/Widgets/Box.vala:108 src/Widgets/Views/BoxView.vala:62
+msgid "Set new Cover…"
+msgstr "Cambiare Copertina"
+
+#: src/Widgets/VideoTimeLine.vala:243
+msgid "Repeat"
+msgstr "Ripeti"
+
+#: src/Widgets/VideoTimeLine.vala:270
+#, c-format
+msgid "Track %d (%s)"
+msgstr "Traccia %d (%s)"
+
+#: src/Widgets/VideoTimeLine.vala:288
+msgid "disable"
+msgstr "Disattivare"
+
+#: src/Widgets/VideoTimeLine.vala:300
+#, c-format
+msgid "Subtitle %d (%s)"
+msgstr "Sottotitoli %d (%s)"
+
+#: src/Widgets/Views/Welcome.vala:43
+#, fuzzy
+msgid "Get Some Videos"
+msgstr "Cercare Video"
+
+#: src/Widgets/Views/Welcome.vala:43
+#, fuzzy
+msgid "Add videos to your library."
+msgstr "Aggiungi video da un media alla libreria."
+
+#: src/Widgets/Views/Welcome.vala:44
+msgid "Change Video Folder"
+msgstr "Cambiare Cartella"
+
+#: src/Widgets/Views/Welcome.vala:44
+msgid "Load videos from a folder, a network or an external disk."
+msgstr "Caricare video da una cartella, una rete o un disco esterno"
+
+#: src/Widgets/Views/Welcome.vala:45
+msgid "Import Videos"
+msgstr "aggiungi Video"
+
+#: src/Widgets/Views/Welcome.vala:45
+msgid "Import videos from a source into your library."
+msgstr "Aggiungi video da un media alla libreria."
+
+#: src/Widgets/Views/BoxesView.vala:104
+msgid "No results"
 msgstr ""
 
-#: ../src/MainWindow.vala:151
+#: src/Widgets/Views/BoxesView.vala:104
+msgid "Try another search"
+msgstr ""
+
+#: src/Dialogs/Preferences.vala:61
+msgid "Use Dark Theme"
+msgstr "Tema Scuro"
+
+#: src/Dialogs/Preferences.vala:69
+msgid "Load Content from The Movie DB"
+msgstr ""
+
+#: src/Dialogs/Preferences.vala:77
+msgid "Save custom Covers in Library folder"
+msgstr ""
+
+#: src/Dialogs/Preferences.vala:95
+msgid "_Close"
+msgstr ""
+
+#: src/MainWindow.vala:206
+msgid "Resume playing"
+msgstr ""
+
+#: src/MainWindow.vala:224
 msgid "Change Video Folder…"
 msgstr "Cambiare Cartella Video..."
 
-#: ../src/MainWindow.vala:160
+#: src/MainWindow.vala:234
 msgid "Import Videos…"
 msgstr "Aggiungi Video..."
 
-#: ../src/MainWindow.vala:168
+#: src/MainWindow.vala:243
 msgid "Rescan Library"
 msgstr "Riscanerizare la Libreria"
 
-#: ../src/MainWindow.vala:174
+#: src/MainWindow.vala:250
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: ../src/MainWindow.vala:192
+#: src/MainWindow.vala:269
 msgid "Search Videos"
 msgstr "Cercare Video"
 
-#: ../src/MainWindow.vala:198
-msgid "Library"
-msgstr "Riscanerizare la Libreria"
+#: src/MainWindow.vala:282
+msgid "Back"
+msgstr ""
 
-#: ../src/Dialogs/Preferences.vala:60
-msgid "Use Dark Theme"
-msgstr "Tema Scuro"
+#~ msgid "Library"
+#~ msgstr "Riscanerizare la Libreria"

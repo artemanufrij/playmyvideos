@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-24 23:35+0400\n"
+"POT-Creation-Date: 2018-04-08 13:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrey Kultyapov <camellan@yandex.ru>\n"
 "Language-Team: \n"
@@ -14,141 +14,210 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 2.0.4\n"
 
-#: ../src/Dialogs/Preferences.vala:61
-msgid "Use Dark Theme"
-msgstr "Использовать тёмную тему"
-
-#: ../src/Dialogs/Preferences.vala:69
-msgid "Load Content from The Movie DB"
-msgstr "Загружать информации о фильме из Movie DB"
-
-#: ../src/Dialogs/Preferences.vala:77
-msgid "Save custom Covers in Library folder"
-msgstr "Сохранять пользовательские обложки в папку медиатеки"
-
-#: ../src/Dialogs/Preferences.vala:95
-msgid "_Close"
-msgstr "_Закрыть"
-
-#: ../src/MainWindow.vala:202 ../src/MainWindow.vala:377
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:7
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:3
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:4
+#: src/MainWindow.vala:202 src/MainWindow.vala:377
 msgid "Cinema"
 msgstr "Cinema"
 
-#: ../src/MainWindow.vala:206
-msgid "Resume playing"
-msgstr "Возобновить воспроизведение"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
+msgid "A video player for watching local video files."
+msgstr ""
 
-#: ../src/MainWindow.vala:224
-msgid "Change Video Folder…"
-msgstr "Выбрать папку видео…"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
+msgid "A very fast video player designed extra for large local libraries."
+msgstr ""
 
-#: ../src/MainWindow.vala:234
-msgid "Import Videos…"
-msgstr "Импорт видео…"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:11
+msgid "Features:"
+msgstr ""
 
-#: ../src/MainWindow.vala:243
-msgid "Rescan Library"
-msgstr "Пересканировать медиатеку"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:13
+msgid "Season playlist"
+msgstr ""
 
-#: ../src/MainWindow.vala:250
-msgid "Preferences"
-msgstr "Настройки"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:14
+#, fuzzy
+msgid "Subtiles support"
+msgstr "Субтитры"
 
-#: ../src/MainWindow.vala:269
-msgid "Search Videos"
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:15
+msgid "'TheMovieDB.org' integration for fetching covers"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:26
+msgid "Artem Anufrij"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:5
+#, fuzzy
+msgid "Watch your videos"
 msgstr "Поиск видео"
 
-#: ../src/MainWindow.vala:282
-msgid "Back"
-msgstr "Назад"
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:6
+msgid "videos;movies;shows;"
+msgstr ""
 
-#: ../src/Services/LibraryManager.vala:170
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:8
+msgid "com.github.artemanufrij.playmyvideos"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:17
+msgid "Play/Pause"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:19
+msgid "media-playback-start-symbolic"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:22
+msgid "Next"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:24
+msgid "media-skip-forward-symbolic"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:27
+msgid "Fullscreen"
+msgstr ""
+
+#: data/com.github.artemanufrij.playmyvideos.desktop.in:28
+msgid "view-fullscreen-symbolic"
+msgstr ""
+
+#: src/Services/LibraryManager.vala:170
 msgid "Choose an image…"
 msgstr "Выбрать изображение…"
 
-#: ../src/Services/LibraryManager.vala:172
-#: ../src/Services/LibraryManager.vala:193
-#: ../src/Services/LibraryManager.vala:215
+#: src/Services/LibraryManager.vala:172 src/Services/LibraryManager.vala:193
+#: src/Services/LibraryManager.vala:215
 msgid "_Cancel"
 msgstr "_Отмена"
 
-#: ../src/Services/LibraryManager.vala:173
-#: ../src/Services/LibraryManager.vala:194
-#: ../src/Services/LibraryManager.vala:216
+#: src/Services/LibraryManager.vala:173 src/Services/LibraryManager.vala:194
+#: src/Services/LibraryManager.vala:216
 msgid "_Open"
 msgstr "_Открыть"
 
-#: ../src/Services/LibraryManager.vala:176
+#: src/Services/LibraryManager.vala:176
 msgid "Images"
 msgstr "Изображения"
 
-#: ../src/Services/LibraryManager.vala:192
+#: src/Services/LibraryManager.vala:192
 msgid "Select a folder."
 msgstr "Выбрать папку."
 
-#: ../src/Services/LibraryManager.vala:197
+#: src/Services/LibraryManager.vala:197
 msgid "Folder"
 msgstr "Папка"
 
-#: ../src/Services/LibraryManager.vala:213
+#: src/Services/LibraryManager.vala:213
 msgid "Choose a subtitle file…"
 msgstr "Выбрать файл субтитров…"
 
-#: ../src/Services/LibraryManager.vala:219
+#: src/Services/LibraryManager.vala:219
 msgid "Subtitles"
 msgstr "Субтитры"
 
-#: ../src/Widgets/Box.vala:108 ../src/Widgets/Views/BoxView.vala:62
+#: src/Widgets/Box.vala:108 src/Widgets/Views/BoxView.vala:62
 msgid "Set new Cover…"
 msgstr "Установить новую обложку…"
 
-#: ../src/Widgets/VideoTimeLine.vala:243
+#: src/Widgets/VideoTimeLine.vala:243
 msgid "Repeat"
 msgstr "Повторить"
 
-#: ../src/Widgets/VideoTimeLine.vala:270
+#: src/Widgets/VideoTimeLine.vala:270
+#, c-format
 msgid "Track %d (%s)"
 msgstr "Трек %d (%s)"
 
-#: ../src/Widgets/VideoTimeLine.vala:288
+#: src/Widgets/VideoTimeLine.vala:288
 msgid "disable"
 msgstr "отключить"
 
-#: ../src/Widgets/VideoTimeLine.vala:300
+#: src/Widgets/VideoTimeLine.vala:300
+#, c-format
 msgid "Subtitle %d (%s)"
 msgstr "Субтитры %d (%s)"
 
-#: ../src/Widgets/Views/BoxesView.vala:104
-msgid "No results"
-msgstr "Нет результата"
-
-#: ../src/Widgets/Views/BoxesView.vala:104
-msgid "Try another search"
-msgstr "Попробуйте другой запрос"
-
-#: ../src/Widgets/Views/Welcome.vala:43
+#: src/Widgets/Views/Welcome.vala:43
 msgid "Get Some Videos"
 msgstr "Выбор видеофайлов"
 
-#: ../src/Widgets/Views/Welcome.vala:43
+#: src/Widgets/Views/Welcome.vala:43
 msgid "Add videos to your library."
 msgstr "Добавьте видео в медиатеку."
 
-#: ../src/Widgets/Views/Welcome.vala:44
+#: src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
 msgstr "Выбрать папку видео"
 
-#: ../src/Widgets/Views/Welcome.vala:44
+#: src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
 msgstr "Загрузить видео из папки, сетевого или внешнего диска."
 
-#: ../src/Widgets/Views/Welcome.vala:45
+#: src/Widgets/Views/Welcome.vala:45
 msgid "Import Videos"
 msgstr "Импорт видео"
 
-#: ../src/Widgets/Views/Welcome.vala:45
+#: src/Widgets/Views/Welcome.vala:45
 msgid "Import videos from a source into your library."
 msgstr "Импорт видео из источника в медиатеку."
+
+#: src/Widgets/Views/BoxesView.vala:104
+msgid "No results"
+msgstr "Нет результата"
+
+#: src/Widgets/Views/BoxesView.vala:104
+msgid "Try another search"
+msgstr "Попробуйте другой запрос"
+
+#: src/Dialogs/Preferences.vala:61
+msgid "Use Dark Theme"
+msgstr "Использовать тёмную тему"
+
+#: src/Dialogs/Preferences.vala:69
+msgid "Load Content from The Movie DB"
+msgstr "Загружать информации о фильме из Movie DB"
+
+#: src/Dialogs/Preferences.vala:77
+msgid "Save custom Covers in Library folder"
+msgstr "Сохранять пользовательские обложки в папку медиатеки"
+
+#: src/Dialogs/Preferences.vala:95
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: src/MainWindow.vala:206
+msgid "Resume playing"
+msgstr "Возобновить воспроизведение"
+
+#: src/MainWindow.vala:224
+msgid "Change Video Folder…"
+msgstr "Выбрать папку видео…"
+
+#: src/MainWindow.vala:234
+msgid "Import Videos…"
+msgstr "Импорт видео…"
+
+#: src/MainWindow.vala:243
+msgid "Rescan Library"
+msgstr "Пересканировать медиатеку"
+
+#: src/MainWindow.vala:250
+msgid "Preferences"
+msgstr "Настройки"
+
+#: src/MainWindow.vala:269
+msgid "Search Videos"
+msgstr "Поиск видео"
+
+#: src/MainWindow.vala:282
+msgid "Back"
+msgstr "Назад"
 
 #~ msgid "Play My Videos"
 #~ msgstr "Play My Videos"

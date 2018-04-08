@@ -37,6 +37,11 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="1.0.0" date="2018-04-10">
+            <description>
+                Switch to Meson
+            </description>
+        </release>
         <release version="0.3.5" date="2018-03-30">
             <description>
                 <p>Fix:</p>
