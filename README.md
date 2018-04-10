@@ -19,7 +19,6 @@
 </p>
 
 ## Install from Github.
-
 As first you need elementary SDK
 ```
 sudo apt install elementary-sdk
@@ -33,16 +32,10 @@ Clone repository and change directory
 git clone https://github.com/artemanufrij/playmyvideos.git
 cd playmyvideos
 ```
-
-Create **build** folder and compile application
+Compile, install and start Cinema on your system
 ```
 meson build --prefix=/usr
 cd build
-ninja
-```
-
-Install and start Play My Videos on your system
-```
 sudo make ninja
 com.github.artemanufrij.playmyvideos
 ```
