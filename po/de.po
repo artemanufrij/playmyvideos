@@ -21,8 +21,8 @@ msgid "Cinema"
 msgstr "Cinema"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
-msgid "A video player for watching local video files."
-msgstr "Video Player zum abspielen von lokalen Videodateien."
+msgid "A video player for watching local video files"
+msgstr "Video Player zum abspielen von lokalen Videodateien"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
 msgid "A very fast video player designed extra for large local libraries."
