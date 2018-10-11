@@ -5,9 +5,9 @@
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0+</project_license>
     <name>Cinema</name>
-    <summary>A video player for watching local video files.</summary>
+    <summary>A video player for watching local video files</summary>
     <description>
-        <p>A very fast video player designed extra for large local libraries.</p>
+        <p>A very fast video player designed extra for large local libraries which also supports downloading of box covers</p>
         <p>Features:</p>
         <ul>
             <li>Season playlist</li>
