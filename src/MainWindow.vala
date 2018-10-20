@@ -132,15 +132,6 @@ namespace PlayMyVideos {
                     library_manager.sync_library_content.begin ();
                     visible_playing_button ();
                 });
-
-            this.configure_event.connect (
-                (event) => {
-                    if (!player_view.playback.playing) {
-                        settings.window_width = event.width;
-                        settings.window_height = event.height;
-                    }
-                    return false;
-                });
             this.motion_notify_event.connect (
                 (event) => {
                     show_mouse_cursor ();
@@ -407,6 +398,11 @@ namespace PlayMyVideos {
                 this.get_position (out x, out y);
                 settings.window_x = x;
                 settings.window_y = y;
+
+                int width, height;
+                this.get_size (out width, out height);
+                settings.window_height = height;
+                settings.window_width = width;
             }
         }
 
