@@ -182,6 +182,7 @@ namespace PlayMyVideos.Widgets.Views {
                 }
                 return;
             }
+            pause ();
             current_video = video;
             if (current_video.box != null) {
                 playlist.show_box (current_video.box);

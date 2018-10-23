@@ -34,7 +34,6 @@ namespace PlayMyVideos.Widgets {
         Gtk.Image thumbnail;
 
         public Video (Objects.Video video) {
-
             this.video = video;
             this.video.thumbnail_normal_changed.connect (() => {
                 thumbnail.pixbuf = video.thumbnail_normal;

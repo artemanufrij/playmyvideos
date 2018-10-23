@@ -307,7 +307,7 @@ namespace PlayMyVideos {
                     }
                     var current_width = this.get_allocated_width ();
                     double w_r = (double)(current_width - 156) / width;
-                    int new_height = (int)(height * w_r) + 206;
+                    int new_height = (int)(height * w_r) + 193;
                     if (current_width <= 0 || new_height <=0) {
                         return;
                     }
