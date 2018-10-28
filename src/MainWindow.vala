@@ -480,8 +480,7 @@ namespace PlayMyVideos {
         }
 
         public void hide_mouse_cursor () {
-            var display = this.get_window ().get_display ();
-            var cursor = new Gdk.Cursor.for_display (display, Gdk.CursorType.BLANK_CURSOR);
+            var cursor = new Gdk.Cursor.from_name (Gdk.Display.get_default (), "none");
             this.get_window ().set_cursor (cursor);
         }
 
