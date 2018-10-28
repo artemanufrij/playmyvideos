@@ -49,15 +49,9 @@ namespace PlayMyVideos {
 
         construct {
             settings = Settings.get_default ();
-            settings.notify["use-dark-theme"].connect (
-                () => {
-                    Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = settings.use_dark_theme;
-                    if (settings.use_dark_theme) {
-                        app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
-                    } else {
-                        app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
-                    }
-                });
+            settings.notify["use-dark-theme"].connect (() => {
+                Gtk.Settings.get_default ().gtk_application_prefer_dark_theme = settings.use_dark_theme;
+            });
 
             library_manager = PlayMyVideos.Services.LibraryManager.instance;
             library_manager.added_new_box.connect (
@@ -204,11 +198,7 @@ namespace PlayMyVideos {
 
             //SETTINGS MENU
             app_menu = new Gtk.MenuButton ();
-            if (settings.use_dark_theme) {
-                app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
-            } else {
-                app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
-            }
+            app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.LARGE_TOOLBAR));
 
             var settings_menu = new Gtk.Menu ();
 
@@ -259,10 +249,9 @@ namespace PlayMyVideos {
             search_entry = new Gtk.SearchEntry ();
             search_entry.placeholder_text = _ ("Search Videos");
             search_entry.valign = Gtk.Align.CENTER;
-            search_entry.search_changed.connect (
-                () => {
-                    boxes_view.filter = search_entry.text;
-                });
+            search_entry.search_changed.connect (() => {
+                boxes_view.filter = search_entry.text;
+            });
             headerbar.pack_end (search_entry);
 
             // SPINNER
@@ -274,12 +263,11 @@ namespace PlayMyVideos {
             navigation_button.valign = Gtk.Align.CENTER;
             navigation_button.can_focus = false;
             navigation_button.get_style_context ().add_class ("back-button");
-            navigation_button.clicked.connect (
-                () => {
-                    settings.last_played_video_progress = player_view.playback.progress;
-                    show_boxes ();
-                    player_view.clear_last_size ();
-                });
+            navigation_button.clicked.connect (() => {
+                settings.last_played_video_progress = player_view.playback.progress;
+                show_boxes ();
+                player_view.clear_last_size ();
+            });
 
             headerbar.pack_start (navigation_button);
 
@@ -287,32 +275,39 @@ namespace PlayMyVideos {
 
             boxes_view = new Widgets.Views.BoxesView ();
             boxes_view.video_selected.connect (show_player);
+            boxes_view.box_removed.connect ((current_count) => {
+                if (current_count == 0) {
+                    Idle.add (() => {
+                        if (content.visible_child_name != "welcome") {
+                            content.visible_child_name = "welcome";
+                        }
+                        return false;
+                    });
+                }
+            });
 
             player_view = new Widgets.Views.PlayerView ();
-            player_view.ended.connect (
-                () => {
-                    settings.last_played_video_uri = "";
-                    settings.last_played_video_progress = 0;
-                    show_boxes ();
-                });
-            player_view.started.connect (
-                (video) => {
-                    headerbar.title = video.title;
-                    play_button.visible = false;
-                });
-            player_view.player_frame_resized.connect (
-                (width, height) => {
-                    if (width < 0 || height < 0) {
-                        return;
-                    }
-                    var current_width = this.get_allocated_width ();
-                    double w_r = (double)(current_width - 156) / width;
-                    int new_height = (int)(height * w_r) + 193;
-                    if (current_width <= 0 || new_height <=0) {
-                        return;
-                    }
-                    this.get_window ().resize (current_width, new_height);
-                });
+            player_view.ended.connect (() => {
+                settings.last_played_video_uri = "";
+                settings.last_played_video_progress = 0;
+                show_boxes ();
+            });
+            player_view.started.connect ((video) => {
+                headerbar.title = video.title;
+                play_button.visible = false;
+            });
+            player_view.player_frame_resized.connect ((width, height) => {
+                if (width < 0 || height < 0) {
+                    return;
+                }
+                var current_width = this.get_allocated_width ();
+                double w_r = (double)(current_width - 156) / width;
+                int new_height = (int)(height * w_r) + 193;
+                if (current_width <= 0 || new_height <=0) {
+                    return;
+                }
+                this.get_window ().resize (current_width, new_height);
+            });
 
             var welcome = new Widgets.Views.Welcome ();
 

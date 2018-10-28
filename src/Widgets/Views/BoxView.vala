@@ -116,7 +116,10 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         private void current_box_removed () {
-            box_removed ();
+            Idle.add (() => {
+                box_removed ();
+                return false;
+            });
         }
 
         private void change_cover () {

@@ -80,17 +80,15 @@ namespace PlayMyVideos.Objects {
             settings = Settings.get_default ();
             library_manager = Services.LibraryManager.instance;
             db_manager = library_manager.db_manager;
-            video_removed.connect (
-                (video) => {
-                    this._videos.remove (video);
-                    if (this.videos.length () == 0) {
-                        db_manager.remove_box (this);
-                    }
-                });
-            removed.connect (
-                () => {
-                    FileUtils.remove (cover_path);
-                });
+            video_removed.connect ((video) => {
+                this._videos.remove (video);
+                if (this.videos.length () == 0) {
+                    db_manager.remove_box (this);
+                }
+            });
+            removed.connect (() => {
+                FileUtils.remove (cover_path);
+            });
         }
 
         public Box (string title = "") {

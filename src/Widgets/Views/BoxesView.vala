@@ -30,6 +30,7 @@ namespace PlayMyVideos.Widgets.Views {
         Services.LibraryManager library_manager;
 
         public signal void video_selected (Objects.Video video);
+        public signal void box_removed (uint current_count);
 
         Gtk.FlowBox boxes;
         Gtk.Revealer action_revealer;
@@ -60,14 +61,12 @@ namespace PlayMyVideos.Widgets.Views {
 
         construct {
             library_manager = Services.LibraryManager.instance;
-            library_manager.added_new_box.connect (
-                (box) => {
-                    Idle.add (
-                        () => {
-                            add_box (box);
-                            return false;
-                        });
+            library_manager.added_new_box.connect ((box) => {
+                Idle.add (() => {
+                    add_box (box);
+                    return false;
                 });
+            });
         }
 
         public BoxesView () {
@@ -113,10 +112,15 @@ namespace PlayMyVideos.Widgets.Views {
 
         public void add_box (Objects.Box box) {
             var b = new Widgets.Box (box);
-            b.video_selected.connect (
-                (video) => {
-                    video_selected (video);
-                });
+            b.removed.connect (() => {
+                lock (boxes) {
+                    b.destroy ();
+                    box_removed (boxes.get_children().length ());
+                }
+            });
+            b.video_selected.connect ((video) => {
+                video_selected (video);
+            });
             lock (boxes) {
                 boxes.add (b);
             }
@@ -124,20 +128,20 @@ namespace PlayMyVideos.Widgets.Views {
         }
 
         private void do_sort () {
-            if (timer_sort != 0) {
-                Source.remove (timer_sort);
-                timer_sort = 0;
-            }
+            lock (timer_sort) {
+                if (timer_sort != 0) {
+                    Source.remove (timer_sort);
+                    timer_sort = 0;
+                }
 
-            timer_sort = Timeout.add (
-                500,
-                () => {
+                timer_sort = Timeout.add (500, () => {
                     boxes.set_sort_func (boxes_sort_func);
                     boxes.set_sort_func (null);
                     Source.remove (timer_sort);
                     timer_sort = 0;
                     return false;
                 });
+            }
         }
 
         private void do_search () {

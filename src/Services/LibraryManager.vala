@@ -98,7 +98,7 @@ namespace PlayMyVideos.Services {
         // LOCAL FILES REGION
         public async void sync_library_content () {
             new Thread <void*> (
-                null,
+                "sync_library_content",
                 () => {
                     remove_non_existent_items ();
                     scan_local_library_for_new_files (settings.library_location);

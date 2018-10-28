@@ -31,6 +31,7 @@ namespace PlayMyVideos.Widgets {
         PlayMyVideos.Settings settings;
 
         public signal void video_selected (Objects.Video video);
+        public signal void removed ();
 
         public Objects.Box box { get; private set; }
         public string title { get { return box.title; } }
@@ -59,7 +60,7 @@ namespace PlayMyVideos.Widgets {
             });
             this.box.removed.connect (() => {
                 Idle.add (() => {
-                    this.destroy ();
+                    removed ();
                     return false;
                 });
             });
