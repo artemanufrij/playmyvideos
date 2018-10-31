@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2017-2017 Artem Anufrij <artem.anufrij@live.de>
+ * Copyright (c) 2017-2018 Artem Anufrij <artem.anufrij@live.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
 
 namespace PlayMyVideos.Dialogs {
     public class Preferences : Gtk.Dialog {
-        PlayMyVideos.Settings settings;
+        Settings settings;
 
         construct {
             settings = PlayMyVideos.Settings.get_default ();
@@ -58,14 +58,6 @@ namespace PlayMyVideos.Dialogs {
             grid.row_spacing = 12;
             grid.margin = 12;
 
-            var use_dark_theme_label = new Gtk.Label (_("Use Dark Theme"));
-            use_dark_theme_label.halign = Gtk.Align.START;
-            var use_dark_theme = new Gtk.Switch ();
-            use_dark_theme.active = settings.use_dark_theme;
-            use_dark_theme.notify["active"].connect (() => {
-                settings.use_dark_theme = use_dark_theme.active;
-            });
-
             var load_content_label = new Gtk.Label (_("Load Content from The Movie DB"));
             load_content_label.halign = Gtk.Align.START;
             var load_content = new Gtk.Switch ();
@@ -82,13 +74,10 @@ namespace PlayMyVideos.Dialogs {
                 settings.save_custom_covers = save_custom_covers.active;
             });
 
-            grid.attach (use_dark_theme_label, 0, 0);
-            grid.attach (use_dark_theme, 1, 0);
-            grid.attach (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), 0, 1, 2, 1);
-            grid.attach (load_content_label, 0, 2);
-            grid.attach (load_content, 1, 2);
-            grid.attach (save_custom_covers_label, 0, 3);
-            grid.attach (save_custom_covers, 1, 3);
+            grid.attach (load_content_label, 0, 0);
+            grid.attach (load_content, 1, 0);
+            grid.attach (save_custom_covers_label, 0, 1);
+            grid.attach (save_custom_covers, 1, 1);
 
             content.pack_start (grid, false, false, 0);
 
