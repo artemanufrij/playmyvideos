@@ -1,98 +1,96 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French translations for com.github.artemanufrij.playmyvideos package.
+# Copyright (C) 2019 THE com.github.artemanufrij.playmyvideos'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.artemanufrij.playmyvideos package.
+# NathanBnm, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: com.github.artemanufrij.playmyvideos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-08 13:43+0200\n"
-"PO-Revision-Date: 2017-11-08 23:29+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2019-01-19 23:45+0100\n"
+"Last-Translator: NathanBnm\n"
+"Language-Team: Français\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:7
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:3
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:4
 #: src/MainWindow.vala:202 src/MainWindow.vala:377
 msgid "Cinema"
-msgstr ""
+msgstr "Cinéma"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
 msgid "A video player for watching local video files."
-msgstr ""
+msgstr "Un lecteur vidéo pour regarder les fichiers vidéo locaux."
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
 msgid "A very fast video player designed extra for large local libraries."
-msgstr ""
+msgstr "Un lecteur vidéo très rapide conçu pour les grandes bibliothèques locales."
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:11
 msgid "Features:"
-msgstr ""
+msgstr "Fonctionnalités :"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:13
 msgid "Season playlist"
-msgstr ""
+msgstr "Playlist de la saison"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:14
 msgid "Subtiles support"
-msgstr ""
+msgstr "Support des sous-titres"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:15
 msgid "'TheMovieDB.org' integration for fetching covers"
-msgstr ""
+msgstr "Intégration de « TheMovieDB.org » pour récupérer les couvertures"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:26
 msgid "Artem Anufrij"
-msgstr ""
+msgstr "Artem Anufrij"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:5
 #, fuzzy
 msgid "Watch your videos"
-msgstr "Chercher des vidéos"
+msgstr "Regardez vos vidéos"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:6
 msgid "videos;movies;shows;"
-msgstr ""
+msgstr "vidéos;films;shows;"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:8
 msgid "com.github.artemanufrij.playmyvideos"
-msgstr ""
+msgstr "com.github.artemanufrij.playmyvideos"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:17
 msgid "Play/Pause"
-msgstr ""
+msgstr "Lecture/Pause"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:19
 msgid "media-playback-start-symbolic"
-msgstr ""
+msgstr "media-playback-start-symbolic"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:22
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:24
 msgid "media-skip-forward-symbolic"
-msgstr ""
+msgstr "media-skip-forward-symbolic"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:27
 msgid "Fullscreen"
-msgstr ""
+msgstr "Plein-écran"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:28
 msgid "view-fullscreen-symbolic"
-msgstr ""
+msgstr "view-fullscreen-symbolic"
 
 #: src/Services/LibraryManager.vala:170
 msgid "Choose an image…"
-msgstr "Choisir une image..."
+msgstr "Choisir une image…"
 
 #: src/Services/LibraryManager.vala:172 src/Services/LibraryManager.vala:193
 #: src/Services/LibraryManager.vala:215
@@ -110,7 +108,7 @@ msgstr "Images"
 
 #: src/Services/LibraryManager.vala:192
 msgid "Select a folder."
-msgstr "Choisir un dossier."
+msgstr "Sélectionner un dossier."
 
 #: src/Services/LibraryManager.vala:197
 msgid "Folder"
@@ -119,20 +117,20 @@ msgstr "Dossier"
 #: src/Services/LibraryManager.vala:213
 #, fuzzy
 msgid "Choose a subtitle file…"
-msgstr "Choisir une image..."
+msgstr "Choisir un fichier de sous-titres…"
 
 #: src/Services/LibraryManager.vala:219
 #, fuzzy
 msgid "Subtitles"
-msgstr "Sous-titre %d (%s)"
+msgstr "Sous-titres"
 
 #: src/Widgets/Box.vala:108 src/Widgets/Views/BoxView.vala:62
 msgid "Set new Cover…"
-msgstr "Nouvelle couverture..."
+msgstr "Définir une nouvelle couverture…"
 
 #: src/Widgets/VideoTimeLine.vala:243
 msgid "Repeat"
-msgstr ""
+msgstr "Répéter"
 
 #: src/Widgets/VideoTimeLine.vala:270
 #, c-format
@@ -151,16 +149,16 @@ msgstr "Sous-titre %d (%s)"
 #: src/Widgets/Views/Welcome.vala:43
 #, fuzzy
 msgid "Get Some Videos"
-msgstr "Chercher des vidéos"
+msgstr "Obtenir des vidéos"
 
 #: src/Widgets/Views/Welcome.vala:43
 #, fuzzy
 msgid "Add videos to your library."
-msgstr "Importer des vidéos dans votre bibliothèque"
+msgstr "Importez des vidéos dans votre bibliothèque."
 
 #: src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
-msgstr "Changer le dossier vidéo"
+msgstr "Modifier le dossier vidéo"
 
 #: src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
@@ -172,43 +170,43 @@ msgstr "Importer des vidéos"
 
 #: src/Widgets/Views/Welcome.vala:45
 msgid "Import videos from a source into your library."
-msgstr "Importer des vidéos dans votre bibliothèque"
+msgstr "Importez des vidéos dans votre bibliothèque"
 
 #: src/Widgets/Views/BoxesView.vala:104
 msgid "No results"
-msgstr ""
+msgstr "Aucun résultat"
 
 #: src/Widgets/Views/BoxesView.vala:104
 msgid "Try another search"
-msgstr ""
+msgstr "Essayez une autre recherche"
 
 #: src/Dialogs/Preferences.vala:61
 msgid "Use Dark Theme"
-msgstr ""
+msgstr "Utiliser le thème sombre"
 
 #: src/Dialogs/Preferences.vala:69
 msgid "Load Content from The Movie DB"
-msgstr ""
+msgstr "Charger le contenu depuis The Movie DB"
 
 #: src/Dialogs/Preferences.vala:77
 msgid "Save custom Covers in Library folder"
-msgstr ""
+msgstr "Enregistrer les couvertures personnalisées dans le dossier de la bibliothèque"
 
 #: src/Dialogs/Preferences.vala:95
 msgid "_Close"
-msgstr ""
+msgstr "_Fermer"
 
 #: src/MainWindow.vala:206
 msgid "Resume playing"
-msgstr ""
+msgstr "Reprendre la lecture"
 
 #: src/MainWindow.vala:224
 msgid "Change Video Folder…"
-msgstr "Changer le dossier vidéo"
+msgstr "Modifier le dossier vidéo…"
 
 #: src/MainWindow.vala:234
 msgid "Import Videos…"
-msgstr "Importer des vidéos..."
+msgstr "Importer des vidéos…"
 
 #: src/MainWindow.vala:243
 msgid "Rescan Library"
@@ -216,15 +214,15 @@ msgstr "Ré-indexer la bibliothèque"
 
 #: src/MainWindow.vala:250
 msgid "Preferences"
-msgstr ""
+msgstr "Préférences"
 
 #: src/MainWindow.vala:269
 msgid "Search Videos"
-msgstr "Chercher des vidéos"
+msgstr "Rechercher des vidéos"
 
 #: src/MainWindow.vala:282
 msgid "Back"
-msgstr ""
+msgstr "Retour"
 
 #~ msgid "Play My Videos"
 #~ msgstr "Lire mes vidéos"
