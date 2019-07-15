@@ -194,10 +194,6 @@
                 <ul>
                     <li>null handler exception if audio stream hasn't a value</li>
                 </ul>
-            </description>
-        </release>
-        <release version="0.2.1" date="2018-01-07">
-            <description>
                 <p>New:</p>
                 <ul>
                     <li>Save/restore window position</li>
