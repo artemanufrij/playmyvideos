@@ -318,6 +318,8 @@ namespace PlayMyVideos {
         private void header_build_style_switcher () {
             var mode_switch = new Granite.ModeSwitch.from_icon_name ("display-brightness-symbolic", "weather-clear-night-symbolic");
             mode_switch.valign = Gtk.Align.CENTER;
+            mode_switch.primary_icon_tooltip_text = _("Light background");
+            mode_switch.secondary_icon_tooltip_text = _("Dark background");
             mode_switch.active = settings.use_dark_theme;
             mode_switch.notify["active"].connect (() => {
                 settings.use_dark_theme = mode_switch.active;
