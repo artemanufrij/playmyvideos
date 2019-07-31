@@ -135,11 +135,11 @@ msgstr "Geri"
 
 #: src/MainWindow.vala:277
 msgid "Change Video Folder…"
-msgstr "Video Dizinini Değiştir ..."
+msgstr "Video Dizinini Değiştir…"
 
 #: src/MainWindow.vala:286
 msgid "Import Videos…"
-msgstr "Videoları içeri aktar..."
+msgstr "Videoları içeri aktar…"
 
 #: src/MainWindow.vala:294
 msgid "Rescan Library"

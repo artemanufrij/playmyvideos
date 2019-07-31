@@ -145,7 +145,7 @@ namespace PlayMyVideos {
             options [0] = { "next", 0, 0, OptionArg.NONE, ref next, "Play next track", null };
             options [1] = { "fullscreen", 0, 0, OptionArg.NONE, ref full, "Toggle fullscreen", null };
             options [2] = { "play", 0, 0, OptionArg.NONE, ref play, "Toggle playing", null };
-            options [3] = { "", 0, 0, OptionArg.STRING_ARRAY, ref arg_files, null, "[URI...]" };
+            options [3] = { "", 0, 0, OptionArg.STRING_ARRAY, ref arg_files, null, "[URI…]" };
             options [4] = { null };
 
             var opt_context = new OptionContext ("actions");

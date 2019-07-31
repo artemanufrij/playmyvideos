@@ -53,7 +53,7 @@ msgstr "Ondertiteling"
 
 #: src/Widgets/Box.vala:109 src/Widgets/Views/BoxView.vala:62
 msgid "Set new Cover…"
-msgstr "Nieuwe hoes instellen..."
+msgstr "Nieuwe hoes instellen…"
 
 #: src/Widgets/VideoTimeLine.vala:243
 msgid "Repeat"
@@ -131,11 +131,11 @@ msgstr "Terug"
 
 #: src/MainWindow.vala:277
 msgid "Change Video Folder…"
-msgstr "Videomap wijzigen..."
+msgstr "Videomap wijzigen…"
 
 #: src/MainWindow.vala:286
 msgid "Import Videos…"
-msgstr "Video's importeren..."
+msgstr "Video's importeren…"
 
 #: src/MainWindow.vala:294
 msgid "Rescan Library"

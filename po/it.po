@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/Services/LibraryManager.vala:170
 msgid "Choose an image…"
-msgstr "Scegli un immagine..."
+msgstr "Scegli un immagine…"
 
 #: src/Services/LibraryManager.vala:172 src/Services/LibraryManager.vala:193
 #: src/Services/LibraryManager.vala:215
@@ -46,7 +46,7 @@ msgstr "Cartella"
 #: src/Services/LibraryManager.vala:213
 #, fuzzy
 msgid "Choose a subtitle file…"
-msgstr "Scegli un immagine..."
+msgstr "Scegli un immagine…"
 
 #: src/Services/LibraryManager.vala:219
 #, fuzzy
@@ -135,11 +135,11 @@ msgstr ""
 
 #: src/MainWindow.vala:277
 msgid "Change Video Folder…"
-msgstr "Cambiare Cartella Video..."
+msgstr "Cambiare Cartella Video…"
 
 #: src/MainWindow.vala:286
 msgid "Import Videos…"
-msgstr "Aggiungi Video..."
+msgstr "Aggiungi Video…"
 
 #: src/MainWindow.vala:294
 msgid "Rescan Library"

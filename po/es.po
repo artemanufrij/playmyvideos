@@ -135,11 +135,11 @@ msgstr ""
 
 #: src/MainWindow.vala:277
 msgid "Change Video Folder…"
-msgstr "Cambiar carpeta de Video..."
+msgstr "Cambiar carpeta de Video…"
 
 #: src/MainWindow.vala:286
 msgid "Import Videos…"
-msgstr "Importar Videos..."
+msgstr "Importar Videos…"
 
 #: src/MainWindow.vala:294
 msgid "Rescan Library"
