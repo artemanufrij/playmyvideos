@@ -260,7 +260,7 @@ msgid ""
 msgstr ""
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:187
-msgid "Lazy cover loading -&gt; less memory on startup"
+msgid "Lazy cover loading > less memory on startup"
 msgstr ""
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:195
