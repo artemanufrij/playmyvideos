@@ -43,12 +43,10 @@ msgid "Folder"
 msgstr "Dossier"
 
 #: src/Services/LibraryManager.vala:213
-#, fuzzy
 msgid "Choose a subtitle file…"
 msgstr "Choisir un fichier de sous-titres…"
 
 #: src/Services/LibraryManager.vala:219
-#, fuzzy
 msgid "Subtitles"
 msgstr "Sous-titres"
 
@@ -75,18 +73,16 @@ msgid "Subtitle %d (%s)"
 msgstr "Sous-titre %d (%s)"
 
 #: src/Widgets/Views/Welcome.vala:43
-#, fuzzy
 msgid "Get Some Videos"
-msgstr "Obtenir des vidéos"
+msgstr "Ajoutez des vidéos"
 
 #: src/Widgets/Views/Welcome.vala:43
-#, fuzzy
 msgid "Add videos to your library."
 msgstr "Importez des vidéos dans votre bibliothèque."
 
 #: src/Widgets/Views/Welcome.vala:44
 msgid "Change Video Folder"
-msgstr "Modifier le dossier vidéo"
+msgstr "Modifier l'emplacement des vidéos"
 
 #: src/Widgets/Views/Welcome.vala:44
 msgid "Load videos from a folder, a network or an external disk."
@@ -143,7 +139,7 @@ msgstr "Importer des vidéos…"
 
 #: src/MainWindow.vala:294
 msgid "Rescan Library"
-msgstr "Ré-indexer la bibliothèque"
+msgstr "Recharger la bibliothèque"
 
 #: src/MainWindow.vala:300
 msgid "Preferences"
