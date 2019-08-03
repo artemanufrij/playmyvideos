@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.artemanufrij.playmyvideos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-31 11:56+0200\n"
+"POT-Creation-Date: 2019-08-03 11:43+0200\n"
 "PO-Revision-Date: 2019-07-31 11:41+0200\n"
 "Last-Translator: Andrey Kultyapov <camellan@yandex.ru>\n"
 "Language-Team: none\n"
@@ -118,7 +118,7 @@ msgstr "Сохранять пользовательские обложки в п
 msgid "_Close"
 msgstr "_Закрыть"
 
-#: src/MainWindow.vala:181 src/MainWindow.vala:379
+#: src/MainWindow.vala:181 src/MainWindow.vala:381
 msgid "Cinema"
 msgstr "Cinema"
 
@@ -146,6 +146,14 @@ msgstr "Пересканировать медиатеку"
 msgid "Preferences"
 msgstr "Настройки"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:321
+msgid "Light background"
+msgstr ""
+
+#: src/MainWindow.vala:322
+msgid "Dark background"
+msgstr ""
+
+#: src/MainWindow.vala:332
 msgid "Search Videos"
 msgstr "Поиск видео"

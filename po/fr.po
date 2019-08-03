@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.artemanufrij.playmyvideos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-31 11:56+0200\n"
+"POT-Creation-Date: 2019-08-03 11:43+0200\n"
 "PO-Revision-Date: 2019-01-19 23:45+0100\n"
 "Last-Translator: NathanBnm\n"
 "Language-Team: Français\n"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "_Close"
 msgstr "_Fermer"
 
-#: src/MainWindow.vala:181 src/MainWindow.vala:379
+#: src/MainWindow.vala:181 src/MainWindow.vala:381
 msgid "Cinema"
 msgstr "Cinéma"
 
@@ -145,6 +145,14 @@ msgstr "Recharger la bibliothèque"
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:321
+msgid "Light background"
+msgstr "Thème clair"
+
+#: src/MainWindow.vala:322
+msgid "Dark background"
+msgstr "Thème sombre"
+
+#: src/MainWindow.vala:332
 msgid "Search Videos"
 msgstr "Rechercher des vidéos"
