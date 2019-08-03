@@ -1,88 +1,21 @@
+# Dutch translations for com.github.artemanufrij.playmyvideos package.
+# Copyright (C) 2019 THE com.github.artemanufrij.playmyvideos'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.artemanufrij.playmyvideos package.
+# Heimen Stoffels <vistausss@outlook.com>, 2019.
+#
 msgid ""
 msgstr ""
+"Project-Id-Version: com.github.artemanufrij.playmyvideos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 13:43+0200\n"
+"POT-Creation-Date: 2019-07-31 11:56+0200\n"
+"PO-Revision-Date: 2019-07-31 11:53+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Language-Team: none\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"Project-Id-Version: \n"
-"PO-Revision-Date: \n"
-"Language-Team: Dutch <vistausss@outlook.com>\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
-"X-Generator: Poedit 2.1.1\n"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:7
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:3
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:4
-#: src/MainWindow.vala:202 src/MainWindow.vala:377
-msgid "Cinema"
-msgstr "Cinema"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
-msgid "A video player for watching local video files."
-msgstr "Een videospeler voor het afspelen van lokale bestanden."
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
-msgid "A very fast video player designed extra for large local libraries."
-msgstr "Een razendsnelle videospeler, ontworpen voor grote, lokale verzamelingen."
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:11
-msgid "Features:"
-msgstr "Functies:"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:13
-msgid "Season playlist"
-msgstr "Afspeellijst per seizoen"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:14
-msgid "Subtiles support"
-msgstr "Ondersteuning voor ondertiteling"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:15
-msgid "'TheMovieDB.org' integration for fetching covers"
-msgstr "'TheMovieDB.org'-integratie voor het ophalen van filmhoezen"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:26
-msgid "Artem Anufrij"
-msgstr "Artem Anufrij"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:5
-msgid "Watch your videos"
-msgstr "Bekijk je video's"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:6
-msgid "videos;movies;shows;"
-msgstr "video's;films;series;"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:8
-msgid "com.github.artemanufrij.playmyvideos"
-msgstr "com.github.artemanufrij.playmyvideos"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:17
-msgid "Play/Pause"
-msgstr "Afspelen/Pauzeren"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:19
-msgid "media-playback-start-symbolic"
-msgstr "media-playback-start-symbolic"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:22
-msgid "Next"
-msgstr "Volgende"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:24
-msgid "media-skip-forward-symbolic"
-msgstr "media-skip-forward-symbolic"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:27
-msgid "Fullscreen"
-msgstr "Volledig scherm"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:28
-msgid "view-fullscreen-symbolic"
-msgstr "view-fullscreen-symbolic"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Services/LibraryManager.vala:170
 msgid "Choose an image…"
@@ -118,9 +51,9 @@ msgstr "Kies een ondertitelingsbestand."
 msgid "Subtitles"
 msgstr "Ondertiteling"
 
-#: src/Widgets/Box.vala:108 src/Widgets/Views/BoxView.vala:62
+#: src/Widgets/Box.vala:109 src/Widgets/Views/BoxView.vala:62
 msgid "Set new Cover…"
-msgstr "Nieuwe hoes instellen..."
+msgstr "Nieuwe hoes instellen…"
 
 #: src/Widgets/VideoTimeLine.vala:243
 msgid "Repeat"
@@ -164,57 +97,54 @@ msgstr "Video's importeren"
 msgid "Import videos from a source into your library."
 msgstr "Video's importeren naar je verzameling."
 
-#: src/Widgets/Views/BoxesView.vala:104
+#: src/Widgets/Views/BoxesView.vala:103
 msgid "No results"
 msgstr "Geen resultaten"
 
-#: src/Widgets/Views/BoxesView.vala:104
+#: src/Widgets/Views/BoxesView.vala:103
 msgid "Try another search"
 msgstr "Probeer een andere zoekopdracht"
 
 #: src/Dialogs/Preferences.vala:61
-msgid "Use Dark Theme"
-msgstr "Donker thema gebruiken"
-
-#: src/Dialogs/Preferences.vala:69
 msgid "Load Content from The Movie DB"
 msgstr "Inhoud ophalen uit The Movie DB"
 
-#: src/Dialogs/Preferences.vala:77
+#: src/Dialogs/Preferences.vala:69
 msgid "Save custom Covers in Library folder"
 msgstr "Aangepaste hoezen opslaan in verzamelingmap"
 
-#: src/Dialogs/Preferences.vala:95
+#: src/Dialogs/Preferences.vala:84
 msgid "_Close"
 msgstr "_Sluiten"
 
-#: src/MainWindow.vala:206
+#: src/MainWindow.vala:181 src/MainWindow.vala:379
+msgid "Cinema"
+msgstr "Cinema"
+
+#: src/MainWindow.vala:248
 msgid "Resume playing"
 msgstr "Afspelen hervatten"
 
-#: src/MainWindow.vala:224
-msgid "Change Video Folder…"
-msgstr "Videomap wijzigen..."
-
-#: src/MainWindow.vala:234
-msgid "Import Videos…"
-msgstr "Video's importeren..."
-
-#: src/MainWindow.vala:243
-msgid "Rescan Library"
-msgstr "Verzameling opnieuw synchroniseren"
-
-#: src/MainWindow.vala:250
-msgid "Preferences"
-msgstr "Voorkeuren"
-
-#: src/MainWindow.vala:269
-msgid "Search Videos"
-msgstr "Video's doorzoeken"
-
-#: src/MainWindow.vala:282
+#: src/MainWindow.vala:258
 msgid "Back"
 msgstr "Terug"
 
-#~ msgid "Library"
-#~ msgstr "Bibliotheek"
+#: src/MainWindow.vala:277
+msgid "Change Video Folder…"
+msgstr "Videomap wijzigen…"
+
+#: src/MainWindow.vala:286
+msgid "Import Videos…"
+msgstr "Video's importeren…"
+
+#: src/MainWindow.vala:294
+msgid "Rescan Library"
+msgstr "Verzameling opnieuw synchroniseren"
+
+#: src/MainWindow.vala:300
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: src/MainWindow.vala:330
+msgid "Search Videos"
+msgstr "Video's doorzoeken"

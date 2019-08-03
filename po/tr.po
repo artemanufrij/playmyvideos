@@ -1,94 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Turkish translations for com.github.artemanufrij.playmyvideos package.
+# Copyright (C) 2019 THE com.github.artemanufrij.playmyvideos'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.artemanufrij.playmyvideos package.
+# Automatically generated, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: com.github.artemanufrij.playmyvideos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 13:43+0200\n"
-"PO-Revision-Date: 2018-02-17 23:25+0300\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: tr_TR\n"
+"POT-Creation-Date: 2019-07-31 11:56+0200\n"
+"PO-Revision-Date: 2019-07-31 11:41+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:7
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:3
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:4
-#: src/MainWindow.vala:202 src/MainWindow.vala:377
-msgid "Cinema"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
-msgid "A video player for watching local video files."
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
-msgid "A very fast video player designed extra for large local libraries."
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:11
-msgid "Features:"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:13
-msgid "Season playlist"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:14
-msgid "Subtiles support"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:15
-msgid "'TheMovieDB.org' integration for fetching covers"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:26
-msgid "Artem Anufrij"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:5
-#, fuzzy
-msgid "Watch your videos"
-msgstr "Videoları Ara"
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:6
-msgid "videos;movies;shows;"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:8
-msgid "com.github.artemanufrij.playmyvideos"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:17
-msgid "Play/Pause"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:19
-msgid "media-playback-start-symbolic"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:22
-msgid "Next"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:24
-msgid "media-skip-forward-symbolic"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:27
-msgid "Fullscreen"
-msgstr ""
-
-#: data/com.github.artemanufrij.playmyvideos.desktop.in:28
-msgid "view-fullscreen-symbolic"
-msgstr ""
 
 #: src/Services/LibraryManager.vala:170
 msgid "Choose an image…"
@@ -126,7 +53,7 @@ msgstr "Bir resim seç.."
 msgid "Subtitles"
 msgstr "Altyazı %d (%s)"
 
-#: src/Widgets/Box.vala:108 src/Widgets/Views/BoxView.vala:62
+#: src/Widgets/Box.vala:109 src/Widgets/Views/BoxView.vala:62
 msgid "Set new Cover…"
 msgstr "Yeni Kapak Belirle"
 
@@ -174,57 +101,54 @@ msgstr "Videoları içeri aktar"
 msgid "Import videos from a source into your library."
 msgstr "Videoları bir kaynaktan kütüphanenize aktarın"
 
-#: src/Widgets/Views/BoxesView.vala:104
+#: src/Widgets/Views/BoxesView.vala:103
 msgid "No results"
 msgstr ""
 
-#: src/Widgets/Views/BoxesView.vala:104
+#: src/Widgets/Views/BoxesView.vala:103
 msgid "Try another search"
 msgstr ""
 
 #: src/Dialogs/Preferences.vala:61
-msgid "Use Dark Theme"
-msgstr "Koyu Temayı Kullan"
-
-#: src/Dialogs/Preferences.vala:69
 msgid "Load Content from The Movie DB"
 msgstr ""
 
-#: src/Dialogs/Preferences.vala:77
+#: src/Dialogs/Preferences.vala:69
 msgid "Save custom Covers in Library folder"
 msgstr "Özel kapakları Kütüphane klasörüne kaydet"
 
-#: src/Dialogs/Preferences.vala:95
+#: src/Dialogs/Preferences.vala:84
 msgid "_Close"
 msgstr ""
 
-#: src/MainWindow.vala:206
+#: src/MainWindow.vala:181 src/MainWindow.vala:379
+msgid "Cinema"
+msgstr ""
+
+#: src/MainWindow.vala:248
 msgid "Resume playing"
 msgstr ""
 
-#: src/MainWindow.vala:224
-msgid "Change Video Folder…"
-msgstr "Video Dizinini Değiştir ..."
-
-#: src/MainWindow.vala:234
-msgid "Import Videos…"
-msgstr "Videoları içeri aktar..."
-
-#: src/MainWindow.vala:243
-msgid "Rescan Library"
-msgstr "Kütüphaneyi yeniden tara"
-
-#: src/MainWindow.vala:250
-msgid "Preferences"
-msgstr "Tercihler"
-
-#: src/MainWindow.vala:269
-msgid "Search Videos"
-msgstr "Videoları Ara"
-
-#: src/MainWindow.vala:282
+#: src/MainWindow.vala:258
 msgid "Back"
 msgstr "Geri"
 
-#~ msgid "Play My Videos"
-#~ msgstr "Videolarımı Oynat"
+#: src/MainWindow.vala:277
+msgid "Change Video Folder…"
+msgstr "Video Dizinini Değiştir…"
+
+#: src/MainWindow.vala:286
+msgid "Import Videos…"
+msgstr "Videoları içeri aktar…"
+
+#: src/MainWindow.vala:294
+msgid "Rescan Library"
+msgstr "Kütüphaneyi yeniden tara"
+
+#: src/MainWindow.vala:300
+msgid "Preferences"
+msgstr "Tercihler"
+
+#: src/MainWindow.vala:330
+msgid "Search Videos"
+msgstr "Videoları Ara"
