@@ -280,7 +280,7 @@ msgstr ""
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:207
 msgid "Save/restore window position"
-msgstr "Gravar/Restaurar posição da janela"
+msgstr "Guardar/Restaurar posição da janela"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:211
 msgid "Start searching instand on key press"
@@ -313,7 +313,7 @@ msgstr "Português (Brasil) (por Cleiton Floss)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:248
 msgid "Option for saving custom covers into library"
-msgstr "Opção para gravar capas personalizadas na biblioteca"
+msgstr "Opção para guardar capas personalizadas na biblioteca"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:257
 msgid "Playing episodes"
