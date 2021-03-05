@@ -1,16 +1,16 @@
 # Italian translations for extra package.
 # Copyright (C) 2019 THE extra'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
-# Automatically generated, 2019.
+# workaround, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-31 11:56+0200\n"
-"PO-Revision-Date: 2019-07-31 11:43+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-04-25 06:18+0200\n"
+"Last-Translator: workaround\n"
+"Language-Team: Italian\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,74 +21,76 @@ msgstr ""
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:4
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:7
 msgid "Cinema"
-msgstr ""
+msgstr "Cinema"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:5
 #, fuzzy
 msgid "Watch your videos"
-msgstr "Cercare Video"
+msgstr "Guarda i tuoi video"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:6
 msgid "videos;movies;shows;"
-msgstr ""
+msgstr "video;film;show;"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:8
 msgid "com.github.artemanufrij.playmyvideos"
-msgstr ""
+msgstr "com.github.artemanufrij.playmyvideos"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:17
 msgid "Play/Pause"
-msgstr ""
+msgstr "Riproduci/Pausa"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:19
 msgid "media-playback-start-symbolic"
-msgstr ""
+msgstr "media-playback-start-symbolic"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:22
 msgid "Next"
-msgstr ""
+msgstr "Successivo"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:24
 msgid "media-skip-forward-symbolic"
-msgstr ""
+msgstr "media-skip-forward-symbolic"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:27
 msgid "Fullscreen"
-msgstr ""
+msgstr "Schermo intero"
 
 #: data/com.github.artemanufrij.playmyvideos.desktop.in:28
 msgid "view-fullscreen-symbolic"
-msgstr ""
+msgstr "view-fullscreen-symbolic"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:8
 msgid "A video player for watching local video files"
-msgstr ""
+msgstr "Un lettore video per guardare file video locali"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:10
 msgid ""
 "A very fast video player designed extra for large local libraries which also "
 "supports downloading of box covers"
 msgstr ""
+"Un lettore video molto veloce pensato per grandi librerie locali che permette inoltre "
+"il download delle copertine"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:11
 msgid "Features:"
-msgstr ""
+msgstr "Funzionalità:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:13
 msgid "Season playlist"
-msgstr ""
+msgstr "Playlist per stagione"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:14
 msgid "Subtiles support"
-msgstr ""
+msgstr "Supporto ai sottotitoli"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:15
 msgid "'TheMovieDB.org' integration for fetching covers"
-msgstr ""
+msgstr "Integrazione a 'TheMovieDB.org' per il recupero delle copertine"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:26
 msgid "Artem Anufrij"
-msgstr ""
+msgstr "Artem Anufrij"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:42
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:62
@@ -100,11 +102,11 @@ msgstr ""
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:238
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:307
 msgid "Translation:"
-msgstr ""
+msgstr "Traduzione:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:44
 msgid "French (by Nathan Bonnemains)"
-msgstr ""
+msgstr "Francese (di Nathan Bonnemains)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:50
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:92
@@ -121,33 +123,33 @@ msgstr ""
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:298
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:315
 msgid "New:"
-msgstr ""
+msgstr "Novità:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:52
 msgid "Style switcher"
-msgstr ""
+msgstr "Pulsante per cambio tema"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:58
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:109
 msgid "Fixed:"
-msgstr ""
+msgstr "Correzioni:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:60
 msgid "Restore correct window size"
-msgstr ""
+msgstr "Ripristino finestra alle dimensioni corrette"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:64
 msgid "Dutch (by Heimen Stoffels)"
-msgstr ""
+msgstr "Olandese (di Heimen Stoffels)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:69
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:127
 msgid "Prepare for JUNO"
-msgstr ""
+msgstr "Preparazione per JUNO"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:78
 msgid "German"
-msgstr ""
+msgstr "Tedesco"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:84
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:162
@@ -158,15 +160,15 @@ msgstr ""
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:267
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:303
 msgid "Fix:"
-msgstr ""
+msgstr "Correzioni:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:86
 msgid "don't cover fetching from themoviedb.org if it was disabled"
-msgstr ""
+msgstr "non prelevare la copertina da themoviedb.org se questa è disabilitata"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:94
 msgid "Double click on the box starts playing the video"
-msgstr ""
+msgstr "Doppio click sul riquadro per avviare la riproduzione del video"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:100
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:113
@@ -175,211 +177,215 @@ msgstr ""
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:209
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:221
 msgid "Improved:"
-msgstr ""
+msgstr "Migliorato:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:102
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:115
 msgid "Cover fetching"
-msgstr ""
+msgstr "Prelievo della copertina"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:103
 msgid "Small UI fixes"
-msgstr ""
+msgstr "Piccole correzioni dell'interfaccia grafica"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:111
 msgid "Error: database sync if a video file was moved/renamed"
-msgstr ""
+msgstr "Errore: sincronizzazione database se un file video è stato spostato/rinominato"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:123
 msgid "Regard release year for better cover fetching"
-msgstr ""
+msgstr "Miglior recupero della recupero tenendo conto dell'anno di rilascio"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:125
 msgid "Misc:"
-msgstr ""
+msgstr "Varie:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:135
 msgid "Fetch cover from themoviedb.org"
-msgstr ""
+msgstr "Preleva copertina da themoviedb.org"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:137
 msgid "Improvements:"
-msgstr ""
+msgstr "Migliorie:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:139
 msgid "Show \"No Result\" message if search term hasn't any results"
-msgstr ""
+msgstr "Mostra messaggio \"Nessun risultato\" se la ricerca non ha corrispondenza"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:143
 msgid "Turkish (by Şenol Alan)"
-msgstr ""
+msgstr "Turco (di Şenol Alan)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:151
 msgid "Show Spinner until library is scanned"
-msgstr ""
+msgstr "Mostra rotellina fintanto che la libreria viene analizzata"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:155
 msgid "French (by papou84)"
-msgstr ""
+msgstr "Francese (di papou84)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:156
 msgid "Italian (by papou84)"
-msgstr ""
+msgstr "Italiano (di papou84)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:164
 msgid "External subtitles"
-msgstr ""
+msgstr "Sottotitoli esterni"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:165
 msgid "Sort episodes in playlist"
-msgstr ""
+msgstr "Ordinamento degli episodi in playlist"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:166
 msgid "Black bars"
-msgstr ""
+msgstr "Bande nere"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:170
 msgid "Dutch (by Levi Voorintholt)"
-msgstr ""
+msgstr "Olandese (di Levi Voorintholt)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:178
 msgid "Open multi selected files"
-msgstr ""
+msgstr "Apri più file selezionati"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:182
 msgid "Empty playlist if open an external video file"
-msgstr ""
+msgstr "Svuota playlist all'apertura di un file video esterno"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:186
 msgid ""
 "Title builder from '…\\Best Comedy Ever\\Season 01\\…' to 'Best Comedy Ever "
 "- Season 01'"
 msgstr ""
+"Riscrivi il titolo da '…\\Miglior commedia di sempre\\Stagione 01\\…' a 'Miglior commedia di sempre "
+"- Stagione 01'"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:187
 msgid "Lazy cover loading > less memory on startup"
-msgstr ""
+msgstr "Caricamento pigro delle copertine > minor uso della memoria all'avvio"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:195
 msgid "Spanish (by Alain)"
-msgstr ""
+msgstr "Spagnolo (di Alain)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:203
 msgid "null handler exception if audio stream hasn't a value"
-msgstr ""
+msgstr "gestione degli errori se il flusso audio non ha alcun valore"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:207
 msgid "Save/restore window position"
-msgstr ""
+msgstr "Salva/ripristina posizione finestra"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:211
 msgid "Start searching instand on key press"
-msgstr ""
+msgstr "La ricerca inizia quando si preme un tasto"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:219
 msgid "Preview Popup on Timeline"
-msgstr ""
+msgstr "Anteprima nel lettore video"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:223
 msgid "Some popup behaviors"
-msgstr ""
+msgstr "Comportamento di alcuni suggerimenti"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:231
 msgid "Resume playing last video"
-msgstr ""
+msgstr "Riprendi la riproduzione dell'ultimo video"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:232
 msgid "Open box of last viewed video"
-msgstr ""
+msgstr "Apertura copertina dell'ultimo video visto"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:236
 msgid "Critical error on closing window while a video is playing"
-msgstr ""
+msgstr "Errore critico durante la chiusura della finestra durante la riproduzione di video"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:240
 msgid "Portuguese (Brazil) (by Cleiton Floss)"
-msgstr ""
+msgstr "Portoghese (Brasile) (di Cleiton Floss)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:248
 #, fuzzy
 msgid "Option for saving custom covers into library"
-msgstr "Aggiungi video da un media alla libreria."
+msgstr "Opzione per salvare una copertina personalizzata nella libreria"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:257
 msgid "Playing episodes"
-msgstr ""
+msgstr "Riproduzione degli episodi"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:265
 msgid "Improved Sync: don't show video item if video file doesn't exist."
-msgstr ""
+msgstr "Sincronizzazione migliorata: non viene mostrato l'elemento video se il file video non esiste."
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:269
 msgid ""
 "[only if no items in library] Open welcome screen instead empty library "
 "after finished playing"
 msgstr ""
+"[solo se la libreria è vuota] Apertura della schermata di benvenuto invece "
+"della libreria vuota al termine della riproduzione"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:270
 msgid "Improved behavior for subtiles in Series/Seasons folder"
-msgstr ""
+msgstr "Miglioramento del comportamento dei sottotitoli nella cartella Serie/Stagione"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:278
 #, fuzzy
 msgid "Repeat mode"
-msgstr "Ripeti"
+msgstr "Modalità ripeti"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:279
 msgid "Option for Light Theme"
-msgstr ""
+msgstr "Opzione per il tema chiaro"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:281
 msgid "Changes:"
-msgstr ""
+msgstr "Modifiche:"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:283
 msgid "Icon (by Alexey Varfolomeev)"
-msgstr ""
+msgstr "Icona (di Alexey Varfolomeev)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:291
 msgid "Import files by Drag and Drop"
-msgstr ""
+msgstr "Importa file con il trascina e rilascia"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:292
 msgid "Toggle playing by click mouse button"
-msgstr ""
+msgstr "Commuta riproduzione al click del mouse"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:300
 msgid "Disable screensaver while playing"
-msgstr ""
+msgstr "Disabilita screensaver durante la riproduzione"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:301
 msgid "Improved start up"
-msgstr ""
+msgstr "Miglioramento all'avvio"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:305
 msgid "Subtitle button wasn't visible of only one Subtitle was available"
-msgstr ""
+msgstr "Il pulsante sottotitoli non era visibile se era disponibile solo un sottotitolo"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:309
 msgid "French (by nvivant)"
-msgstr ""
+msgstr "Francese (by nvivant)"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:317
 msgid "Toggle playing [SPACE]"
-msgstr ""
+msgstr "Commuta riproduzione [SPAZIO]"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:318
 msgid "Toggle fullscreen [F11]"
-msgstr ""
+msgstr "Commuta schermo intero [F11]"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:319
 msgid "Media key support"
-msgstr ""
+msgstr "Supporto ai tasti multimediali"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:320
 msgid "Seek function [LEFT/RIGHT]"
-msgstr ""
+msgstr "Funzioe di ricerca [SINISTRA/DESTRA]"
 
 #: data/com.github.artemanufrij.playmyvideos.appdata.xml.in:326
 msgid "Initial release"
-msgstr ""
+msgstr "Primo rilascio"
